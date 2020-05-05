@@ -18,6 +18,7 @@ from django.urls import path
 from . import fonctions
 
 urlpatterns = [
-    path('', fonctions.Home),
-    path('commande/<str:nom_personne>', fonctions.Commande),
+    path('', fonctions.Home, name='Page_Home'),
+    path('commande', fonctions.Commande, name='Page_Commande'),
+    path('creation', fonctions.Creation, name='Page_Creation'),
 ]

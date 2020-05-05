@@ -1,0 +1,27 @@
+<!doctype html>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Création Compte</title>
+		<meta name="description" content="The Account Creation Page">
+	</head>
+    <header>
+        <h1>Créer votre compte</h1>
+    </header>
+    <p>{{erreur}}</p>
+    <body>
+        <form method="POST" action="/creation">
+            {% csrf_token %}
+            <input type="text" placeholder="Identifiant" name="id_box">
+            <input type="submit" value="Connexion">
+        </form>
+	</body>
+</html>
+
+
+
+
+
+
+
