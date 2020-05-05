@@ -2,3 +2,4 @@
 .vscode
 virtual_environment_MAC/
 *.pyc
+test/

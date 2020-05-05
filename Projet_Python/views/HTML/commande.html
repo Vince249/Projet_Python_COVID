@@ -1,1 +1,76 @@
-<h1><span title="Salut!" >Bonjour {{nom_personne}}</span></h1>
+<!doctype html>
+<html lang="fr">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <title>Commande-Produits</title>
+  </head>
+
+  <body>
+    <h2><span title="Salut!" >Bonjour {{nom_personne}}</span></h2> <!--Affichage en titre type 2-->
+    <div class="d-flex justify-content-center"><h1>Commande de produits</h1></div>
+
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+        <label class="form-check-label" for="defaultCheck1">
+          Default checkbox
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
+        <label class="form-check-label" for="defaultCheck2">
+          Disabled checkbox
+        </label>
+      </div>
+
+    <form class="form-inline">
+        <class class="my-1 mr-2" for="inlineFormCustomSelectPref" id='product'> </class>
+          <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+            <option selected>Quantité</option>
+            <option value="1">1</option>            
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>            
+          </select>
+        
+        <script>
+          list_Produits = ["Riz", "Tomates", "Lait", "Pâtes"];
+          for(let i = 0; i < list_Produits.length; i++){
+            document.getElementById('product').innerHTML += list_Produits[i] + '<br>'; // +<br> => Retour à la ligne
+          } 
+        </script>
+      
+        <!--
+        <div class="custom-control custom-checkbox my-1 mr-sm-2">
+        <input type="checkbox" class="custom-control-input" id="customControlInline">
+        <label class="custom-control-label" for="customControlInline">Remember my preference</label>
+        </div>
+        -->
+      
+        <button type="submit" class="btn btn-primary my-1">Submit</button>
+      </form>
+      
+      <button type="button" class="btn btn-success ">Success</button>
+      <button type="button" class="btn btn-success btn-lg btn-block">Bouton Large nommé Success</button>
+
+  </body>
+</html>
+
+
+
+
+
