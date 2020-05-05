@@ -11,20 +11,26 @@ def Home(request):
         # si refusé, erreur = "Identifiant/Mot de passe invalide", nom="
         erreur = ""
         nom=id
-    test = [
-        {'nom':"truc", 'age': "18"},
-        {'nom':"pipo", 'age': "58"},
-    ]
+
     return render(request, 'HTML/home.html',{
         'erreur' : erreur,
-        'nom' : nom,
-        'test' : test
+        'nom' : nom,        
     })
 
 
+
 def Commande(request,nom_personne):
+    #METTRE ICI le dictionnaire
+    #! Liste des produits proposés
+    product_List = [
+        {'nom':"Pain", 'quantite_Max': "5"},
+        {'nom':"Riz", 'quantite_Max': "10"},
+    ]
+
     return render(request, 'HTML/commande.html',{
-        'nom_personne' : nom_personne
+        'nom_personne' : nom_personne,
+        'product_List' : product_List
+        #mettre le nom du dico un peu même synthaxe que la ligne au dessus
     })
 
 

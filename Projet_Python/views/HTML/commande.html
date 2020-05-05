@@ -19,23 +19,20 @@
     <h2><span title="Salut!" >Bonjour {{nom_personne}}</span></h2> <!--Affichage en titre type 2-->
     <div class="d-flex justify-content-center"><h1>Commande de produits</h1></div>
 
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-        <label class="form-check-label" for="defaultCheck1">
-          Default checkbox
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-        <label class="form-check-label" for="defaultCheck2">
-          Disabled checkbox
-        </label>
-      </div>
-
-    <form class="form-inline">
-        <class class="my-1 mr-2" for="inlineFormCustomSelectPref" id='product'> </class>
+    <!-- Lien pour un for en HTMl : https://docs.djangoproject.com/fr/3.0/ref/templates/builtins/#for -->
+    <!-- Besoin d'un DICTIONNAIRE de produits du style 
+      produit = [
+        {'nom':"Pain", 'quantite_Max': "4"},
+        {'nom':"Riz", 'age': "7"},
+    ]
+    -->
+    <ul>
+      {% for product in product_List %}
+      <form class="form-row align-items-center">  <!-- "form-inline" -->
+        <class class="my-1 mr-2" > {{ product.nom }} </class> <!-- <class class="my-1 mr-2" for="inlineFormCustomSelectPref">{{ product.nom }} <br> </class> -->
           <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
             <option selected>Quantité</option>
+            <option value="0">0</option> 
             <option value="1">1</option>            
             <option value="2">2</option>
             <option value="3">3</option>
@@ -45,26 +42,18 @@
             <option value="7">7</option>
             <option value="8">8</option>
             <option value="9">9</option>            
-          </select>
-        
-        <script>
-          list_Produits = ["Riz", "Tomates", "Lait", "Pâtes"];
-          for(let i = 0; i < list_Produits.length; i++){
-            document.getElementById('product').innerHTML += list_Produits[i] + '<br>'; // +<br> => Retour à la ligne
-          } 
-        </script>
-      
-        <!--
-        <div class="custom-control custom-checkbox my-1 mr-sm-2">
-        <input type="checkbox" class="custom-control-input" id="customControlInline">
-        <label class="custom-control-label" for="customControlInline">Remember my preference</label>
-        </div>
-        -->
-      
-        <button type="submit" class="btn btn-primary my-1">Submit</button>
+          </select>    
+          <p> <br> </p>    
+
+      {% empty %} <!-- Cas ou product_List est vide -->
+          <li>Erreur. Aucun produit n'est disponible</li>
+      {% endfor %}
       </form>
+    </ul>
       
       <button type="button" class="btn btn-success ">Success</button>
+      <br>
+      <br>
       <button type="button" class="btn btn-success btn-lg btn-block">Bouton Large nommé Success</button>
 
   </body>
