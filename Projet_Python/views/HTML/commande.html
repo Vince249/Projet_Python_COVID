@@ -16,7 +16,35 @@
   </head>
 
   <body>
-    <h2><span title="Salut!" >Bonjour {{nom_personne}}</span></h2> <!--Affichage en titre type 2-->
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          1 of 3
+        </div>
+        <div class="col-6">
+          2 of 3 (wider)
+        </div>
+        <div class="col">
+          3 of 3
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          1 of 3
+        </div>
+        <div class="col-5">
+          2 of 3 (wider)
+        </div>
+        <div class="col">
+          3 of 3
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <h3><span title="Salut!" >Bonjour {{nom_personne}}</span></h3> <!--Affichage en titre type 2-->
     <div class="d-flex justify-content-center"><h1>Commande de produits</h1></div>
 
     <!-- Lien pour un for en HTMl : https://docs.djangoproject.com/fr/3.0/ref/templates/builtins/#for -->
@@ -31,6 +59,15 @@
       <form class="form-row align-items-center">  <!-- "form-inline" -->
         <class class="my-1 mr-2" > {{ product.nom }} </class> <!-- <class class="my-1 mr-2" for="inlineFormCustomSelectPref">{{ product.nom }} <br> </class> -->
           <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+            
+            <option selected>Quantité</option>
+            {% for i in product.quantite_Max %} <!-- On fait varier la quantité proposée en fonction de la quantié max pour chaque produit -->           
+              <option value = i> {{i}} </option>     
+            {% empty %} <!-- Cas ou il n'y a pas de quantité max -->
+                <li>Erreur. Aucune quantité maximale renseignée</li>
+            {% endfor %}
+          </select>
+      <!-- 
             <option selected>Quantité</option>
             <option value="0">0</option> 
             <option value="1">1</option>            
@@ -42,8 +79,8 @@
             <option value="7">7</option>
             <option value="8">8</option>
             <option value="9">9</option>            
-          </select>    
-          <p> <br> </p>    
+          </select>     
+      -->   
 
       {% empty %} <!-- Cas ou product_List est vide -->
           <li>Erreur. Aucun produit n'est disponible</li>
@@ -51,10 +88,9 @@
       </form>
     </ul>
       
-      <button type="button" class="btn btn-success ">Success</button>
-      <br>
-      <br>
-      <button type="button" class="btn btn-success btn-lg btn-block">Bouton Large nommé Success</button>
+    <br>
+    <br>
+    <button type="button" class="btn btn-success btn-lg btn-block">Bouton Large nommé Success</button>
 
   </body>
 </html>

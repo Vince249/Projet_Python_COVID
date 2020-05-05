@@ -23,8 +23,11 @@ def Commande(request,nom_personne):
     #METTRE ICI le dictionnaire
     #! Liste des produits proposés
     product_List = [
-        {'nom':"Pain", 'quantite_Max': "5"},
-        {'nom':"Riz", 'quantite_Max': "10"},
+        {'nom':"Pain", 'quantite_Max': range(5)},
+        {'nom':"Riz", 'quantite_Max': range(10)},
+        {'nom':"Farine", 'quantite_Max': range(15)},
+        {'nom':"Pommes", 'quantite_Max': range(8)},
+        {'nom':"Lait", 'quantite_Max': range(12)},
     ]
 
     return render(request, 'HTML/commande.html',{
