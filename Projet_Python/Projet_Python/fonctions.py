@@ -25,9 +25,21 @@ def Home(request):
 
 
 def Commande(request):
+    #METTRE ICI le dictionnaire
+    #! Liste des produits proposés
+    product_List = [
+        {'nom':"Pain", 'quantite_Max': range(5)},
+        {'nom':"Riz", 'quantite_Max': range(10)},
+        {'nom':"Farine", 'quantite_Max': range(15)},
+        {'nom':"Pommes", 'quantite_Max': range(8)},
+        {'nom':"Lait", 'quantite_Max': range(12)},
+    ]
+
     return render(request, 'HTML/commande.html',{
-        'id':id_utilisateur
+        'nom_personne' : id_utilisateur,
+        'product_List' : product_List
     })
+        #mettre le nom du dico un peu même synthaxe que la ligne au dessus
 
 def Creation(request):
     erreur=""
