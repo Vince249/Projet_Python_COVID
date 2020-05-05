@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "virtual_environment\\Scripts\\python.exe"
+    "python.pythonPath": "virtual_environment\\Scripts\\python.exe",
+    "python.autoComplete.extraPaths": ["virtual_environment/Lib/site-packages"],
 }
