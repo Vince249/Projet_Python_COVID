@@ -1,3 +1,4 @@
 .DS_Store
+.vscode
 virtual_environment_MAC/
 *.pyc

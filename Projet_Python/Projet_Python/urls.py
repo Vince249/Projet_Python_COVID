@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from . import views
+from . import fonctions
 
 urlpatterns = [
-    path('', views.Home),
-    path('commande/<str:nom_personne>', views.Commande),
+    path('', fonctions.Home),
+    path('commande/<str:nom_personne>', fonctions.Commande),
 ]
