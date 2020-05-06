@@ -9,19 +9,33 @@
     <header>
         <h1>Créer votre compte</h1>
     </header>
-    <p>{{erreur}}</p>
     <body>
+        <p>{{erreur}}</p>
         <form method="POST" action="/creation">
             {% csrf_token %}
             <input type="text" placeholder="Identifiant" name="id_box">
+            <br>
+            <input type="text" placeholder="Nom" name="nom_box">
+            <br>
+            <input type="text" placeholder="Email" name="email_box">
+            <br>
+            <input type="text" placeholder="Mot de passe" name="pwd_box">
+            <br>
+            <input type="text" placeholder="Téléphone" name="tel_box">
+            <br>
+            <input type="text" placeholder="Ville" name="ville_box">
+            <br>
+            <input type="text" placeholder="Code Postal" name="CP_box">
+            <br>
+            <input type="text" placeholder="Adresse" name="adresse_box">
+            <br>
+            Rajouter plan Google maps avec adresse
+            Voir comment on fait pour rajouter plusieurs personnes dans le foyer tout ça, là c'est un test
+            <br>
             <input type="submit" value="Connexion">
         </form>
 	</body>
 </html>
-
-
-
-
 
 
 
