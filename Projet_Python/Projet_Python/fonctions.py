@@ -44,6 +44,7 @@ def Commande(request):
             FormCommande = form.ProduitForm(request.POST)
             if(FormCommande.is_valid()):
                 data = FormCommande.cleaned_data
+                print('data', data)
                 #* Mettre les DATA dans le JSON
                 message='Commande réussie'
     FormProductList = form.ProduitForm()
@@ -72,6 +73,7 @@ def Creation(request):
                 #vérifier si le forms est correctement rempli
                 #si non, erreur = "ERREUR"
                 #si oui, mettre id dans la variable globale, autoriser la redirection et remplir le JSON avec les valeurs
+                print("data",data)
                 #* Mettre les DATA dans le JSON
                 id_utilisateur = data['id_box']
                 nb_personne_foyer = data['nb_foyer']

@@ -1,5 +1,6 @@
 <form method="POST" action="/details">
     {% csrf_token %}
+    {{ Form_Set.management_form }}
     {% for forms in Form_Set %}
         <p>Personne {{forloop.counter}}</p>
         {{forms.as_p}}
