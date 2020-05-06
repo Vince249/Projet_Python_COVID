@@ -53,6 +53,12 @@ def Commande(request):
         'message': message,
     })
 
+def Allergie(request):
+    message = ''
+    return render(request, 'HTML/allergie.html',{
+        'message': message,
+    })
+
 
 def Creation(request):
     erreur=""

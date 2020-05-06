@@ -20,6 +20,7 @@ from . import fonctions
 urlpatterns = [
     path('', fonctions.Home, name='Page_Home'),
     path('commande', fonctions.Commande, name='Page_Commande'),
+    path('commande/allergie/', fonctions.Allergie, name='Page_Allergie'),
     path('creation', fonctions.Creation, name='Page_Creation'),
     path('admin', fonctions.Admin, name='Page_Admin'),
     path('details', fonctions.Details, name='Page_Detail'),
