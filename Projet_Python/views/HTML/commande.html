@@ -44,7 +44,7 @@
 
 
 
-    <h3><span title="Salut!" >Bonjour {{nom_personne}}</span></h3> <!--Affichage en titre type 2-->
+    <h3><span title="Salut!" >Bonjour {{id_personne}}</span></h3> <!--Affichage en titre type 2-->
     <div class="d-flex justify-content-center"><h1>Commande de produits</h1></div>
 
     <!-- Lien pour un for en HTMl : https://docs.djangoproject.com/fr/3.0/ref/templates/builtins/#for -->
@@ -55,44 +55,20 @@
     ]
     -->
   
-    <ul>
-      {% for product in product_List %}
-      <form class="form-row align-items-center">  <!-- "form-inline" -->
-        <class class="my-1 mr-2" > {{ product.nom }} </class> <!-- <class class="my-1 mr-2" for="inlineFormCustomSelectPref">{{ product.nom }} <br> </class> -->
-          <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
-            
-            <option selected>Quantité</option>
-            {% for i in product.quantite_Max %} <!-- On fait varier la quantité proposée en fonction de la quantié max pour chaque produit -->           
-              <option value = i> {{i}} </option>     
-            {% empty %} <!-- Cas ou il n'y a pas de quantité max -->
-                <li>Erreur. Aucune quantité maximale renseignée</li>
-            {% endfor %}
-          </select>
-      <!-- 
-            <option selected>Quantité</option>
-            <option value="0">0</option> 
-            <option value="1">1</option>            
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>            
-          </select>     
-      -->   
-
-      {% empty %} <!-- Cas ou product_List est vide -->
-          <li>Erreur. Aucun produit n'est disponible</li>
-      {% endfor %}
-      </form>
-    </ul>
+    <form method="POST" action="/commande">  
+      {% csrf_token %}
+      {{Form_Product_List.as_p}}
+      <input type="submit" name="Commande" value="Valider commande">
+    </form>
+    
       
     <br>
     <br>
     <button type="button" class="btn btn-success btn-lg btn-block">Bouton Large nommé Success</button>
 
+    <footer>
+      <p>{{message}}</p>
+    </footer>
   </body>
 </html>
 
