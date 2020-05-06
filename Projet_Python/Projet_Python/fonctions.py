@@ -1,22 +1,35 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 
-id_utilisateur=""
+id_utilisateur = ""
+
 def Home(request):
     global id_utilisateur
     erreur=""
     id_utilisateur=""
+
     if(request.method == 'POST'):
-        id = request.POST['id']
-        pwd = request.POST['pwd']
-        if(id=='a' and pwd =="mdp"): #ici mettre vérification JSON
-            #return redirect('/commande')
-            #naviguer vers page commande sans paramètre par l'URL (on peut utiliser des variables globales)
-            id_utilisateur = id
-            return redirect('Page_Commande')
-            #naviguer vers page commande sans paramètre sans l'URL (on peut utiliser des variables globales)
-        else:
-            erreur="Identifiant/Mot de passe invalide"
+        if (request.POST.get("login_client")):
+            id_client = request.POST['id_client']
+            pwd_client = request.POST['pwd_client']
+            if(id_client =='a' and pwd_client =="mdp"): #ici mettre vérification JSON
+                #return redirect('/commande')
+                #naviguer vers page commande sans paramètre par l'URL (on peut utiliser des variables globales)
+                id_utilisateur = id_client
+                return redirect('Page_Commande')
+                #naviguer vers page commande sans paramètre sans l'URL (on peut utiliser des variables globales)
+            else:
+                erreur="Identifiant/Mot de passe client invalide"
+
+        if (request.POST.get("login_admin")):
+            id_admin = request.POST['id_admin']
+            pwd_admin = request.POST['pwd_admin']
+            if(id_admin =='adminid' and pwd_admin =="adminmdp"): #ici mettre vérification JSON
+                id_utilisateur = id_admin
+                return redirect('Page_Admin')
+                #naviguer vers page commande sans paramètre sans l'URL (on peut utiliser des variables globales)
+            else:
+                erreur="Identifiant/Mot de passe admin invalide"
 
 
     return render(request, 'HTML/home.html',{
@@ -41,6 +54,7 @@ def Commande(request):
     })
         #mettre le nom du dico un peu même synthaxe que la ligne au dessus
 
+
 def Creation(request):
     erreur=""
     global id_utilisateur 
@@ -55,3 +69,7 @@ def Creation(request):
     })
 
 
+def Admin(request):
+    return render(request, 'HTML/admin.html',{
+        'id_admin' : id_utilisateur,
+    })

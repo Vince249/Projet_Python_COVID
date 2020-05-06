@@ -21,4 +21,5 @@ urlpatterns = [
     path('', fonctions.Home, name='Page_Home'),
     path('commande', fonctions.Commande, name='Page_Commande'),
     path('creation', fonctions.Creation, name='Page_Creation'),
+    path('admin', fonctions.Admin, name='Page_Admin')
 ]
