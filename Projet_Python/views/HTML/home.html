@@ -15,15 +15,13 @@
         <p>Login client</p>
         <form method="POST" action="/">
             {% csrf_token %}
-            <input type="text" placeholder="Identifiant" name="id_client">
-            <input type="password" placeholder="Mot de passe" name="pwd_client">
+            {{Form_Login_Client}}
             <input type="submit" name="login_client" value="Connexion">
         </form>
         <p>Login admin</p>
         <form method="POST" action="/">
             {% csrf_token %}
-            <input type="text" placeholder="Identifiant" name="id_admin">
-            <input type="password" placeholder="Mot de passe" name="pwd_admin">
+            {{Form_Login_Admin}}
             <input type="submit" name="login_admin" value="Connexion">
         </form>
     

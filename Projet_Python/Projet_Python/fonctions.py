@@ -1,42 +1,39 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
-
+from . import form
 id_utilisateur = ""
+
 
 def Home(request):
     global id_utilisateur
     erreur=""
     id_utilisateur=""
-
     if(request.method == 'POST'):
-        if (request.POST.get("login_client")):
-            id_client = request.POST['id_client']
-            pwd_client = request.POST['pwd_client']
-            if(id_client =='a' and pwd_client =="mdp"): #ici mettre vérification JSON
-                #return redirect('/commande')
-                #naviguer vers page commande sans paramètre par l'URL (on peut utiliser des variables globales)
-                id_utilisateur = id_client
-                return redirect('Page_Commande')
-                #naviguer vers page commande sans paramètre sans l'URL (on peut utiliser des variables globales)
-            else:
-                erreur="Identifiant/Mot de passe client invalide"
-
-        if (request.POST.get("login_admin")):
-            id_admin = request.POST['id_admin']
-            pwd_admin = request.POST['pwd_admin']
-            if(id_admin =='adminid' and pwd_admin =="adminmdp"): #ici mettre vérification JSON
-                id_utilisateur = id_admin
-                return redirect('Page_Admin')
-                #naviguer vers page commande sans paramètre sans l'URL (on peut utiliser des variables globales)
-            else:
-                erreur="Identifiant/Mot de passe admin invalide"
-
-
+        if(request.POST.get('login_client')):
+            FormLoginClient = form.LoginClientForm(request.POST)
+            if(FormLoginClient.is_valid()):
+                data = FormLoginClient.cleaned_data
+                if(data['id_client'] =='a' and data['pwd_client'] =="mdp"): #faire une vérif JSON ici
+                    id_utilisateur = data['id_client']
+                    return redirect('Page_Commande')
+                else:
+                    erreur="Identifiant/Mot de passe client invalide"
+        if(request.POST.get('login_admin')):
+            FormLoginAdmin = form.LoginAdminForm(request.POST)
+            if(FormLoginAdmin.is_valid()):
+                data = FormLoginAdmin.cleaned_data
+                if(data['id_admin']=='admin' and data['pwd_admin']=='mdp'): #faire une vérif JSON ici
+                    id_utilisateur = data['id_admin']
+                    return redirect('Page_Admin')
+                else:
+                    erreur="Identifiant/Mot de passe admin invalide"
+    FormLoginAdmin = form.LoginAdminForm()
+    FormLoginClient = form.LoginClientForm()
     return render(request, 'HTML/home.html',{
         'erreur' : erreur,
+        'Form_Login_Client' : FormLoginClient,
+        'Form_Login_Admin' : FormLoginAdmin,
     })
-
-
 def Commande(request):
     #METTRE ICI le dictionnaire
     #! Liste des produits proposés
