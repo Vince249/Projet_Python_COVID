@@ -28,3 +28,20 @@ class ProduitForm(forms.Form):
     Qt_Farine = forms.ChoiceField(choices= Functionchoice(product_List[2]['quantite_Max']))
     Qt_Pommes = forms.ChoiceField(choices= Functionchoice(product_List[3]['quantite_Max']))
     Qt_lait = forms.ChoiceField(choices= Functionchoice(product_List[4]['quantite_Max']))
+
+class CreationForm(forms.Form):
+    id_box = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Identifiant Foyer'}))
+    Email = forms.CharField(label="",max_length = 254,widget=forms.EmailInput(attrs={'placeholder': 'Email'}))
+    pwd = forms.CharField(label = '',widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
+    tel = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Téléphone'}))
+    ville = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Ville'}))
+    codeP = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Code Postal'}))
+    adresse = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Adresse'}))
+    nb_animal = forms.IntegerField(label = '',min_value=0,widget=forms.NumberInput(attrs={'placeholder': "Nombre d'animaux"}))
+    nb_foyer = forms.IntegerField(label = '',min_value=0,widget=forms.NumberInput(attrs={'placeholder': "Nb personnes foyer"}))
+
+class CreationPersonne(forms.Form):
+    nom_box = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Nom'}))
+    prenom_box = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Prénom'}))
+    age_box = forms.IntegerField(label = '',min_value=0,widget=forms.NumberInput(attrs={'placeholder': 'Âge'}))
+

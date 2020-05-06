@@ -1,0 +1,11 @@
+<form method="POST" action="/details">
+    {% csrf_token %}
+    {% for forms in Form_Set %}
+        <p>Personne {{forloop.counter}}</p>
+        {{forms.as_p}}
+        <br>
+    {% endfor %}
+    <br>
+    <br>
+    <input type="submit" name='details' value="Créer compte">
+</form>
