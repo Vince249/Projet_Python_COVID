@@ -15,11 +15,15 @@
             {% csrf_token %}
             {{Form_Creation.as_p}}
             <br>
-            Rajouter plan Google maps avec adresse
-            Voir comment on fait pour rajouter plusieurs personnes dans le foyer tout ça, là c'est un test
+            <p>Vous pouvez chercher la longitude et latitude de votre adresse <a href="https://www.coordonnees-gps.fr/" target="_blank">ici !</a></p>
+            <p>Une fois cela fait vous pouvez utiliser les bouton ci-dessous pour poursuivre votre création de compte ou vous assurer d'avoir entré les bonnes coordonnées GPS </p>
             <br>
-            <input type="submit" name='creation' value="Suivant">
+            <input type="submit" name='creation' value="Continuer votre inscription">
+            <input type="submit" name="bouton" value="Afficher adresse">
         </form>
+        <br>
+        <br>
+        {{map|safe}}
 	</body>
 </html>
 

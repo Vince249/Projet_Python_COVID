@@ -1,9 +1,13 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.forms import formset_factory
+import folium
 from . import form
+
+#! Variables globales
 id_utilisateur = ""
 nb_personne_foyer = 0
+FormCreation = form.CreationForm()
 
 def Home(request):
     global id_utilisateur
@@ -65,6 +69,10 @@ def Creation(request):
     erreur=""
     global id_utilisateur 
     global nb_personne_foyer
+    global FormCreation
+    m= folium.Map(location=[43.634, 1.433333],width=750, height=500,zoom_start=1)
+    if(request.method !='POST'):
+        FormCreation = form.CreationForm()
     if(request.method=='POST'):
         if(request.POST.get('creation')):
             FormCreation = form.CreationForm(request.POST)
@@ -78,10 +86,21 @@ def Creation(request):
                 id_utilisateur = data['id_box']
                 nb_personne_foyer = data['nb_foyer']
                 return redirect('Page_Detail')
-    FormCreation = form.CreationForm()
+        if(request.POST.get('bouton')):
+            FormCreation = form.CreationForm(request.POST)
+            if(FormCreation.is_valid()):
+                data = FormCreation.cleaned_data
+                longitude = data['longitude']
+                latitude = data['latitude']
+                m= folium.Map(location=[latitude,longitude ],width=750, height=500,zoom_start=20)
+                tooltip = 'Click me!'
+                folium.Marker([latitude, longitude], popup='<i>Votre domicile</i>', tooltip=tooltip).add_to(m)
+    m=m._repr_html_()
+    
     return render(request, 'HTML/creation_compte.html',{
         'erreur' : erreur,
         'Form_Creation' : FormCreation,
+        'map':m
     })
 
 def Details(request):
@@ -103,6 +122,9 @@ def Details(request):
 
 
 def Admin(request):
+    m= folium.Map(location=[43.634, 1.433333],zoom_start=20)
+    m=m._repr_html_()
     return render(request, 'HTML/admin.html',{
         'id_admin' : id_utilisateur,
+        'map':m,
     })

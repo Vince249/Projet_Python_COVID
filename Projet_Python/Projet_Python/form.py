@@ -81,6 +81,8 @@ class CreationForm(forms.Form):
     ville = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Ville'}))
     codeP = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Code Postal'}))
     adresse = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Adresse'}))
+    latitude = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Latitude'}))
+    longitude = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Longitude'}))
     nb_animal = forms.IntegerField(label = '',min_value=0,widget=forms.NumberInput(attrs={'placeholder': "Nombre d'animaux"}))
     nb_foyer = forms.IntegerField(label = '',min_value=0,widget=forms.NumberInput(attrs={'placeholder': "Nb personnes foyer"}))
 
