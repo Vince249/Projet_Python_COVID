@@ -1,14 +1,17 @@
 #File contenant toutes les méthodes liées à la page de la commune pour visualiser différentes données statistiques
 #! SAVE dans le dossier "Projet_Python/Graphs_Stats/"
 
+#! """ Import """
 import numpy as np
 import matplotlib.pyplot as plt
+import squarify #Pour le TreeMap
 
-"""# Dataset"""
+#! """ Dataset"""
 #Rappel :
 #Data récupérées en sortie de commande : {'Qt_Pain': '2', 'Qt_Riz': '3', 'Qt_Farine': '0', 'Qt_Pommes': '6', 'Qt_lait': '10'}
 #! Il faut un dataset de cette forme pour vouvir le convertir en DataFrame panda
 commandeJson = {"tomates" : 12, "pain" : 5, "riz": 9, "pate" : 6, "farine":4}
+
 
 ### Histogramme de la quantité de commande de chaque produit ###
 
@@ -40,4 +43,17 @@ plt.axis('equal')
 plt.title('Pie-Chart des quantités totales commandées pour chaque produit')
 
 plt.savefig('Projet_Python/Graphs_Stats/Pie-Chart_Quantite-totale-produit.png')
+plt.show()
+
+### TreeMap ###
+#Site Web : https://jingwen-z.github.io/data-viz-with-matplotlib-series5-treemap/
+
+
+plt.rc('font', size=14)
+squarify.plot(sizes = commandeJson.values(), label=commandeJson.keys(), alpha=0.7)
+plt.axis('off')
+plt.title('TreeMap des quantités par produit')
+
+plt.savefig('Projet_Python/Graphs_Stats/TreeMap_Quantite-totale-produit.png')
+
 plt.show()
