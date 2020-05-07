@@ -104,20 +104,31 @@ def Creation(request):
     })
 
 def Details(request):
-
+    FormSetDetails = formset_factory(form.CreationPersonne, extra=nb_personne_foyer)
+    erreur=""
     if(request.method == 'POST'):
         if(request.POST.get('details')):
             FormSetDetails = formset_factory(form.CreationPersonne, extra=nb_personne_foyer)
             formset = FormSetDetails(request.POST)
             if(formset.is_valid()):
-                for forms in formset:  
-                    data=forms.cleaned_data
-                    print("Personne :", data)
-                    #* Mettre les DATA de chaque personne dans le JSON
-                return redirect('Page_Commande')
-    FormSetDetails = formset_factory(form.CreationPersonne, extra=nb_personne_foyer)
+                check=True
+                #! Vérification formset, on aurait aussi pu simplement modifier dans la library forms le fichier formset ligne 173 en mettant : defaults['empty_permitted'] = False              
+                for forms in formset:
+                    
+                    if (not forms.is_valid() or not forms.has_changed()) : 
+                        check=False
+                        erreur="Tous les champs doivent être remplis"
+                if(check):
+                    for forms in formset:  
+                        data=forms.cleaned_data
+                        print("Personne :", data)
+                        #* Mettre les DATA de chaque personne dans le JSON
+                    return redirect('Page_Commande')
+            else:
+                erreur="Tous les champs doivent être remplis"   
     return render(request, 'HTML/details.html',{
         'Form_Set' : FormSetDetails,
+        'erreur' : erreur
     })
 
 

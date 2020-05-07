@@ -1,57 +1,5 @@
 from django import forms
 
-#On intéragira avec cette variable globale en changeant la valeur de quantite_Max si on veut adapter le nb à la taille de la famille
-product_List = [
-        {'nom':"Pain", 'quantite_Max': 5},
-        {'nom':"Riz", 'quantite_Max': 10},
-        {'nom':"Farine", 'quantite_Max': 15},
-        {'nom':"Pommes", 'quantite_Max': 8},
-        {'nom':"Lait", 'quantite_Max': 12},
-    ]
-
-product_List_Condiment = [
-    {'nom':"Sel/Poivre", 'quantite_Max': 2},
-    {'nom':"Epice", 'quantite_Max': 1},
-    {'nom':"Assaisonnements (Huile et vinaigre)", 'quantite_Max': 2},
-]
-
-product_List_Legume=[
-    {'nom':"Pomme de terre", 'quantite_Max': 25},
-    {'nom':"Tomate", 'quantite_Max': 20},
-]
-
-product_List_Fruit=[
-    {'nom':"Pomme", 'quantite_Max': 15},
-    {'nom':"Citron", 'quantite_Max': 7},
-]
-product_List_Conservation = [
-    {'nom':"Frites-Surgelées", 'quantite_Max': 5},
-    {'nom':"Choucroute en Conserve", 'quantite_Max': 6},
-    {'nom':"Pâtes (500 g)", 'quantite_Max': 15},
-    {'nom':"Riz (500 g)", 'quantite_Max': 8},
-]
-product_List_MatierePremiere = [
-    {'nom':"Farine (kg)", 'quantite_Max': 3},
-    {'nom':"Sucre (kg)", 'quantite_Max': 2},
-    {'nom':"Oeuf (unité de 6)", 'quantite_Max': 3},
-    {'nom':"Pain (Baguette)", 'quantite_Max': 12},
-]
-product_List_Laitier_Viande=[
-    {'nom':"Beurre (250g)", 'quantite_Max': 8},
-    {'nom':"Fromage", 'quantite_Max': 10},
-    {'nom':"Crème fraiche (20 cl)", 'quantite_Max': 10},
-    {'nom':"Poulet", 'quantite_Max': 5},
-    {'nom':"Poisson", 'quantite_Max': 5},
-]
-product_List_HygieneSante=[
-    {'nom':"Kit-Médicaments (Doliprane et Anti-inflammatoire", 'quantite_Max': 10},
-    {'nom':"Pilile (plaquettes)", 'quantite_Max': 3},
-    {'nom':"Kit-Soin du corps (Savon et dentifrice)", 'quantite_Max': 4},
-]
-product_List_Entretien=[
-    {'nom':"kit-Entretien (Liquide vaisselle, lessive, javel)", 'quantite_Max': 3},
-]
-
 
 class LoginClientForm(forms.Form):
     id_client = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Identifiant'}))
@@ -67,11 +15,40 @@ def Functionchoice(a):
     for i in range(a+1): liste.append((str(i),str(i)))
     return liste
 class ProduitForm(forms.Form):
-    Qt_Pain = forms.ChoiceField(choices= Functionchoice(product_List[0]['quantite_Max']))
-    Qt_Riz = forms.ChoiceField(choices= Functionchoice(product_List[1]['quantite_Max']))
-    Qt_Farine = forms.ChoiceField(choices= Functionchoice(product_List[2]['quantite_Max']))
-    Qt_Pommes = forms.ChoiceField(choices= Functionchoice(product_List[3]['quantite_Max']))
-    Qt_lait = forms.ChoiceField(choices= Functionchoice(product_List[4]['quantite_Max']))
+
+    SelPoivre = forms.ChoiceField(label="Sel/Poivre ",choices= Functionchoice(2))
+    Epice = forms.ChoiceField(label="Epices ",choices= Functionchoice(1))
+    Assaisonnements = forms.ChoiceField(label="Assaisonnements (Huile et vinaigre) ",choices= Functionchoice(2))
+
+    Pomme_de_terre = forms.ChoiceField(label="Pomme de terre ",choices= Functionchoice(25))
+    Tomate = forms.ChoiceField(label="Tomate ",choices= Functionchoice(20))
+
+    Pomme = forms.ChoiceField(label="Pomme ",choices= Functionchoice(15))
+    Citron = forms.ChoiceField(label="Tomate ",choices= Functionchoice(7))
+
+    Frite = forms.ChoiceField(label="Frites-Surgelées ",choices= Functionchoice(5))
+    Choucroute = forms.ChoiceField(label="Choucroute en Conserve ",choices= Functionchoice(6))
+    Pate = forms.ChoiceField(label="Pâtes (500 g) ",choices= Functionchoice(15))
+    Riz = forms.ChoiceField(label="Riz (500 g) ",choices= Functionchoice(8))
+
+    Farine = forms.ChoiceField(label="Farine (kg) ",choices= Functionchoice(3))
+    Sucre = forms.ChoiceField(label="Sucre (kg) ",choices= Functionchoice(2))
+    Oeuf = forms.ChoiceField(label="Oeuf (unité de 6) ",choices= Functionchoice(3))
+    Pain = forms.ChoiceField(label="Pain (Baguette) ",choices= Functionchoice(12))
+
+    Lait = forms.ChoiceField(label="Lait (1L)",choices= Functionchoice(4))
+    Beurre = forms.ChoiceField(label="Beurre (250g) ",choices= Functionchoice(8))
+    Fromage = forms.ChoiceField(label="Fromage ",choices= Functionchoice(10))
+    Creme = forms.ChoiceField(label="Crème fraiche (20 cl) ",choices= Functionchoice(10))
+    Poulet = forms.ChoiceField(label="Poulet ",choices= Functionchoice(5))
+    Poisson = forms.ChoiceField(label="Poisson ",choices= Functionchoice(5))
+
+    MedKit= forms.ChoiceField(label="Kit-Médicaments (Doliprane et Anti-inflammatoire) ",choices= Functionchoice(10))
+    Pilule = forms.ChoiceField(label="Pilule (plaquettes) ",choices= Functionchoice(3))
+    KitSoin = forms.ChoiceField(label="Kit-Soin du corps (Savon et dentifrice) ",choices= Functionchoice(4))
+
+    KitEntretien = forms.ChoiceField(label="kit-Entretien (Liquide vaisselle, lessive, javel) ",choices= Functionchoice(3))
+    
 
 class CreationForm(forms.Form):
     id_box = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Identifiant Foyer'}))
@@ -87,7 +64,7 @@ class CreationForm(forms.Form):
     nb_foyer = forms.IntegerField(label = '',min_value=0,widget=forms.NumberInput(attrs={'placeholder': "Nb personnes foyer"}))
 
 class CreationPersonne(forms.Form):
-    nom_box = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Nom'}))
-    prenom_box = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Prénom'}))
-    age_box = forms.IntegerField(label = '',min_value=0,widget=forms.NumberInput(attrs={'placeholder': 'Âge'}))
+    nom_box = forms.CharField(label="",required=True,widget=forms.TextInput(attrs={'placeholder': 'Nom'}))
+    prenom_box = forms.CharField(label="",required=True,widget=forms.TextInput(attrs={'placeholder': 'Prénom'}))
+    age_box = forms.IntegerField(label = '',required=True,min_value=0,widget=forms.NumberInput(attrs={'placeholder': 'Âge'}))
 
