@@ -1,0 +1,49 @@
+{
+    "foyers": [
+        {
+            "id_box": "Foyer1",
+            "Email": "dqsdqsd@dsqdqs",
+            "pwd": "qsdsqd",
+            "tel": "0622685047",
+            "ville": "Courbevoie",
+            "codeP": "dqsdsqdqsd",
+            "adresse": "12 avenue L\u00e9onard de Vinci",
+            "latitude": "48.7259764",
+            "longitude": "2.2363532",
+            "nb_animal": 2,
+            "nb_foyer": 2,
+            "Personnes": [
+                {
+                    "nom_box": "BONY",
+                    "prenom_box": "R\u00e9mi",
+                    "age_box": 20
+                },
+                {
+                    "nom_box": "SOUDRY",
+                    "prenom_box": "Gabriel",
+                    "age_box": 21
+                }
+            ]
+        },
+        {
+            "id_box": "a",
+            "Email": "qsdqsdqsd@sqdsq",
+            "pwd": "mdp",
+            "tel": "0622685047",
+            "ville": "Courbevoie",
+            "codeP": "92400",
+            "adresse": "12 avenue Leonard de Vinci",
+            "latitude": "48.7259764",
+            "longitude": "2.2363532",
+            "nb_animal": 2,
+            "nb_foyer": 1,
+            "Personnes": [
+                {
+                    "nom_box": "DaVinciBot",
+                    "prenom_box": "qsdsqd",
+                    "age_box": 20
+                }
+            ]
+        }
+    ]
+}

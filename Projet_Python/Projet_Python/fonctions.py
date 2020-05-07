@@ -3,6 +3,7 @@ from django.shortcuts import redirect
 from django.forms import formset_factory
 import folium
 from . import form
+from .methode_JSON import methodes_JSON
 
 #! Variables globales
 id_utilisateur = ""
@@ -20,7 +21,7 @@ def Home(request):
             FormLoginClient = form.LoginClientForm(request.POST)
             if(FormLoginClient.is_valid()):
                 data = FormLoginClient.cleaned_data
-                if(data['id_client'] =='a' and data['pwd_client'] =="mdp"): #* faire une vérif JSON ici
+                if(methodes_JSON.VerifClient(data['id_client'],data['pwd_client'])): #* faire une vérif JSON ici
                     id_utilisateur = data['id_client']
                     return redirect('Page_Commande')
                 else:
@@ -29,7 +30,7 @@ def Home(request):
             FormLoginAdmin = form.LoginAdminForm(request.POST)
             if(FormLoginAdmin.is_valid()):
                 data = FormLoginAdmin.cleaned_data
-                if(data['id_admin']=='admin' and data['pwd_admin']=='mdp'): #* faire une vérif JSON ici
+                if(methodes_JSON.VerifAdmin(data['id_admin'],data['pwd_admin'])): #* faire une vérif JSON ici
                     id_utilisateur = data['id_admin']
                     return redirect('Page_Admin')
                 else:
@@ -50,6 +51,7 @@ def Commande(request):
                 data = FormCommande.cleaned_data
                 print('data', data)
                 #* Mettre les DATA dans le JSON
+                methodes_JSON.EnregistrerCommande(data, id_utilisateur) 
                 message='Commande réussie'
     FormProductList = form.ProduitForm()
     return render(request, 'HTML/commande.html',{
@@ -78,11 +80,9 @@ def Creation(request):
             FormCreation = form.CreationForm(request.POST)
             if(FormCreation.is_valid()):
                 data = FormCreation.cleaned_data
-                #vérifier si le forms est correctement rempli
-                #si non, erreur = "ERREUR"
-                #si oui, mettre id dans la variable globale, autoriser la redirection et remplir le JSON avec les valeurs
                 print("data",data)
                 #* Mettre les DATA dans le JSON
+                methodes_JSON.EnregistrerClient(data)
                 id_utilisateur = data['id_box']
                 nb_personne_foyer = data['nb_foyer']
                 return redirect('Page_Detail')
@@ -123,6 +123,7 @@ def Details(request):
                         data=forms.cleaned_data
                         print("Personne :", data)
                         #* Mettre les DATA de chaque personne dans le JSON
+                        methodes_JSON.EnregistrerPersonnes(data)
                     return redirect('Page_Commande')
             else:
                 erreur="Tous les champs doivent être remplis"   
