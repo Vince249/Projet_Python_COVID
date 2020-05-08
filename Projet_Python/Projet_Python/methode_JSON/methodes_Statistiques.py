@@ -13,10 +13,12 @@ from datetime import datetime,timedelta
 import json
 
 
-#C'est normal je travaille dessus
-#import plotly.graph_objs as go
-#import json
-#import pandas as pd
+import json
+import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
+from plotly.offline import plot
+
 
 
 
@@ -35,13 +37,13 @@ def ConvertToStatisticsUse():
     for uneCommande in fichier["commandes"]:#Commande n°1
         print("uneCommande => ", uneCommande)
         for unProduit in uneCommande:
-            #SI Le produit est déjà dans notre dictionnaire final et ce n'est pas l'id ou la date
-            if(unProduit in commandeJson.keys() and unProduit != "id" and unProduit != "Date"): 
+            #SI Le produit est déjà dans notre dictionnaire final et ce n'est pas l'id ou la date ou le CP
+            if(unProduit in commandeJson.keys() and unProduit != "id" and unProduit != "Date" and unProduit != "CP"): 
                 addValue = commandeJson[unProduit] + int(uneCommande[unProduit])
                 commandeJson[unProduit] = addValue
             #Sinon si ce n'est pas l'id ou la date
             #Alors on l'ajoute au dico final
-            elif(unProduit != "id" and unProduit != "Date"):
+            elif(unProduit != "id" and unProduit != "Date" and unProduit != "CP"):
                 commandeJson[unProduit] = int(uneCommande[unProduit])
 
 ### Histogramme de la quantité de commande de chaque produit ###
@@ -103,22 +105,31 @@ def TreeMap_Product():
 
 
 def Arrondissement_Map():
-    # #récupération des données dans le geojson (coordonées arrondissements de paris)
-    # with open('./JSON/arrondissements.geojson') as json_file:
-    #     data_arrondissements = json.load(json_file)
+    with open('/Users/vince/Downloads/arrondissements.geojson') as json_file:
+        data_arrondissements = json.load(json_file)
 
-    # #extraction des clés d'identification de chaque element
-    # liste_arrondissements = []
-    # for i in range(0,len(data_arrondissements['features'])): #len(data_arrondissements['features']) -> nombre d'éléments dans features (=nombre d'arrondissements)
-    #     liste_arrondissements.append(data_arrondissements['features'][i]['properties']['c_arinsee'])
+
+    with open('/Users/vince/Downloads/commandes_faites.json') as json_file:
+        fichier = json.load(json_file)
+        commandes=fichier['commandes']
+
+    df = pd.DataFrame(commandes)
+    convert_dict = {"Frites":int}
+    df = df.astype(convert_dict)
+
+    df2 = df.groupby('CP')['Frites'].sum().reset_index() #on met le reset index pour conserver un dataframe, sinon on a un SeriesFrame
+    #on groupy by CP et on compte dans chaque CP le nombre de produit commandés
+
+    fig = go.Figure(px.choropleth_mapbox(df2, geojson=data_arrondissements, locations='CP', color='Frites',
+                            #color_continuous_scale="Viridis", #couleur peut etre changer surement
+                            mapbox_style="carto-positron",
+                            zoom=11, center = {"lat": 48.8534, "lon": 2.3488},
+                            opacity=0.5,
+                            labels={'quantite':'quantite de produit'}
+                            )) 
     
-    # #print(liste_arrondissements)
-
-
-
-
-
-    return
+    
+    return plot(fig)
 
 def Quantite_Client():
     # Je veux montrer l'évolution du nb de personne avec un compte depuis le lancement du site, on va dire que le site est lancé le 01/05
