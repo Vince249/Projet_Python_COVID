@@ -44,6 +44,45 @@
                     "age_box": 20
                 }
             ]
+        },
+        {
+            "id_box": "Foryer 2",
+            "Email": "qsdqsd@qsdqs",
+            "pwd": "dqsdqs",
+            "tel": "0622685047",
+            "ville": "Courbevoie",
+            "codeP": "92400",
+            "adresse": "12 avenue Leonard de Vinci",
+            "latitude": "48.7259764",
+            "longitude": "2.2363532",
+            "nb_animal": 2,
+            "nb_foyer": 2,
+            "Personnes": [
+                {
+                    "nom_box": "qsdqsd",
+                    "prenom_box": "qsdsqd",
+                    "age_box": 23
+                },
+                {
+                    "nom_box": "fjfjfj",
+                    "prenom_box": "dqds",
+                    "age_box": 45
+                }
+            ]
+        },
+        {
+            "id_box": "qsdqsd",
+            "Email": "qsdqsd@qsdqsq",
+            "pwd": "qsdsqd",
+            "tel": "0622685047",
+            "ville": "Courbevoie",
+            "codeP": "92400",
+            "adresse": "12 avenue Leonard de Vinci",
+            "latitude": "48.7259764",
+            "longitude": "2.2363532",
+            "nb_animal": 2,
+            "nb_foyer": 2,
+            "Personnes": []
         }
     ]
 }

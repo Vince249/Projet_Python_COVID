@@ -1,5 +1,17 @@
 {
     "commandes": [
-        
+        {
+            "SelPoivre": "2",
+            "id": "a"
+        },
+        {
+            "Frite": "2",
+            "id": "a"
+        },
+        {
+            "Frite": "1",
+            "id": "",
+            "od": "hal"
+        }
     ]
 }

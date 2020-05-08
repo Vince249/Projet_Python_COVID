@@ -1,15 +1,33 @@
-<form method="POST" action="/details">
-    {% csrf_token %}
-    {{ Form_Set.management_form }}
-    {% for forms in Form_Set %}
-        <p>Personne {{forloop.counter}}</p>
-        {{forms.as_p}}
-        <br>
-    {% endfor %}
-    <br>
-    <br>
-    <input type="submit" name='details' value="Créer compte">
-</form>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en"
+    <head>
+        <meta charset="utf-8">
+        <title>Administrateur</title>
+        <meta name="description" content="The Administrateur Page">
+        <link rel="stylesheet" href="{% static 'CSS/details.css' %}">
+    </head>
+>
+    <body>
+
+        <form method="POST" action="/details">
+            {% csrf_token %}
+            {{ Form_Set.management_form }}
+            {% for forms in Form_Set %}
+                <p>Personne {{forloop.counter}}</p>
+                {{forms.as_p}}
+                <br>
+            {% endfor %}
+            <br>
+            <br>
+            <input type="submit" name='details' value="Créer compte">
+        </form>
+        
+        
+        {{erreur}}
+
+    </body>
+</html>
 
 
-{{erreur}}
+

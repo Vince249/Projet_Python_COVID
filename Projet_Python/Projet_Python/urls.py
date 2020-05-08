@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import fonctions
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('', fonctions.Home, name='Page_Home'),
@@ -25,3 +26,5 @@ urlpatterns = [
     path('admin', fonctions.Admin, name='Page_Admin'),
     path('details', fonctions.Details, name='Page_Detail'),
 ]
+
+urlpatterns+=staticfiles_urlpatterns()

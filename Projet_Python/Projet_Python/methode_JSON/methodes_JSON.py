@@ -32,8 +32,14 @@ def EnregistrerCommande(data, id):
 	with open('./JSON/commandes_faites.json') as json_file:
 		fichier = json.load(json_file)
 		temp = fichier['commandes']
-		temp.append(data)
-		temp[len(temp)-1]['id']=id
+		print("1",data)
+		datacleaned={}
+		for k,v in data.items():
+			if v != '0':
+				datacleaned[k]=v
+		print("2",datacleaned)
+		datacleaned['id']=id
+		temp.append(datacleaned)
 	write_json(fichier,'./JSON/commandes_faites.json')
 	return
 
@@ -43,7 +49,9 @@ def VerifClient(id,pwd):
 		temp=fichier['foyers']
 		check = False
 		for element in temp:
-			if(element['id_box']==id and element['pwd']==pwd): check=True
+			if(element['id_box']==id and element['pwd']==pwd): 
+				check=True
+				break
 	return check
 
 def VerifAdmin(id,pwd):
