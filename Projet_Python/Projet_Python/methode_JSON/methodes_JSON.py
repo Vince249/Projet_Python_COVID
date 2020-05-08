@@ -17,7 +17,7 @@ def EnregistrerClient(data):
 		temp = fichier['foyers']
 		data['Personnes']=[]
 		today = date.today()
-		data['Date']=today.strftime("%d/%m/%Y")
+		data['Date']=today.strftime("%d-%m-%Y")
 		temp.append(data)
 	write_json(fichier,'./JSON/infos_client.json')
 	return

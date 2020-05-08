@@ -75,7 +75,7 @@ def Quantite_Client():
     enddate = datetime.date.today()
     listejours=[]
     for n in range(int ((enddate - startdate).days)+1):
-        listejours.append( (startdate + timedelta(n)).strftime("%d/%m/%Y"))
+        listejours.append( (startdate + timedelta(n)).strftime("%d-%m-%Y"))
     #on cherche le nb de client par date
     '''
     for i in listejours:
@@ -85,5 +85,3 @@ def Quantite_Client():
     }
     '''
     pass
-    
-
