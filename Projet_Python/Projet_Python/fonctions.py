@@ -6,10 +6,12 @@ from . import form
 from .methode_JSON import methodes_JSON
 from .methode_JSON import methodes_Statistiques
 
+
 #! Variables globales
 id_utilisateur = ""
 nb_personne_foyer = 0
 FormCreation = form.CreationForm()
+
 
 def Home(request):
     global id_utilisateur
@@ -43,6 +45,8 @@ def Home(request):
         'Form_Login_Client' : FormLoginClient,
         'Form_Login_Admin' : FormLoginAdmin,
     })
+
+
 def Commande(request):
     message=''
     if(request.method == 'POST'):
@@ -60,6 +64,7 @@ def Commande(request):
         'Form_Product_List' : FormProductList,
         'message': message,
     })
+
 
 def Allergie(request):
     message = ''
@@ -103,6 +108,7 @@ def Creation(request):
         'Form_Creation' : FormCreation,
         'map':m
     })
+
 
 def Details(request):
     FormSetDetails = formset_factory(form.CreationPersonne, extra=nb_personne_foyer)
