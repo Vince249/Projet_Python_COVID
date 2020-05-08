@@ -1,9 +1,9 @@
 {
     "foyers": [
         {
-            "id_box": "Foyer1",
+            "id_box": "aaaaaa5",
             "Email": "dqsdqsd@dsqdqs",
-            "pwd": "qsdsqd",
+            "pwd": "d",
             "tel": "0622685047",
             "ville": "Courbevoie",
             "codeP": "dqsdsqdqsd",
@@ -14,75 +14,43 @@
             "nb_foyer": 2,
             "Personnes": [
                 {
+                    "nom_box": "bob",
+                    "prenom_box": "sincalr",
+                    "age_box": 54
+                },
+                {
+                    "nom_box": "mic",
+                    "prenom_box": "jag",
+                    "age_box": 70
+                }
+            ],
+            "Date": "08/05/2020"
+        },
+        {
+            "id_box": "dsqdsqdqsdqsdqsdqsd",
+            "Email": "qsdqsd@qsdqs",
+            "pwd": "d",
+            "tel": "0622685047",
+            "ville": "Courbevoie",
+            "codeP": "92400",
+            "adresse": "12 avenue Leonard de Vinci",
+            "latitude": "48.7259764",
+            "longitude": "2.088067",
+            "nb_animal": 2,
+            "nb_foyer": 2,
+            "Personnes": [
+                {
                     "nom_box": "BONY",
                     "prenom_box": "R\u00e9mi",
-                    "age_box": 20
+                    "age_box": 2
                 },
-                {
-                    "nom_box": "SOUDRY",
-                    "prenom_box": "Gabriel",
-                    "age_box": 21
-                }
-            ]
-        },
-        {
-            "id_box": "a",
-            "Email": "qsdqsdqsd@sqdsq",
-            "pwd": "mdp",
-            "tel": "0622685047",
-            "ville": "Courbevoie",
-            "codeP": "92400",
-            "adresse": "12 avenue Leonard de Vinci",
-            "latitude": "48.7259764",
-            "longitude": "2.2363532",
-            "nb_animal": 2,
-            "nb_foyer": 1,
-            "Personnes": [
                 {
                     "nom_box": "DaVinciBot",
-                    "prenom_box": "qsdsqd",
-                    "age_box": 20
+                    "prenom_box": "R\u00e9mi GUILLON BONY",
+                    "age_box": 3
                 }
-            ]
-        },
-        {
-            "id_box": "Foryer 2",
-            "Email": "qsdqsd@qsdqs",
-            "pwd": "dqsdqs",
-            "tel": "0622685047",
-            "ville": "Courbevoie",
-            "codeP": "92400",
-            "adresse": "12 avenue Leonard de Vinci",
-            "latitude": "48.7259764",
-            "longitude": "2.2363532",
-            "nb_animal": 2,
-            "nb_foyer": 2,
-            "Personnes": [
-                {
-                    "nom_box": "qsdqsd",
-                    "prenom_box": "qsdsqd",
-                    "age_box": 23
-                },
-                {
-                    "nom_box": "fjfjfj",
-                    "prenom_box": "dqds",
-                    "age_box": 45
-                }
-            ]
-        },
-        {
-            "id_box": "qsdqsd",
-            "Email": "qsdqsd@qsdqsq",
-            "pwd": "qsdsqd",
-            "tel": "0622685047",
-            "ville": "Courbevoie",
-            "codeP": "92400",
-            "adresse": "12 avenue Leonard de Vinci",
-            "latitude": "48.7259764",
-            "longitude": "2.2363532",
-            "nb_animal": 2,
-            "nb_foyer": 2,
-            "Personnes": []
+            ],
+            "Date": "08/05/2020"
         }
     ]
 }
