@@ -9,6 +9,14 @@ from matplotlib import pyplot as plt
 import squarify #Pour le TreeMap
 import os
 
+
+#C'est normal je travaille dessus
+#import plotly.graph_objs as go
+#import json
+#import pandas as pd
+
+
+
 #! """ Dataset"""
 #Rappel :
 #Data récupérées en sortie de commande : {'Qt_Pain': '2', 'Qt_Riz': '3', 'Qt_Farine': '0', 'Qt_Pommes': '6', 'Qt_lait': '10'}
@@ -66,3 +74,24 @@ def TreeMap_Product():
     plt.savefig('assets/Image/TreeMap_Quantite-totale-produit.png')
     plt.close()
     #plt.show()
+
+
+
+
+def Arrondissement_Map():
+    # #récupération des données dans le geojson (coordonées arrondissements de paris)
+    # with open('./JSON/arrondissements.geojson') as json_file:
+    #     data_arrondissements = json.load(json_file)
+
+    # #extraction des clés d'identification de chaque element
+    # liste_arrondissements = []
+    # for i in range(0,len(data_arrondissements['features'])): #len(data_arrondissements['features']) -> nombre d'éléments dans features (=nombre d'arrondissements)
+    #     liste_arrondissements.append(data_arrondissements['features'][i]['properties']['c_arinsee'])
+    
+    # #print(liste_arrondissements)
+
+
+
+
+
+    return
