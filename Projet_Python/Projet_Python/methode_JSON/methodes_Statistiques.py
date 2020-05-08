@@ -8,6 +8,8 @@ matplotlib.use('Agg')
 from matplotlib import pyplot as plt
 import squarify #Pour le TreeMap
 import os
+from pandas import DataFrame
+from datetime import datetime,timedelta
 
 #! """ Dataset"""
 #Rappel :
@@ -67,7 +69,21 @@ def TreeMap_Product():
     plt.close()
 
 def Quantite_Client():
-    # Je veux montrer l'évolution du nb de personne avec un compte depuis le lancement du site, on va dire que le site est lancé ojd
+    # Je veux montrer l'évolution du nb de personne avec un compte depuis le lancement du site, on va dire que le site est lancé le 01/05
+    # On fait une liste des dates entre le 01/05 et aujourd'hui
+    startdate = datetime.date(2020,5,1)
+    enddate = datetime.date.today()
+    listejours=[]
+    for n in range(int ((enddate - startdate).days)+1):
+        listejours.append( (startdate + timedelta(n)).strftime("%d/%m/%Y"))
+    #on cherche le nb de client par date
+    '''
+    for i in listejours:
 
-     
+    Data = { 'Date': listejours,
+    'Qt_Clients':
+    }
+    '''
+    pass
+    
 
