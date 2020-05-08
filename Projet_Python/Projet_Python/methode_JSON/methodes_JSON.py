@@ -20,7 +20,7 @@ def EnregistrerClient(data):
 		temp = fichier['foyers']
 		data['Personnes']=[]
 		today = date.today()
-		data['Date']=today.strftime("%d-%m-%Y")
+		data['Date']=today.strftime("%Y-%m-%d")
 		temp.append(data)
 	write_json(fichier,'./JSON/infos_client.json')
 	return
@@ -53,7 +53,7 @@ def EnregistrerCommande(data, id):
 				datacleaned[k]=v
 		datacleaned['id']=id
 		datacleaned['CP']=CP
-		datacleaned['Date'] = (datetime.now()).strftime("%d-%m-%Y") #Ajout de la date au format dd-mm-YYYY
+		datacleaned['Date'] = (datetime.now()).strftime("%Y-%m-%d") #Ajout de la date au format YYYY-mm-dd
 		
 		temp.append(datacleaned)
 	write_json(fichier,'./JSON/commandes_faites.json')
