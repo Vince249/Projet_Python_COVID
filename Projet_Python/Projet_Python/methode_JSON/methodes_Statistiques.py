@@ -6,11 +6,15 @@ import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 from matplotlib import pyplot as plt
+import matplotlib.dates as mdates
 import squarify #Pour le TreeMap
 import os
+import pandas as pd
 from pandas import DataFrame
-from datetime import datetime,timedelta
+import datetime
+from datetime import timedelta
 import json
+from matplotlib.ticker import  MaxNLocator
 
 #! """ Dataset"""
 #Rappel :
@@ -91,19 +95,40 @@ def TreeMap_Product():
     plt.close()
 
 def Quantite_Client():
+    if(os.path.isfile('assets/Image/Totaux_Personnes_Courbe.png')):
+        os.remove('assets/Image/Totaux_Personnes_Courbe.png')#Supprimer l'image actuelle
+
     # Je veux montrer l'évolution du nb de personne avec un compte depuis le lancement du site, on va dire que le site est lancé le 01/05
     # On fait une liste des dates entre le 01/05 et aujourd'hui
     startdate = datetime.date(2020,5,1)
     enddate = datetime.date.today()
     listejours=[]
     for n in range(int ((enddate - startdate).days)+1):
-        listejours.append( (startdate + timedelta(n)).strftime("%d-%m-%Y"))
+        listejours.append( (startdate + timedelta(n)).strftime("%Y-%m-%d"))
     #on cherche le nb de client par date
-    '''
-    for i in listejours:
-
-    Data = { 'Date': listejours,
-    'Qt_Clients':
+    Liste_Totaux_Personnes = [0]
+    #* On initialise le premier terme
+    f=open('./JSON/infos_client.json')
+    fichier = json.load(f)
+    temp = fichier['foyers']
+    for element in temp:
+        if(element['Date']==startdate.strftime("%Y-%m-%d")):
+            Liste_Totaux_Personnes[0]+=len(element['Personnes'])
+    #* Maintenant on fait les autres dates
+    for index_jour in range(1,len(listejours)):
+        date_actu = listejours[index_jour]
+        Liste_Totaux_Personnes.append(0)
+        for element in temp:
+            if(element['Date']==date_actu):
+                Liste_Totaux_Personnes[index_jour]+=len(element['Personnes'])
+        Liste_Totaux_Personnes[index_jour]+= Liste_Totaux_Personnes[index_jour-1]
+    print('Liste', Liste_Totaux_Personnes)
+    Data={
+        'Jours' : listejours,
+        'Totaux_Personnes':Liste_Totaux_Personnes
     }
-    '''
-    pass
+    df=DataFrame(Data,columns=['Jours','Totaux_Personnes'])
+    df['Jours']= pd.to_datetime(df['Jours'])
+    fig = df.plot(x='Jours', y='Totaux_Personnes',figsize=(10,10),x_compat=True)
+    fig.xaxis.set_major_locator(mdates.DayLocator(bymonthday=range(1,32,2)))
+    fig.get_figure().savefig('assets/Image/Totaux_Personnes_Courbe.png')

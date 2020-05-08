@@ -141,6 +141,7 @@ def Admin(request):
     methodes_Statistiques.Histo_Product()
     methodes_Statistiques.PieChart_Product()
     methodes_Statistiques.TreeMap_Product()
+    methodes_Statistiques.Quantite_Client()
 
     return render(request, 'HTML/admin.html',{
         'id_admin' : id_utilisateur,
