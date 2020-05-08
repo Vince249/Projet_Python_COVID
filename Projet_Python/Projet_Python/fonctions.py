@@ -4,6 +4,7 @@ from django.forms import formset_factory
 import folium
 from . import form
 from .methode_JSON import methodes_JSON
+from .methode_JSON import methodes_Statistiques
 
 #! Variables globales
 id_utilisateur = ""
@@ -136,6 +137,10 @@ def Details(request):
 def Admin(request):
     m= folium.Map(location=[43.634, 1.433333],zoom_start=20)
     m=m._repr_html_()
+    methodes_Statistiques.Histo_Product()
+    methodes_Statistiques.PieChart_Product()
+    methodes_Statistiques.TreeMap_Product()
+
     return render(request, 'HTML/admin.html',{
         'id_admin' : id_utilisateur,
         'map':m,
