@@ -66,7 +66,7 @@ def TreeMap_Product():
     plt.savefig('assets/Image/TreeMap_Quantite-totale-produit.png')
     plt.close()
 
-def Quantite_Client():
+#def Quantite_Client():
     # Je veux montrer l'évolution du nb de personne avec un compte depuis le lancement du site, on va dire que le site est lancé ojd
 
      
