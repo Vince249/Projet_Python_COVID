@@ -32,12 +32,12 @@ def EnregistrerCommande(data, id):
 	with open('./JSON/commandes_faites.json') as json_file:
 		fichier = json.load(json_file)
 		temp = fichier['commandes']
-		print("1",data)
+		#print("1",data)
 		datacleaned={}
 		for k,v in data.items():
 			if v != '0':
 				datacleaned[k]=v
-		print("2",datacleaned)
+		print("Foramt de la commande : \n",datacleaned)
 		datacleaned['id']=id
 		temp.append(datacleaned)
 	write_json(fichier,'./JSON/commandes_faites.json')
