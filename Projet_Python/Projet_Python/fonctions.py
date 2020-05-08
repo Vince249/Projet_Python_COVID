@@ -144,11 +144,10 @@ def Admin(request):
     m= folium.Map(location=[43.634, 1.433333],zoom_start=20)
     m=m._repr_html_()
     methodes_Statistiques.ConvertToStatisticsUse()#Convertion du tableau pour qu'il puisse être utilisé
-    methodes_Statistiques.Histo_Product()
-    methodes_Statistiques.PieChart_Product()
     methodes_Statistiques.TreeMap_Product()
     methodes_Statistiques.Quantite_Client()
     methodes_Statistiques.Arrondissement_Map()
+    methodes_Statistiques.GraphTotalCommande()
 
     return render(request, 'HTML/admin.html',{
         'id_admin' : id_utilisateur,

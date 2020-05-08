@@ -105,43 +105,43 @@ def TreeMap_Product():
 
 
 ### Nombre de commandes par jour depuis le début (01-05-2020)
-##def GraphTotalCommande():
-# On fait une liste des dates entre le 01/05 et aujourd'hui
-startdate = date(2020,5,1)#Date du début
-enddate = date.today()#Date d'aujourd'hui 
-listejours=[]#tableau de chaque date entre le début et aujourd'hui
-for n in range(int ((enddate - startdate).days)+1):
-    listejours.append( (startdate + timedelta(n)).strftime("%d-%m-%Y"))
-    #Save sous forme de string de la forme dd-mm-YYYY de toutes les dates de l'intervalle
-#on cherche le nb de commande par date
-#listejours = ['01-05-2020', '02-05-2020', '03-05-2020', '04-05-2020', '05-05-2020', '06-05-2020', '07-05-2020', '08-05-2020', '09-05-2020']
+def GraphTotalCommande():
+    # On fait une liste des dates entre le 01/05 et aujourd'hui
+    startdate = date(2020,5,1)#Date du début
+    enddate = date.today()#Date d'aujourd'hui 
+    listejours=[]#tableau de chaque date entre le début et aujourd'hui
+    for n in range(int ((enddate - startdate).days)+1):
+        listejours.append( (startdate + timedelta(n)).strftime("%d-%m-%Y"))
+        #Save sous forme de string de la forme dd-mm-YYYY de toutes les dates de l'intervalle
+    #on cherche le nb de commande par date
+    #listejours = ['01-05-2020', '02-05-2020', '03-05-2020', '04-05-2020', '05-05-2020', '06-05-2020', '07-05-2020', '08-05-2020', '09-05-2020']
 
-#Beosin d'avoir un dico de la forme suivante pour utilisation de Panda :
-#dicoJourNmbCommande = {"Date":['01-05-2020', '02-05-2020', '03-05-2020', '04-05-2020', '05-05-2020', '06-05-2020', '07-05-2020', '08-05-2020', '09-05-2020'],
-                        #"TotalCommandeJour" : [4,6,8,5,3,7,5,11,6],
-                        #"TotalCommandeCumule":[4,10,18,23,26,33,38,49,55]}
-dicoJourNmbCommande = {"Date":listejours, "TotalCommandeJour":[], "TotalCommandeCumule":[]}
+    #Beosin d'avoir un dico de la forme suivante pour utilisation de Panda :
+    #dicoJourNmbCommande = {"Date":['01-05-2020', '02-05-2020', '03-05-2020', '04-05-2020', '05-05-2020', '06-05-2020', '07-05-2020', '08-05-2020', '09-05-2020'],
+                            #"TotalCommandeJour" : [4,6,8,5,3,7,5,11,6],
+                            #"TotalCommandeCumule":[4,10,18,23,26,33,38,49,55]}
+    dicoJourNmbCommande = {"Date":listejours, "TotalCommandeJour":[], "TotalCommandeCumule":[]}
 
-with open('./JSON/commandes_faites.json') as json_file:
-    fichier = json.load(json_file)
-    listCommandes = fichier['commandes']
-    cumulNbCommande = 0
-    for day in listejours :
-        total = 0
-        for order in listCommandes :
-            if(order["Date"] == day):
-                total += 1
-        dicoJourNmbCommande["TotalCommandeJour"].extend([total])
-        dicoJourNmbCommande["TotalCommandeCumule"].extend([cumulNbCommande + total])
-        cumulNbCommande += total
+    with open('./JSON/commandes_faites.json') as json_file:
+        fichier = json.load(json_file)
+        listCommandes = fichier['commandes']
+        cumulNbCommande = 0
+        for day in listejours :
+            total = 0
+            for order in listCommandes :
+                if(order["Date"] == day):
+                    total += 1
+            dicoJourNmbCommande["TotalCommandeJour"].extend([total])
+            dicoJourNmbCommande["TotalCommandeCumule"].extend([cumulNbCommande + total])
+            cumulNbCommande += total
 
-pandaJourCommande = DataFrame(dicoJourNmbCommande)
-#print(pandaJourCommande)
-pandaJourCommande.plot(x="Date", y="TotalCommandeCumule",
-                        kind='line',title="Graphique des commandes cumulées depuis le " + startdate.strftime(("%d-%m-%Y")),
-                        grid=True, legend = False, figsize=(15,6), color='g')
-#plt.show()
-plt.savefig('assets/Image/Cumule-Commandes.png')
+    pandaJourCommande = DataFrame(dicoJourNmbCommande)
+    #print(pandaJourCommande)
+    pandaJourCommande.plot(x="Date", y="TotalCommandeCumule",
+                            kind='line',title="Graphique des commandes cumulées depuis le " + startdate.strftime(("%Y-%m-%d")),
+                            grid=True, legend = False, figsize=(15,6), color='g')
+    #plt.show()
+    plt.savefig('assets/Image/Cumule-Commandes.png')
 
 
 
