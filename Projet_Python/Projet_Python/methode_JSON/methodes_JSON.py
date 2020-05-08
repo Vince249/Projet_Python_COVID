@@ -2,9 +2,9 @@
 # Python program to update 
 # JSON 
 
-
+from datetime import datetime
 import json 
-
+from datetime import date
 # function to add to JSON 
 def write_json(data, filename):
 	with open(filename,'w') as f:
@@ -15,8 +15,10 @@ def EnregistrerClient(data):
 	with open('./JSON/infos_client.json') as json_file:
 		fichier = json.load(json_file)
 		temp = fichier['foyers']
+		data['Personnes']=[]
+		today = date.today()
+		data['Date']=today.strftime("%d-%m-%Y")
 		temp.append(data)
-		temp[len(temp)-1]['Personnes']=[]
 	write_json(fichier,'./JSON/infos_client.json')
 	return
 
@@ -32,13 +34,13 @@ def EnregistrerCommande(data, id):
 	with open('./JSON/commandes_faites.json') as json_file:
 		fichier = json.load(json_file)
 		temp = fichier['commandes']
-		#print("1",data)
 		datacleaned={}
 		for k,v in data.items():
 			if v != '0':
 				datacleaned[k]=v
-		print("Foramt de la commande : \n",datacleaned)
 		datacleaned['id']=id
+		datacleaned['Date'] = (datetime.now()).strftime("%d-%m-%Y") #Ajout de la date au format dd-mm-YYYY
+		
 		temp.append(datacleaned)
 	write_json(fichier,'./JSON/commandes_faites.json')
 	return

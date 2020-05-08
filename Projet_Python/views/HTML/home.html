@@ -7,12 +7,17 @@
 		<title>Accueil</title>
         <meta name="description" content="The Connection Page">
         <link rel="stylesheet" href="{% static 'CSS/home.css' %}">
-	</head>
-    <header>
         <h2>Page d'accueil</h2>
-        <h3>Bienvenue !</h3>
-    </header>
+        <h2>GROUPE ALPHA</h2>
+	</head>
+        
     <body>
+        
+        <div class="loginbox">
+            <img src="{% static 'Image/avatar.jpg' %}" class="avatar" />
+        
+
+        <div class="form1">
         <p>{{erreur}}</p>
         <p>Login client</p>
         <form method="POST" action="/">
@@ -20,14 +25,21 @@
             {{Form_Login_Client}}
             <input type="submit" name="login_client" value="Connexion">
         </form>
+        </div>
+
+        <div class="form2">
         <p>Login admin</p>
         <form method="POST" action="/">
             {% csrf_token %}
             {{Form_Login_Admin}}
             <input type="submit" name="login_admin" value="Connexion">
         </form>
-    
-        <p><a href='/creation'>Créer votre compte</a></p>
+        </div>
+        </div>
+        <div class="create_account">
+            <p><a href='/creation'>Créer votre compte</a></p>
+        </div>
+        
 	</body>
 </html>
 
