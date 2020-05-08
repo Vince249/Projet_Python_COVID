@@ -28,28 +28,60 @@
     ]
     -->
 
-        <!-- Mise en place d'ID pour le CSS-->
+        <!-- Mise en place d'ID pour le CSS
         <h2 id="Nourriture">Produits alimentaires</h2>
         <h3 id="Condiements">Condiments</h3>
-        <!-- METTRE product_List_Condiment-->
+        METTRE product_List_Condiment
         <h3 id="Legumes">Légumes de saison</h3>
-        <!-- METTRE product_List_Legume-->
+        METTRE product_List_Legume
         <h3 id="Fruis">Fruits de saison</h3>
-        <!-- METTRE product_List_Fruit-->
+        METTRE product_List_Fruit
         <h3 id="Conserve">Aliment ayant une longue conservation</h3>
-        <!-- METTRE product_List_Conservation-->
+        METTRE product_List_Conservation
         <h3 id="Base">Matières premières</h3>
-        <!-- METTRE product_List_MatierePremiere-->
+        METTRE product_List_MatierePremiere
         <h3 id="Laitier_Viande">Produits laitiers et viande</h3>
-        <!-- METTRE product_List_Laitier_Viande-->
+        METTRE product_List_Laitier_Viande
         <h2 id="Hygiene">Hygiène et Santé</h2>
-        <!-- METTRE product_List_HygieneSante-->
+        METTRE product_List_HygieneSante
         <h2 id="Entretien">Produits d'entretien</h2>
-        <!-- METTRE product_List_Entretien-->
+        METTRE product_List_Entretien-->
   
+        <!-- forloop.counter : L’itération actuelle de la boucle (index à partir de 1) -->
+    <h2 id="Nourriture">Produits alimentaires</h2>
+
     <form method="POST" action="/commande">  
-      {% csrf_token %}
-      {{Form_Product_List.as_p}}
+      {% csrf_token %} <!-- une protection contre le « Cross site request forgery » (CSRF) : Protège des attaques CSRF -->
+      <!-- {{Form_Product_List.as_p}} -->
+      {% for product in Form_Product_List %}
+        {% if forloop.first %}
+          <h3 id="Condiements">Condiments</h3>
+        {% endif %}
+        {% if forloop.counter == 4 %}
+          <h3 id="Legumes">Légumes de saison</h3>
+        {% endif %}
+        {% if forloop.counter == 7 %}
+          <h3 id="Fruis">Fruits de saison</h3>
+        {% endif %}
+        {% if forloop.counter == 9 %}
+          <h3 id="Conserve">Aliment ayant une longue conservation</h3>
+        {% endif %}
+        {% if forloop.counter == 13 %}
+          <h3 id="Base">Matières premières</h3>
+        {% endif %}
+        {% if forloop.counter == 17 %}
+          <h3 id="Laitier_Viande">Produits laitiers et viande</h3>
+        {% endif %}
+        {% if forloop.counter == 23 %}
+          <h2 id="Hygiene">Hygiène et Santé</h2>
+        {% endif %}
+        {% if forloop.counter == 26 %}
+          <h2 id="Entretien">Produits d'entretien</h2>
+        {% endif %}
+      
+        {{product.name}} {{product}}
+        <br/><br/>
+      {% endfor %}
       <input type="submit" name="Commande" value="Valider commande">
     </form>
     
