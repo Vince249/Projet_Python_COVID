@@ -2,7 +2,7 @@
 # Python program to update 
 # JSON 
 
-
+from datetime import datetime
 import json 
 from datetime import date
 # function to add to JSON 
@@ -39,6 +39,8 @@ def EnregistrerCommande(data, id):
 			if v != '0':
 				datacleaned[k]=v
 		datacleaned['id']=id
+		datacleaned['Date'] = (datetime.now()).strftime("%d-%m-%Y") #Ajout de la date au format dd-mm-YYYY
+		
 		temp.append(datacleaned)
 	write_json(fichier,'./JSON/commandes_faites.json')
 	return
