@@ -46,7 +46,7 @@ def Home(request):
         'Form_Login_Admin' : FormLoginAdmin,
     })
 
-
+### Méthode déclanchant les actions liées à la création d'une commande par un utilisateur ###
 def Commande(request):
     if(id_utilisateur!=""):
         message=''
@@ -158,20 +158,18 @@ def Details(request):
             'erreur' : erreur,
         })
 
-
+### Méthode déclanchant les actions de consultation des données par l'administrateur (la commune) ###
 def Admin(request):
     if(id_utilisateur=='admin'):
         m= folium.Map(location=[43.634, 1.433333],zoom_start=20)
         m=m._repr_html_()
         methodes_Statistiques.ConvertToStatisticsUse()#Convertion du tableau pour qu'il puisse être utilisé
-        methodes_Statistiques.TreeMap_Product()
-        methodes_Statistiques.Quantite_Client()
+        methodes_Statistiques.TreeMap_Product() #Création du TreeMap
+        methodes_Statistiques.Quantite_Client() 
         methodes_Statistiques.GraphTotalCommande()
-        html_entrepot = methodes_Statistiques.EntrepotArrondissement()
-        orderOfTheDay = methodes_Statistiques.DetailCommandeToday()
+        html_entrepot = methodes_Statistiques.EntrepotArrondissement() #Création du contenu HTML pour affichage de la liste des entrepots de la ville dans la page HTML admin
+        orderOfTheDay = methodes_Statistiques.DetailCommandeToday() #Création du contenu HTML pour affichage de la synthèse des commandes détailléees du jour dans la page HTML admin
         
-
-
         #selection du produit pour affichage personalisé de la map qui suit
         global choix
         if(request.method == 'POST'):
