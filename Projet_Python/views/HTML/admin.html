@@ -41,6 +41,10 @@
 			<figcaption>Graphique analysant la quantité cumulée du nombre de commande en fonction de la date</figcaption>
 		</figure>
 		<br/>
+		
+		{% autoescape off %}
+		{{ map_produits }}
+		{% endautoescape %}
 
 	</body>
 </html>
