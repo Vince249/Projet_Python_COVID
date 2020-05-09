@@ -64,9 +64,13 @@ body footer h3{
 }
 
 body .lesforms{
-    align-items: right;
+    width: 100%;
+    text-align: right;
 }
 
 body footer ul li{
     list-style: none;
+}
+body footer p{
+    text-align: center;
 }
