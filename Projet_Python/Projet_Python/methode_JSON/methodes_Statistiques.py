@@ -151,15 +151,16 @@ def GraphTotalCommande():
 
 
 def Arrondissement_Map():
-    with open('/Users/vince/Downloads/arrondissements.geojson') as json_file:
+    with open('./JSON/arrondissements.geojson') as json_file:
         data_arrondissements = json.load(json_file)
 
 
-    with open('/Users/vince/Downloads/commandes_faites.json') as json_file:
+    with open('./JSON/commandes_faites.json') as json_file:
         fichier = json.load(json_file)
         commandes=fichier['commandes']
 
     df = pd.DataFrame(commandes)
+    df = df.fillna(0) #si une commande contient certains produits mais pas d'autres, leur valeur dans le dataframe sera "NaN" et ne pourra être lu lors de la conversion en int
     convert_dict = {"Frites":int}
     df = df.astype(convert_dict)
 
