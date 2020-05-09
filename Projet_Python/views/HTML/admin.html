@@ -40,11 +40,15 @@
 			<img src="{% static 'Image/Cumule-Commandes.png' %}" alt="Graphique du cumul des commandes" title="Graphique du nombre de commandes" />
 			<figcaption>Graphique analysant la quantité cumulée du nombre de commande en fonction de la date</figcaption>
 		</figure>
-		<br/>
+		<br/><br/>
 		
 		{% autoescape off %}
 		{{ map_produits }}
 		{% endautoescape %}
+
+		<h3>Total de produits commandés aujourd'hui par arrondissements</h3>
+		{{orderOfTheDay|safe}}
+		<br/><br/>
 
 	</body>
 </html>

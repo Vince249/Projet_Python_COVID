@@ -147,6 +147,7 @@ def Admin(request):
     methodes_Statistiques.TreeMap_Product()
     methodes_Statistiques.Quantite_Client()
     methodes_Statistiques.GraphTotalCommande()
+    orderOfTheDay = methodes_Statistiques.DetailCommandeToday()
 
     map_produits = methodes_Statistiques.Arrondissement_Map()
 
