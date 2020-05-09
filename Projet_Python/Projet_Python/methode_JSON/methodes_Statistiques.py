@@ -46,6 +46,8 @@ def ConvertToStatisticsUse():
             #Alors on l'ajoute au dico final
             elif(unProduit != "id" and unProduit != "Date" and unProduit != "CP" and uneCommande[str(unProduit)] != "0"):
                 commandeJson[unProduit] = int(uneCommande[unProduit])
+    #On trie le dictionnaire par ses valeurs d'une facon decroissante
+    sorted(commandeJson.items(), key=lambda x: x[1], reverse=True) #reverse=True : Trie dansl l'ordre decroissant 
     print("CommandesJSON",commandeJson)
 
 ### Méthode faisant l'Histogramme de la quantité de commande de chaque produit commandé depuis le début du site ###
@@ -89,15 +91,18 @@ def PieChart_Product():
 ### Méthode faisant le TreeMap de tous les produits commandés (suivant leur quantité) depuis le début du site ###
 #Site Web : https://jingwen-z.github.io/data-viz-with-matplotlib-series5-treemap/
 def TreeMap_Product():
-    if(os.path.isfile('assets/Image/TreeMap_Quantite-totale-produit.png')):
+    if(os.path.isfile('assets/Image/TreeMap_Quantite-totale-produit.png')): #Si le fichier existe
         os.remove('assets/Image/TreeMap_Quantite-totale-produit.png')#Supprimer l'image actuelle
+    #Slicing d'un dictionnaire : ici on garde le top 10 des produits (car le dictionnaire est déjà trié par ordre décroissant suivant ses valeurs)
+    topTen = dict(list(commandeJson.items())[0:10]) #10 premiers elements du dictionnaire
+    print("TOP 10 :\n", topTen)
     colors = ['orangered', 'darkorange', 'gold','yellow','greenyellow','palegreen', 'turquoise','paleturquoise','lavender','pink']
     plt.figure(figsize=(8, 6))
     plt.rc('font', size=10) 
-    squarify.plot(sizes = commandeJson.values(), label=commandeJson.keys(), alpha=0.7, color=colors)
+    squarify.plot(sizes = topTen.values(), label=topTen.keys(), alpha=0.7, color=colors)
     plt.axis('off')
     
-    plt.title('TreeMap des quantités par produit')
+    plt.title("TreeMap des quantités par produit pour les "+ str(len(topTen.keys())) +" produits les plus commandés") #Titre adapté si moins de 10 produits
     plt.savefig('assets/Image/TreeMap_Quantite-totale-produit.png', bbox_inches='tight') #rajouter : pad_inches = 0 si on ne veut aucune zone blanche
     plt.close()
     #plt.show()
