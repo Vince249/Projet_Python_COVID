@@ -157,4 +157,5 @@ def Admin(request):
         'map':m,
         'map_produits' : map_produits,
         'html_entrepot':html_entrepot,
+        'orderOfTheDay':orderOfTheDay,
     })
