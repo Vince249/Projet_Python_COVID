@@ -144,6 +144,7 @@ def GraphTotalCommande():
                             grid=True, legend = False, figsize=(15,6), color='g')
     #plt.show()
     plt.savefig('assets/Image/Cumule-Commandes.png')
+    plt.close()
 
 
 
