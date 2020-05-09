@@ -168,7 +168,7 @@ def Admin(request):
         methodes_Statistiques.Quantite_Client()
         methodes_Statistiques.GraphTotalCommande()
         html_entrepot = methodes_Statistiques.EntrepotArrondissement()
-
+        orderOfTheDay = methodes_Statistiques.DetailCommandeToday()
         map_produits = methodes_Statistiques.Arrondissement_Map()
 
         return render(request, 'HTML/admin.html',{
@@ -176,6 +176,7 @@ def Admin(request):
             'map':m,
             'map_produits' : map_produits,
             'html_entrepot':html_entrepot,
+            'orderOfTheDay':orderOfTheDay,
         })
     else:
         erreur='Accès refusé, vous devez être admin pour voir cette page'
