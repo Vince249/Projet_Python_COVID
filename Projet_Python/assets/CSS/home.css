@@ -58,17 +58,18 @@ body{
  
 .loginbox{
     width: 500px;
-    height: 420px;
+    height: 390px;
     background: #000;
     border: 1px solid #cc0000;
     opacity: 0.85;   
     color: #fff;
-    top: 75%;
+    top: 70%;
     left: 50%;
     position: absolute;
     transform: translate(-50%,-50%);
     box-sizing: border-box;
     text-align: center;
+    box-shadow: 5px 5px 10px black;
 }
 
 .loginbox p a{
@@ -100,7 +101,7 @@ input{
 .form1{
     color: red;
     margin-top: 80px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     text-align: center;
 }
 
@@ -111,7 +112,7 @@ input{
     text-align: center;
 }
 
-.form1 p{
+.form1 p{    
     margin-bottom: 20px;
 }
 
@@ -141,8 +142,6 @@ a:link{
     text-decoration: none;
     color: red;
 }
-
-
 
 
 

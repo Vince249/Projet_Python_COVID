@@ -9,16 +9,19 @@
 		<link rel="stylesheet" href="{% static 'CSS/admin.css' %}">
 	</head>
     <header>
+		<p><a href="/">Home</a> > Admin</p>
         <h2>Page d'administration</h2>
         <p>Bienvenue {{id_admin}}!</p>
     </header>
     <body>
-		<p> Ici était la map</p>
 		
+<<<<<<< HEAD
 		
 		
 
 		<br/> <br/>
+=======
+>>>>>>> 18850589ebb77d089591c41d017e642db2f40d5b
 		<h2>Aperçu des statistiques</h2>
 		<h3>Analyse de la quantité de produits commandée</h3>
 		<figure>
@@ -41,6 +44,10 @@
 			<figcaption>Graphique analysant la quantité cumulée du nombre de commande en fonction de la date</figcaption>
 		</figure>
 		<br/>
+
+		<h3>Infos Entrepôts</h3>
+		{{html_entrepot|safe}}
+		<br/>
 		
 		<form>
 			<figure method="POST" action="/admin">
@@ -56,6 +63,10 @@
 			<input type="submit" name="Choix_produit" value="Valider">
 		</form>
 		
+
+		<h3>Total de produits commandés aujourd'hui par arrondissements</h3>
+		{{orderOfTheDay|safe}}
+		<br/><br/>
 
 	</body>
 </html>
