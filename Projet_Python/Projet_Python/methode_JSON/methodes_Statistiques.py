@@ -24,15 +24,11 @@ import plotly.graph_objects as go
 from plotly.offline import plot
 
 
-
-
-#! """ Dataset"""
-#Rappel :
-#Data récupérées en sortie de commande : {'Qt_Pain': '2', 'Qt_Riz': '3', 'Qt_Farine': '0', 'Qt_Pommes': '6', 'Qt_lait': '10'}
-#! Il faut un dataset de cette forme pour vouvir le convertir en DataFrame panda
-#commandeJson = {"tomates" : 12, "pain" : 5, "riz": 9, "pate" : 6, "farine":4}
+#Dictionnaire de la quantité de chaque produit commandés depuis le début du site
+#Utilisé dans les méthodes : Histo_Product() ; PieChart_Product() ;TreeMap_Product()
 commandeJson = dict()
 
+### Méthode mettant à jour le dictionnaire commandeJson
 def ConvertToStatisticsUse():
     with open('./JSON/commandes_faites.json') as json_file: #On importe le fichier des commanes
         fichier = json.load(json_file)
@@ -46,13 +42,11 @@ def ConvertToStatisticsUse():
             if(unProduit in commandeJson.keys() and unProduit != "id" and unProduit != "Date" and unProduit != "CP"): 
                 addValue = commandeJson[unProduit] + int(uneCommande[unProduit])
                 commandeJson[unProduit] = addValue
-            #Sinon si ce n'est pas l'id ou la date
-            #Alors on l'ajoute au dico final
+            #Sinon si ce n'est pas l'id ou la date -> Alors on l'ajoute au dico final
             elif(unProduit != "id" and unProduit != "Date" and unProduit != "CP"):
                 commandeJson[unProduit] = int(uneCommande[unProduit])
 
-### Histogramme de la quantité de commande de chaque produit ###
-
+### Méthode faisant l'Histogramme de la quantité de commande de chaque produit commandé depuis le début du site ###
 # Lien Web : 
 # https://www.science-emergence.com/Articles/Simple-histogramme-avec-matplotlib/
 # http://www.python-simple.com/python-matplotlib/histogram.php 
@@ -70,10 +64,9 @@ def Histo_Product():
     plt.close()#On ferme le plot sinon les figures se superposent et l'enregistrement est corrompu
     #Emplacement : D:\Programmes\Git-Hub_Projet\Projet-Python_A3
     #!On peut préciser l'emplacement de stockage : plt.savefig('Sub Directory/graph.png')
-    
 
 
-### Diagramme circulaire (Pie Chart) ###
+### Méthode faisant le Diagramme circulaire (Pie Chart)amme de la quantité de commande de chaque produit commandé depuis le début du site ###
 #Site Web : Pie Chart : 
 # https://www.science-emergence.com/Articles/Simple-diagramme-circulaire-avec-matplotlib/
 
@@ -86,28 +79,25 @@ def PieChart_Product():
     #  et dans plt.pie() rajouter : colors = myColors MAIS que 4 couleurs
     plt.axis('equal')
     plt.title('Pie-Chart des quantités totales commandées pour chaque produit')
-
     plt.savefig('assets/Image/Pie-Chart_Quantite-totale-produit.png')
     #plt.show()
     plt.close()#On ferme le plot sinon les figures se superposent et l'enregistrement est corrompu
     
 
-### TreeMap ###
+### Méthode faisant le TreeMap de tous les produits commandés (suivant leur quantité) depuis le début du site ###
 #Site Web : https://jingwen-z.github.io/data-viz-with-matplotlib-series5-treemap/
-
 def TreeMap_Product():
     os.remove('assets/Image/TreeMap_Quantite-totale-produit.png')
     plt.rc('font', size=14)
     squarify.plot(sizes = commandeJson.values(), label=commandeJson.keys(), alpha=0.7)
     plt.axis('off')
     plt.title('TreeMap des quantités par produit')
-
     plt.savefig('assets/Image/TreeMap_Quantite-totale-produit.png')
     plt.close()
     #plt.show()
 
 
-### Nombre de commandes par jour depuis le début (2020-05-01)
+### Méthode faisant un graphique du Nombre de commandes par jour depuis une date de début (fixée au : 2020-05-01) ###
 def GraphTotalCommande():
     # On fait une liste des dates entre le 01/05 et aujourd'hui
     startdate = date(2020,5,1)#Date du début
@@ -235,11 +225,9 @@ def EntrepotArrondissement():
     html = df.to_html(table_id='Entrepot', justify='center')
     return html
 
-def DetailCommandeToday():
-    dataBrute = {"Produit":["Frites", "Poivre", "Fromage","Lait", "Tomate"],
-            "Quantite":[15, 6, 30,40,25],
-            "Arrondissement":["75001","75002","75001","75003","75002"]}
 
+### Méthode détaillant la quantité de produits commandés pour toutes les commandes faites le jour de consultation et détaillé par arrondissement ###
+def DetailCommandeToday():
     listArrondissements = ["75001","75002","75003","75004","75005","75006","75007","75008","75009","75010",
                             "75011","75012","75013","75014","75015","75016","75017","75018","75019","75020"]
 
@@ -268,13 +256,14 @@ def DetailCommandeToday():
             dicoPorduitOneDay['Quantite'].extend(listProduit_UnArrondissement.values())
             dicoPorduitOneDay['Arrondissement'].extend([arrondissement]*len(listProduit_UnArrondissement.keys()))
         
-        
+    #Convertion en DataFrame pandas
     dataPandasFormat = pd.DataFrame(dicoPorduitOneDay)
     #Trie par ordre décroissant
     dataPandasFormat_Sorted_Desc = dataPandasFormat.sort_values(by="Quantite", ascending=False).reset_index(drop=True)
-    print("Sorted_Desc : \n", dataPandasFormat_Sorted_Desc)
-    #Modification des colonnes en mettant les CP en index de colonne
+    #print("Sorted_Desc : \n", dataPandasFormat_Sorted_Desc)
+    #Modification des colonnes en mettant les CP en index de colonne (utilisation de pivot)
     dataPandasFormat_Pivot = dataPandasFormat_Sorted_Desc.pivot("Produit","Arrondissement","Quantite")
     dataPandasFormat_Pivot = dataPandasFormat_Pivot.fillna(0) #Remplace tous les NaN par des 0
+    #Sauvegarde du dataFrame sous forme de tableau html
     dataPandas_HtmlFormat = dataPandasFormat_Pivot.to_html(table_id='OrderOfTheDay', justify='center')
     return dataPandas_HtmlFormat
