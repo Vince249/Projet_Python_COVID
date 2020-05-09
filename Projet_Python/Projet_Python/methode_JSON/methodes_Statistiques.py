@@ -225,7 +225,7 @@ def EntrepotArrondissement():
 
     })
     df.index = df.index + 1
-    html = df.to_html()
+    html = df.to_html(table_id='Entrepot', justify='center')
     return html
 
 def DetailCommandeToday():
@@ -233,8 +233,8 @@ def DetailCommandeToday():
             "Quantite":[15, 6, 30,40,25],
             "Arrondissement":["75001","75002","75001","75003","75002"]}
 
-    listArrondissements = ["75101","75102","75103","75104","75105","75106","75107","75108","75109","75110",
-                            "75111","75112","75113","75114","75115","75116","75117","75118","75119","75120"]
+    listArrondissements = ["75001","75002","75003","75004","75005","75006","75007","75008","75009","75010",
+                            "75011","75012","75013","75014","75015","75016","75017","75018","75019","75020"]
 
     dicoPorduitOneDay = {"Produit":[], "Quantite":[], "Arrondissement":[]}
     todayDate = date.today().strftime("%Y-%m-%d")
