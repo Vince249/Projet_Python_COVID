@@ -15,7 +15,7 @@
     <body>
 		<p> Ici était la map</p>
 		
-		{{map|safe}}
+		
 		
 
 		<br/> <br/>
@@ -42,9 +42,20 @@
 		</figure>
 		<br/>
 		
-		{% autoescape off %}
-		{{ map_produits }}
-		{% endautoescape %}
+		<form>
+			<figure method="POST" action="/admin">
+				{% csrf_token %}
+				<!--{% autoescape off %}--> <!-- semble fonctionner sans aussi -->
+				{{ map_produits }}
+				<!--{% endautoescape %}-->
+			<figcaption>Graphique analysant la quantité cumulée du nombre de commande en fonction de la date</figcaption>
+			</figure>
+			{% for product in Form_Choix_Produits %}
+				{{product}}
+			{% endfor %}
+			<input type="submit" name="Choix_produit" value="Valider">
+		</form>
+		
 
 	</body>
 </html>

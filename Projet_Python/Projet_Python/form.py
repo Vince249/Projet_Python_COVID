@@ -68,3 +68,11 @@ class CreationPersonne(forms.Form):
     prenom_box = forms.CharField(label="",required=True,widget=forms.TextInput(attrs={'placeholder': 'Prénom'}))
     age_box = forms.IntegerField(label = '',required=True,min_value=0,widget=forms.NumberInput(attrs={'placeholder': 'Âge'}))
 
+
+Product_Choice = (
+       ('Frites','Frites'),
+       ('Pate', 'Pate'),
+       ('Epice', 'Epice'),
+    )
+class Choix_Produit(forms.Form):
+    choix_produit = forms.ChoiceField(label="Choix du produit à afficher ", choices=Product_Choice)

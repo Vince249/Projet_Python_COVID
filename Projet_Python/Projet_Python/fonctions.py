@@ -11,7 +11,7 @@ from .methode_JSON import methodes_Statistiques
 id_utilisateur = ""
 nb_personne_foyer = 0
 FormCreation = form.CreationForm()
-
+choix = "Frites" #choix par défaut
 
 def Home(request):
     global id_utilisateur
@@ -148,10 +148,24 @@ def Admin(request):
     methodes_Statistiques.Quantite_Client()
     methodes_Statistiques.GraphTotalCommande()
 
-    map_produits = methodes_Statistiques.Arrondissement_Map()
+
+
+    #selection du produit pour affichage personalisé de la map qui suit
+    global choix
+    FormChoixProduit = form.Choix_Produit()
+    print("choix",choix)
+    if(request.method == 'POST'):
+        if(request.POST.get('Choix_produit')):
+            FormChoixProduit = form.Choix_Produit(request.POST)
+            if(FormChoixProduit.is_valid()):
+                choix = FormChoixProduit.cleaned_data
+                
+    
+    map_produits = methodes_Statistiques.Arrondissement_Map(choix)
 
     return render(request, 'HTML/admin.html',{
         'id_admin' : id_utilisateur,
         'map':m,
-        'map_produits' : map_produits
+        'map_produits' : map_produits,
+        'Form_Choix_Produits' : FormChoixProduit
     })

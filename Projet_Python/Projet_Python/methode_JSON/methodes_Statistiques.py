@@ -150,7 +150,7 @@ def GraphTotalCommande():
 
 
 
-def Arrondissement_Map():
+def Arrondissement_Map(Product_name):
     with open('./JSON/arrondissements.geojson') as json_file:
         data_arrondissements = json.load(json_file)
 
@@ -161,20 +161,27 @@ def Arrondissement_Map():
 
     df = pd.DataFrame(commandes)
     df = df.fillna(0) #si une commande contient certains produits mais pas d'autres, leur valeur dans le dataframe sera "NaN" et ne pourra être lu lors de la conversion en int
-    convert_dict = {"Frites":int}
-    df = df.astype(convert_dict)
 
-    df2 = df.groupby('CP')['Frites'].sum().reset_index() #on met le reset index pour conserver un dataframe, sinon on a un SeriesFrame
+    #on fait un astype(dict) avec dict contenant le nom d'une colonne et un type pour convertir une colonne en un type particulier
+    #chaque colonne de produit ayant une quantité de type str, on convertit la colonne voulu (=le produit selectionné) en int afin de pouvoir faire sum
+    #on met le reset index pour conserver un dataframe, sinon on a un SeriesFrame
     #on groupy by CP et on compte dans chaque CP le nombre de produit commandés
-
-    fig = go.Figure(px.choropleth_mapbox(df2, geojson=data_arrondissements, locations='CP', color='Frites',
-                            #color_continuous_scale="Viridis", #couleur peut etre changer surement
-                            mapbox_style="carto-positron",
-                            zoom=11, center = {"lat": 48.8534, "lon": 2.3488},
-                            opacity=0.5,
-                            labels={'quantite':'quantite de produit'},
-                            )) 
+    fig = go.Figure(px.choropleth_mapbox(df.astype({Product_name:int}).groupby('CP')[Product_name].sum().reset_index(), 
+                    geojson=data_arrondissements, 
+                    locations='CP', 
+                    color=Product_name,
+                    #color_continuous_scale="Viridis", #couleur peut etre changer surement
+                    mapbox_style="carto-positron",
+                    zoom=10, center = {"lat": 48.8534, "lon": 2.3488},
+                    opacity=0.5,
+                    labels={'quantite':'quantite de produit'},
+                    ))
     
+    fig.update_layout(height=600,
+                    width=600,
+                    title_text='Quantité du produit commandé par arrondissement',
+                    )
+
     return plot(fig, output_type='div')
 
 def Quantite_Client():
