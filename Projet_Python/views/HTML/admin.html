@@ -15,13 +15,10 @@
     </header>
     <body>
 		
-<<<<<<< HEAD
 		
 		
 
 		<br/> <br/>
-=======
->>>>>>> 18850589ebb77d089591c41d017e642db2f40d5b
 		<h2>Aperçu des statistiques</h2>
 		<h3>Analyse de la quantité de produits commandée</h3>
 		<figure>
@@ -49,18 +46,19 @@
 		{{html_entrepot|safe}}
 		<br/>
 		
-		<form>
-			<figure method="POST" action="/admin">
-				{% csrf_token %}
-				<!--{% autoescape off %}--> <!-- semble fonctionner sans aussi -->
-				{{ map_produits }}
-				<!--{% endautoescape %}-->
-			<figcaption>Graphique analysant la quantité cumulée du nombre de commande en fonction de la date</figcaption>
-			</figure>
-			{% for product in Form_Choix_Produits %}
-				{{product}}
-			{% endfor %}
-			<input type="submit" name="Choix_produit" value="Valider">
+
+
+		<figure >
+			<!--{% autoescape off %}--> <!-- semble fonctionner sans aussi -->
+			{{ map_produits }}
+			<!--{% endautoescape %}-->
+		<figcaption>Graphique analysant la quantité cumulée du nombre de commande en fonction de la date</figcaption>
+		</figure>
+
+		<form method="POST" action="/admin">
+			{% csrf_token %}
+			{{FormChoixProduit}}
+			<input type="submit" name="Bouton_Choix_Produit" value="Valider">
 		</form>
 		
 

@@ -43,13 +43,14 @@ def ConvertToStatisticsUse():
         print("uneCommande => ", uneCommande)
         for unProduit in uneCommande:
             #SI Le produit est déjà dans notre dictionnaire final et ce n'est pas l'id ou la date ou le CP
-            if(unProduit in commandeJson.keys() and unProduit != "id" and unProduit != "Date" and unProduit != "CP"): 
+            if(unProduit in commandeJson.keys() and unProduit != "id" and unProduit != "Date" and unProduit != "CP" and uneCommande[str(unProduit)] != "0"): 
                 addValue = commandeJson[unProduit] + int(uneCommande[unProduit])
                 commandeJson[unProduit] = addValue
             #Sinon si ce n'est pas l'id ou la date
             #Alors on l'ajoute au dico final
-            elif(unProduit != "id" and unProduit != "Date" and unProduit != "CP"):
+            elif(unProduit != "id" and unProduit != "Date" and unProduit != "CP" and uneCommande[str(unProduit)] != "0"):
                 commandeJson[unProduit] = int(uneCommande[unProduit])
+    print("CommandesJSON",commandeJson)
 
 ### Histogramme de la quantité de commande de chaque produit ###
 
@@ -96,7 +97,8 @@ def PieChart_Product():
 #Site Web : https://jingwen-z.github.io/data-viz-with-matplotlib-series5-treemap/
 
 def TreeMap_Product():
-    os.remove('assets/Image/TreeMap_Quantite-totale-produit.png')
+    if(os.path.isfile('assets/Image/TreeMap_Quantite-totale-produit.png')):
+        os.remove('assets/Image/TreeMap_Quantite-totale-produit.png')#Supprimer l'image actuelle
     plt.rc('font', size=14)
     squarify.plot(sizes = commandeJson.values(), label=commandeJson.keys(), alpha=0.7)
     plt.axis('off')
@@ -147,6 +149,43 @@ def GraphTotalCommande():
                             grid=True, legend = False, figsize=(15,6), color='g')
     myFig.xaxis.set_major_locator(mdates.DayLocator(bymonthday=range(1,32,2)))
     myFig.get_figure().savefig('assets/Image/Cumule-Commandes.png')
+
+
+
+#n'est jamais appelé car elle a pour but de ne pas faire planter la carte si le produit choisi par l'admin n'a jamais été commandé
+def Sauvegarde_Commande_Initialisation_Carte():
+    {
+            "CP":"75001",
+            "id":"a",
+            "Date":"2020-04-30",
+            "Choucroute":"0",
+            "Farine":"0",
+            "Frites":"0",
+            "Oeuf":"0",
+            "Pate":"0",
+            "Poulet":"0",
+            "SelPoivre":"0",
+            "Epice":"0",
+            "Assaisonnements":"0",
+            "Pomme_de_terre":"0",
+            "Tomate":"0",
+            "Pomme":"0",
+            "Citron":"0",
+            "Riz":"0",
+            "Sucre":"0",
+            "Pain":"0",
+            "Lait":"0",
+            "Beurre":"0",
+            "Fromage":"0",
+            "Creme":"0",
+            "Poisson":"0",
+            "MedKit":"0",
+            "Pilule":"0",
+            "KitSoin":"0",
+            "KitEntretien":"0"
+        },
+
+
 
 
 def Arrondissement_Map(Product_name):

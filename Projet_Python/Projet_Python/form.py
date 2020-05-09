@@ -69,10 +69,38 @@ class CreationPersonne(forms.Form):
     age_box = forms.IntegerField(label = '',required=True,min_value=0,widget=forms.NumberInput(attrs={'placeholder': 'Âge'}))
 
 
-Product_Choice = (
+
+
+class Choix_Produit(forms.Form):
+    #Liste de tout nos produits 
+    Product_Choice = [
+       ("",""),
        ('Frites','Frites'),
        ('Pate', 'Pate'),
        ('Epice', 'Epice'),
-    )
-class Choix_Produit(forms.Form):
+       ('SelPoivre','SelPoivre'),
+       ('Assaisonnements','Assaisonnements'),
+       ('Pomme_de_terre','Pomme_de_terre'),
+       ('Tomate','Tomate'),
+       ('Pomme','Pomme'),
+       ('Citron','Citron'),
+       ('Choucroute','Choucroute'),
+       ('Riz','Riz'),
+       ('Farine','Farine'),
+       ('Sucre','Sucre'),
+       ('Oeuf','Oeuf'),
+       ('Pain','Pain'),
+       ('Lait','Lait'),
+       ('Beurre','Beurre'),
+       ('Fromage','Fromage'),
+       ('Creme','Creme'),
+       ('Poulet','Poulet'),
+       ('Poisson','Poisson'),
+       ('MedKit','MedKit'),
+       ('Pilule','Pilule'),
+       ('KitSoin','KitSoin'),
+       ('KitEntretien','KitEntretien'),
+    ]
+    Product_Choice.sort(key=lambda tup: tup[0]) #on les trie pour plus de lisibilité
     choix_produit = forms.ChoiceField(label="Choix du produit à afficher ", choices=Product_Choice)
+
