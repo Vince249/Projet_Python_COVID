@@ -90,7 +90,9 @@ def Creation(request):
     global id_utilisateur 
     global nb_personne_foyer
     global FormCreation
-    m= folium.Map(location=[43.634, 1.433333],width=750, height=500,zoom_start=1)
+    fig = folium.Figure(width=750, height=600)
+    m = folium.Map(location=[48.8534, 2.3488], tiles='OpenStreetMap', zoom_start=10).add_to(fig) 
+
     if(request.method !='POST'):
         FormCreation = form.CreationForm()
     if(request.method=='POST'):
@@ -167,7 +169,8 @@ def Admin(request):
         methodes_Statistiques.TreeMap_Product() #Création du TreeMap
         methodes_Statistiques.Quantite_Client() 
         methodes_Statistiques.GraphTotalCommande()
-        html_entrepot = methodes_Statistiques.EntrepotArrondissement() #Création du contenu HTML pour affichage de la liste des entrepots de la ville dans la page HTML admin
+        html_entrepot = methodes_Statistiques.EntrepotArrondissementTab() #Création du contenu HTML pour affichage de la liste des entrepots de la ville dans la page HTML admin
+        map_entrepot = methodes_Statistiques.EntrepotArrondissementMap()
         orderOfTheDay = methodes_Statistiques.DetailCommandeToday() #Création du contenu HTML pour affichage de la synthèse des commandes détailléees du jour dans la page HTML admin
         
         #selection du produit pour affichage personalisé de la map qui suit
@@ -186,6 +189,7 @@ def Admin(request):
             'html_entrepot':html_entrepot,
             'orderOfTheDay':orderOfTheDay,
             'FormChoixProduit' : FormChoixProduit,
+            'map_entrepot' : map_entrepot,
         })
     else:
         erreur='Accès refusé, vous devez être admin pour voir cette page'

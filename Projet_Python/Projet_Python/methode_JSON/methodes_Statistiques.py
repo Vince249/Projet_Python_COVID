@@ -22,6 +22,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from plotly.offline import plot
+import folium
 
 
 #Dictionnaire de la quantité de chaque produit commandés depuis le début du site
@@ -201,13 +202,13 @@ def Arrondissement_Map(Product_name):
                     color=Product_name,
                     #color_continuous_scale="Viridis", #couleur peut etre changer surement
                     mapbox_style="carto-positron",
-                    zoom=10, center = {"lat": 48.8534, "lon": 2.3488},
+                    zoom=11, center = {"lat": 48.8534, "lon": 2.3488},
                     opacity=0.5,
                     labels={'quantite':'quantite de produit'},
                     ))
     
     fig.update_layout(height=600,
-                    width=600,
+                    width=900,
                     title_text='Quantité du produit commandé par arrondissement',
                     )
 
@@ -252,18 +253,79 @@ def Quantite_Client():
     fig.xaxis.set_major_locator(mdates.DayLocator(bymonthday=range(1,32,2)))
     fig.get_figure().savefig('assets/Image/Totaux_Personnes_Courbe.png')
 
-def EntrepotArrondissement():
+def EntrepotArrondissementTab():
     df=pd.DataFrame({ 'Arrondissement':[75001,75002,75003,75004,75005,75006,75007,75008,75009,75010,75011,75012,75013,75014,75015,75016,75017,75018,75019,75020],
     'N_tel_Entrepôt':['013075001','013075002','013075003','013075004','013075005','013075006','013075007','013075008',
     '013075009','013075010','013075011','013075012','013075013','013075014','013075015','013075016','013075017','0130750018','0130750019','013075020'],
-    'Adresse':['adresse entrepôt','adresse entrepôt','adresse entrepôt','adresse entrepôt','adresse entrepôt','adresse entrepôt','adresse entrepôt',
-    'adresse entrepôt','adresse entrepôt','adresse entrepôt','adresse entrepôt','adresse entrepôt','adresse entrepôt','adresse entrepôt','adresse entrepôt',
-    'adresse entrepôt','adresse entrepôt','adresse entrepôt','adresse entrepôt','adresse entrepôt']
-
+    'Adresse':['151 Rue de Rivoli, 75001 Paris, France',
+    '1 Galerie Vivienne, 75002 Paris, France',
+    '53 Rue de Bretagne, 75003 Paris, France',
+    '87 Rue Saint-Antoine, 75004 Paris, France',
+    'La Libre Pensée, Rue des Fossés Saint-Jacques, 75005 Paris, France',
+    '78 Rue Bonaparte, 75006 Paris, France',
+    '144 Rue de Grenelle, 75007 Paris, France',
+    '87 Boulevard Malesherbes, 75008 Paris, France',
+    '10 Rue Chauchat, 75009 Paris, France',
+    '1 Rue Pierre Bullet, 75010 Paris, France',
+    '103 Boulevard Voltaire, 75011 Paris, France',
+    '155 Avenue Daumesnil, 75012 Paris, France',
+    '24 Rue Abel Hovelacque, 75013 Paris, France',
+    '165 Avenue du Maine, 75014 Paris, France',
+    '17 Rue du Docteur Jacquemaire Clemenceau, 75015 Paris, France',
+    '57 Avenue Georges Mandel, 75116 Paris, France',
+    '36 - 38 Rue de Saussure, 75017 Paris, France',
+    '68 Rue Ordener, 75018 Paris, France',
+    '9 Rue Adolphe Mille, 75019 Paris, France',
+    '28 Rue de la Dhuis, 75020 Paris, France']
     })
     df.index = df.index + 1
     html = df.to_html(table_id='Entrepot', justify='center')
     return html
+
+
+def EntrepotArrondissementMap():
+    df=pd.DataFrame({'Arrondissement':[75001,75002,75003,75004,75005,75006,75007,75008,75009,75010,75011,75012,75013,75014,75015,75016,75017,75018,75019,75020],
+                      'Latitude':[48.86251,48.86649,48.863673,48.85464,48.845443,48.850697,48.858125,48.877962,48.872873,48.871734,48.858916,48.841413,48.832375,48.832741,48.842268,48.863506,48.884682,48.892182,48.888404,48.868454],
+                      'Longitude':[2.337419,2.340099,2.360845,2.362531,2.343935,2.332586,2.314873,2.315784,2.339604,2.358037,2.378265,2.388038,2.352903,2.32513,2.298531,2.279297,2.315886,2.34656,2.388472,2.404612],
+                      'N_tel_Entrepôt':['013075001','013075002','013075003','013075004','013075005','013075006','013075007','013075008','013075009','013075010',
+                                        '013075011','013075012','013075013','013075014','013075015','013075016','013075017','0130750018','0130750019','013075020'],
+                      'Adresse':['151 Rue de Rivoli, 75001 Paris, France',
+                                 '1 Galerie Vivienne, 75002 Paris, France',
+                                 '53 Rue de Bretagne, 75003 Paris, France',
+                                 '87 Rue Saint-Antoine, 75004 Paris, France',
+                                 'La Libre Pensée, Rue des Fossés Saint-Jacques, 75005 Paris, France',
+                                 '78 Rue Bonaparte, 75006 Paris, France',
+                                 '144 Rue de Grenelle, 75007 Paris, France',
+                                 '87 Boulevard Malesherbes, 75008 Paris, France',
+                                 '10 Rue Chauchat, 75009 Paris, France',
+                                 '1 Rue Pierre Bullet, 75010 Paris, France',
+                                 '103 Boulevard Voltaire, 75011 Paris, France',
+                                 '155 Avenue Daumesnil, 75012 Paris, France',
+                                 '24 Rue Abel Hovelacque, 75013 Paris, France',
+                                 '165 Avenue du Maine, 75014 Paris, France',
+                                 '17 Rue du Docteur Jacquemaire Clemenceau, 75015 Paris, France',
+                                 '57 Avenue Georges Mandel, 75116 Paris, France',
+                                 '36 - 38 Rue de Saussure, 75017 Paris, France',
+                                 '68 Rue Ordener, 75018 Paris, France',
+                                 '9 Rue Adolphe Mille, 75019 Paris, France',
+                                 '28 Rue de la Dhuis, 75020 Paris, France']
+    })
+
+
+    with open('./JSON/arrondissements.geojson') as json_file:
+        data_arrondissements = json.load(json_file)
+
+
+
+    locations = df[['Latitude', 'Longitude']]
+    locationlist = locations.values.tolist()
+    fig = folium.Figure(width=750, height=600)
+    map = folium.Map(location=[48.8534, 2.3488], tiles='CartoDB positron', zoom_start=12).add_to(fig)   
+    for point in range(0, len(locationlist)):
+        folium.Marker(locationlist[point], popup=df['Adresse'][point],icon=folium.Icon(icon="cloud",color="red")).add_to(map) #on peut changer l'icone, j'ai mis celui-ci pour montrer que c'était possible
+    folium.GeoJson(data_arrondissements,name='geojson',style_function=lambda x:{'fillColor': 'blue', 'color': 'blue'}).add_to(map)
+
+    return fig._repr_html_()
 
 
 ### Méthode détaillant la quantité de produits commandés pour toutes les commandes faites le jour de consultation et détaillé par arrondissement ###
