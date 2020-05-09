@@ -106,7 +106,7 @@ def TreeMap_Product():
     #plt.show()
 
 
-### Nombre de commandes par jour depuis le début (01-05-2020)
+### Nombre de commandes par jour depuis le début (2020-05-01)
 def GraphTotalCommande():
     # On fait une liste des dates entre le 01/05 et aujourd'hui
     startdate = date(2020,5,1)#Date du début
@@ -116,9 +116,9 @@ def GraphTotalCommande():
         listejours.append( (startdate + timedelta(n)).strftime("%Y-%m-%d"))
         #Save sous forme de string de la forme dd-mm-YYYY de toutes les dates de l'intervalle
     #on cherche le nb de commande par date
-    #listejours = ['01-05-2020', '02-05-2020', '03-05-2020', '04-05-2020', '05-05-2020', '06-05-2020', '07-05-2020', '08-05-2020', '09-05-2020']
+    #listejours = ['2020-05-01', '2020-05-02', '2020-05-03']
 
-    #Beosin d'avoir un dico de la forme suivante pour utilisation de Panda :
+    #Beosin d'avoir un dico de la forme suivante pour utilisation de Panda : (DATES sous la forme YYYY-mm-dd et non dd-mm-YYYY)
     #dicoJourNmbCommande = {"Date":['01-05-2020', '02-05-2020', '03-05-2020', '04-05-2020', '05-05-2020', '06-05-2020', '07-05-2020', '08-05-2020', '09-05-2020'],
                             #"TotalCommandeJour" : [4,6,8,5,3,7,5,11,6],
                             #"TotalCommandeCumule":[4,10,18,23,26,33,38,49,55]}
