@@ -219,7 +219,7 @@ def Quantite_Client():
 
 def EntrepotArrondissement():
     df=pd.DataFrame({ 'Arrondissement':[75001,75002,75003,75004,75005,75006,75007,75008,75009,75010,75011,75012,75013,75014,75015,75016,75017,75018,75019,75020],
-    'N_tel':['013075001','013075002','013075003','013075004','013075005','013075006','013075007','013075008',
+    'N_tel_Entrepôt':['013075001','013075002','013075003','013075004','013075005','013075006','013075007','013075008',
     '013075009','013075010','013075011','013075012','013075013','013075014','013075015','013075016','013075017','0130750018','0130750019','013075020'],
     'Adresse':['adresse entrepôt','adresse entrepôt','adresse entrepôt','adresse entrepôt','adresse entrepôt','adresse entrepôt','adresse entrepôt',
     'adresse entrepôt','adresse entrepôt','adresse entrepôt','adresse entrepôt','adresse entrepôt','adresse entrepôt','adresse entrepôt','adresse entrepôt',

@@ -48,29 +48,41 @@ def Home(request):
 
 
 def Commande(request):
-    message=''
-    if(request.method == 'POST'):
-        if(request.POST.get('Commande')):
-            FormCommande = form.ProduitForm(request.POST)
-            if(FormCommande.is_valid()):
-                data = FormCommande.cleaned_data
-                print('data', data)
-                #* Mettre les DATA dans le JSON
-                methodes_JSON.EnregistrerCommande(data, id_utilisateur) 
-                message='Commande réussie'
-    FormProductList = form.ProduitForm()
-    return render(request, 'HTML/commande.html',{
-        'id_personne' : id_utilisateur,
-        'Form_Product_List' : FormProductList,
-        'message': message,
-    })
+    if(id_utilisateur!=""):
+        message=''
+        if(request.method == 'POST' and id_utilisateur!=""): #sécurité utilisateur connecté
+            if(request.POST.get('Commande')):
+                FormCommande = form.ProduitForm(request.POST)
+                if(FormCommande.is_valid()):
+                    data = FormCommande.cleaned_data
+                    print('data', data)
+                    #* Mettre les DATA dans le JSON
+                    methodes_JSON.EnregistrerCommande(data, id_utilisateur) 
+                    message='Commande réussie'
+        FormProductList = form.ProduitForm()
+        return render(request, 'HTML/commande.html',{
+            'id_personne' : id_utilisateur,
+            'Form_Product_List' : FormProductList,
+            'message': message,
+        })
+    else: 
+        erreur = "Accès refusé, vous devez être être connecté pour voir cette page"
+        return render(request, 'HTML/acces_refuse.html',{
+            'erreur' : erreur,
+        })
 
 
 def Allergie(request):
-    message = ''
-    return render(request, 'HTML/allergie.html',{
-        'message': message,
-    })
+    if(id_utilisateur!=""):
+        message = ''
+        return render(request, 'HTML/allergie.html',{
+            'message': message,
+        })
+    else: 
+        erreur = "Accès refusé, vous devez être être connecté pour voir cette page"
+        return render(request, 'HTML/acces_refuse.html',{
+            'erreur' : erreur,
+        })
 
 
 def Creation(request):
@@ -108,52 +120,65 @@ def Creation(request):
         'Form_Creation' : FormCreation,
         'map':m
     })
+    
 
 
 def Details(request):
-    FormSetDetails = formset_factory(form.CreationPersonne, extra=nb_personne_foyer)
-    erreur=""
-    if(request.method == 'POST'):
-        if(request.POST.get('details')):
-            FormSetDetails = formset_factory(form.CreationPersonne, extra=nb_personne_foyer)
-            formset = FormSetDetails(request.POST)
-            if(formset.is_valid()):
-                check=True
-                #! Vérification formset, on aurait aussi pu simplement modifier dans la library forms le fichier formset ligne 173 en mettant : defaults['empty_permitted'] = False              
-                for forms in formset:
-                    
-                    if (not forms.is_valid() or not forms.has_changed()) : 
-                        check=False
-                        erreur="Tous les champs doivent être remplis"
-                if(check):
-                    for forms in formset:  
-                        data=forms.cleaned_data
-                        print("Personne :", data)
-                        #* Mettre les DATA de chaque personne dans le JSON
-                        methodes_JSON.EnregistrerPersonnes(data)
-                    return redirect('Page_Commande')
-            else:
-                erreur="Tous les champs doivent être remplis"   
-    return render(request, 'HTML/details.html',{
-        'Form_Set' : FormSetDetails,
-        'erreur' : erreur
-    })
+    if(id_utilisateur!=""):
+        FormSetDetails = formset_factory(form.CreationPersonne, extra=nb_personne_foyer)
+        erreur=""
+        if(request.method == 'POST'):
+            if(request.POST.get('details')):
+                FormSetDetails = formset_factory(form.CreationPersonne, extra=nb_personne_foyer)
+                formset = FormSetDetails(request.POST)
+                if(formset.is_valid()):
+                    check=True
+                    #! Vérification formset, on aurait aussi pu simplement modifier dans la library forms le fichier formset ligne 173 en mettant : defaults['empty_permitted'] = False              
+                    for forms in formset:
+                        
+                        if (not forms.is_valid() or not forms.has_changed()) : 
+                            check=False
+                            erreur="Tous les champs doivent être remplis"
+                    if(check):
+                        for forms in formset:  
+                            data=forms.cleaned_data
+                            print("Personne :", data)
+                            #* Mettre les DATA de chaque personne dans le JSON
+                            methodes_JSON.EnregistrerPersonnes(data)
+                        return redirect('Page_Commande')
+                else:
+                    erreur="Tous les champs doivent être remplis"   
+        return render(request, 'HTML/details.html',{
+            'Form_Set' : FormSetDetails,
+            'erreur' : erreur
+        })
+    else:
+        erreur = "Accès refusé, vous devez être avoir créé votre compte pour voir cette page"
+        return render(request, 'HTML/acces_refuse.html',{
+            'erreur' : erreur,
+        })
 
 
 def Admin(request):
-    m= folium.Map(location=[43.634, 1.433333],zoom_start=20)
-    m=m._repr_html_()
-    methodes_Statistiques.ConvertToStatisticsUse()#Convertion du tableau pour qu'il puisse être utilisé
-    methodes_Statistiques.TreeMap_Product()
-    methodes_Statistiques.Quantite_Client()
-    methodes_Statistiques.GraphTotalCommande()
-    html_entrepot = methodes_Statistiques.EntrepotArrondissement()
+    if(id_utilisateur=='admin'):
+        m= folium.Map(location=[43.634, 1.433333],zoom_start=20)
+        m=m._repr_html_()
+        methodes_Statistiques.ConvertToStatisticsUse()#Convertion du tableau pour qu'il puisse être utilisé
+        methodes_Statistiques.TreeMap_Product()
+        methodes_Statistiques.Quantite_Client()
+        methodes_Statistiques.GraphTotalCommande()
+        html_entrepot = methodes_Statistiques.EntrepotArrondissement()
 
-    map_produits = methodes_Statistiques.Arrondissement_Map()
+        map_produits = methodes_Statistiques.Arrondissement_Map()
 
-    return render(request, 'HTML/admin.html',{
-        'id_admin' : id_utilisateur,
-        'map':m,
-        'map_produits' : map_produits,
-        'html_entrepot':html_entrepot,
-    })
+        return render(request, 'HTML/admin.html',{
+            'id_admin' : id_utilisateur,
+            'map':m,
+            'map_produits' : map_produits,
+            'html_entrepot':html_entrepot,
+        })
+    else:
+        erreur='Accès refusé, vous devez être admin pour voir cette page'
+        return render(request, 'HTML/acces_refuse.html',{
+            'erreur' : erreur,
+        })
