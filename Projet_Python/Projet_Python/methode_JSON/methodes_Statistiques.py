@@ -111,7 +111,7 @@ def GraphTotalCommande():
     enddate = date.today()#Date d'aujourd'hui 
     listejours=[]#tableau de chaque date entre le début et aujourd'hui
     for n in range(int ((enddate - startdate).days)+1):
-        listejours.append( (startdate + timedelta(n)).strftime("%d-%m-%Y"))
+        listejours.append( (startdate + timedelta(n)).strftime("%Y-%m-%d"))
         #Save sous forme de string de la forme dd-mm-YYYY de toutes les dates de l'intervalle
     #on cherche le nb de commande par date
     #listejours = ['01-05-2020', '02-05-2020', '03-05-2020', '04-05-2020', '05-05-2020', '06-05-2020', '07-05-2020', '08-05-2020', '09-05-2020']
