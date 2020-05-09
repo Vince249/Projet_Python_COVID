@@ -147,6 +147,7 @@ def Admin(request):
     methodes_Statistiques.TreeMap_Product()
     methodes_Statistiques.Quantite_Client()
     methodes_Statistiques.GraphTotalCommande()
+    html_entrepot = methodes_Statistiques.EntrepotArrondissement()
     orderOfTheDay = methodes_Statistiques.DetailCommandeToday()
 
     map_produits = methodes_Statistiques.Arrondissement_Map()
@@ -154,5 +155,6 @@ def Admin(request):
     return render(request, 'HTML/admin.html',{
         'id_admin' : id_utilisateur,
         'map':m,
-        'map_produits' : map_produits
+        'map_produits' : map_produits,
+        'html_entrepot':html_entrepot,
     })

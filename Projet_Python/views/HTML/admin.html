@@ -40,7 +40,11 @@
 			<img src="{% static 'Image/Cumule-Commandes.png' %}" alt="Graphique du cumul des commandes" title="Graphique du nombre de commandes" />
 			<figcaption>Graphique analysant la quantité cumulée du nombre de commande en fonction de la date</figcaption>
 		</figure>
-		<br/><br/>
+		<br/>
+
+		<h3>Infos Entrepôts</h3>
+		{{html_entrepot|safe}}
+		<br/>
 		
 		{% autoescape off %}
 		{{ map_produits }}
