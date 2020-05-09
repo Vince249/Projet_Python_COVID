@@ -91,11 +91,14 @@ def PieChart_Product():
 def TreeMap_Product():
     if(os.path.isfile('assets/Image/TreeMap_Quantite-totale-produit.png')):
         os.remove('assets/Image/TreeMap_Quantite-totale-produit.png')#Supprimer l'image actuelle
-    plt.rc('font', size=14)
-    squarify.plot(sizes = commandeJson.values(), label=commandeJson.keys(), alpha=0.7)
+    colors = ['orangered', 'darkorange', 'gold','yellow','greenyellow','palegreen', 'turquoise','paleturquoise','lavender','pink']
+    plt.figure(figsize=(8, 6))
+    plt.rc('font', size=10) 
+    squarify.plot(sizes = commandeJson.values(), label=commandeJson.keys(), alpha=0.7, color=colors)
     plt.axis('off')
+    
     plt.title('TreeMap des quantités par produit')
-    plt.savefig('assets/Image/TreeMap_Quantite-totale-produit.png')
+    plt.savefig('assets/Image/TreeMap_Quantite-totale-produit.png', bbox_inches='tight') #rajouter : pad_inches = 0 si on ne veut aucune zone blanche
     plt.close()
     #plt.show()
 
@@ -139,7 +142,7 @@ def GraphTotalCommande():
                             kind='line',title="Graphique des commandes cumulées depuis le " + startdate.strftime(("%Y-%m-%d")),
                             grid=True, legend = False, figsize=(15,6), color='g')
     myFig.xaxis.set_major_locator(mdates.DayLocator(bymonthday=range(1,32,2)))
-    myFig.get_figure().savefig('assets/Image/Cumule-Commandes.png')
+    myFig.get_figure().savefig('assets/Image/Cumule-Commandes.png', bbox_inches='tight')
 
 
 
@@ -248,9 +251,10 @@ def Quantite_Client():
     }
     df=DataFrame(Data,columns=['Jours','Totaux_Personnes'])
     df['Jours']= pd.to_datetime(df['Jours'])
-    fig = df.plot(x='Jours', y='Totaux_Personnes',figsize=(10,10),x_compat=True)
+    fig = df.plot(x='Jours', y='Totaux_Personnes',figsize=(10,10),x_compat=True, 
+                    title="Evolution du nombre d'utilisateur depuis le " + startdate.strftime(("%Y-%m-%d")))
     fig.xaxis.set_major_locator(mdates.DayLocator(bymonthday=range(1,32,2)))
-    fig.get_figure().savefig('assets/Image/Totaux_Personnes_Courbe.png')
+    fig.get_figure().savefig('assets/Image/Totaux_Personnes_Courbe.png', bbox_inches='tight')
 
 def EntrepotArrondissement():
     df=pd.DataFrame({ 'Arrondissement':[75001,75002,75003,75004,75005,75006,75007,75008,75009,75010,75011,75012,75013,75014,75015,75016,75017,75018,75019,75020],
