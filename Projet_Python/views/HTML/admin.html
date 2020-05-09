@@ -9,16 +9,12 @@
 		<link rel="stylesheet" href="{% static 'CSS/admin.css' %}">
 	</head>
     <header>
+		<p><a href="/">Home</a> > Admin</p>
         <h2>Page d'administration</h2>
         <p>Bienvenue {{id_admin}}!</p>
     </header>
     <body>
-		<p> Ici était la map</p>
 		
-		{{map|safe}}
-		
-
-		<br/> <br/>
 		<h2>Aperçu des statistiques</h2>
 		<h3>Analyse de la quantité de produits commandée</h3>
 		<figure>
@@ -41,10 +37,18 @@
 			<figcaption>Graphique analysant la quantité cumulée du nombre de commande en fonction de la date</figcaption>
 		</figure>
 		<br/>
+
+		<h3>Infos Entrepôts</h3>
+		{{html_entrepot|safe}}
+		<br/>
 		
 		{% autoescape off %}
 		{{ map_produits }}
 		{% endautoescape %}
+
+		<h3>Total de produits commandés aujourd'hui par arrondissements</h3>
+		{{orderOfTheDay|safe}}
+		<br/><br/>
 
 	</body>
 </html>

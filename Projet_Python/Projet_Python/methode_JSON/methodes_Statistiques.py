@@ -37,6 +37,7 @@ def ConvertToStatisticsUse():
     with open('./JSON/commandes_faites.json') as json_file: #On importe le fichier des commanes
         fichier = json.load(json_file)
         print(fichier)
+    json_file.close()
     #On va le travailler pour l'avoir sous le format : commandeJson = {"tomates" : 12, "pain" : 5, "riz": 9, "pate" : 6, "farine":4}
     for uneCommande in fichier["commandes"]:#Commande n°1
         print("uneCommande => ", uneCommande)
@@ -136,19 +137,16 @@ def GraphTotalCommande():
             dicoJourNmbCommande["TotalCommandeJour"].extend([total])
             dicoJourNmbCommande["TotalCommandeCumule"].extend([cumulNbCommande + total])
             cumulNbCommande += total
+    json_file.close()
 
     pandaJourCommande = DataFrame(dicoJourNmbCommande)
     #print(pandaJourCommande)
-    pandaJourCommande.plot(x="Date", y="TotalCommandeCumule",
+    pandaJourCommande['Date'] = pd.to_datetime(pandaJourCommande['Date'])
+    myFig = pandaJourCommande.plot(x="Date", y="TotalCommandeCumule", x_compat=True,
                             kind='line',title="Graphique des commandes cumulées depuis le " + startdate.strftime(("%Y-%m-%d")),
                             grid=True, legend = False, figsize=(15,6), color='g')
-    #plt.show()
-    plt.savefig('assets/Image/Cumule-Commandes.png')
-    plt.close()
-
-
-
-
+    myFig.xaxis.set_major_locator(mdates.DayLocator(bymonthday=range(1,32,2)))
+    myFig.get_figure().savefig('assets/Image/Cumule-Commandes.png')
 
 
 def Arrondissement_Map():
@@ -216,3 +214,60 @@ def Quantite_Client():
     fig = df.plot(x='Jours', y='Totaux_Personnes',figsize=(10,10),x_compat=True)
     fig.xaxis.set_major_locator(mdates.DayLocator(bymonthday=range(1,32,2)))
     fig.get_figure().savefig('assets/Image/Totaux_Personnes_Courbe.png')
+
+def EntrepotArrondissement():
+    df=pd.DataFrame({ 'Arrondissement':[75001,75002,75003,75004,75005,75006,75007,75008,75009,75010,75011,75012,75013,75014,75015,75016,75017,75018,75019,75020],
+    'N_tel_Entrepôt':['013075001','013075002','013075003','013075004','013075005','013075006','013075007','013075008',
+    '013075009','013075010','013075011','013075012','013075013','013075014','013075015','013075016','013075017','0130750018','0130750019','013075020'],
+    'Adresse':['adresse entrepôt','adresse entrepôt','adresse entrepôt','adresse entrepôt','adresse entrepôt','adresse entrepôt','adresse entrepôt',
+    'adresse entrepôt','adresse entrepôt','adresse entrepôt','adresse entrepôt','adresse entrepôt','adresse entrepôt','adresse entrepôt','adresse entrepôt',
+    'adresse entrepôt','adresse entrepôt','adresse entrepôt','adresse entrepôt','adresse entrepôt']
+
+    })
+    df.index = df.index + 1
+    html = df.to_html()
+    return html
+
+def DetailCommandeToday():
+    dataBrute = {"Produit":["Frites", "Poivre", "Fromage","Lait", "Tomate"],
+            "Quantite":[15, 6, 30,40,25],
+            "Arrondissement":["75001","75002","75001","75003","75002"]}
+
+    listArrondissements = ["75101","75102","75103","75104","75105","75106","75107","75108","75109","75110",
+                            "75111","75112","75113","75114","75115","75116","75117","75118","75119","75120"]
+
+    dicoPorduitOneDay = {"Produit":[], "Quantite":[], "Arrondissement":[]}
+    todayDate = date.today().strftime("%Y-%m-%d")
+    #Lecture du fichier des commandes pour prendre celles du jour
+    with open('./JSON/commandes_faites.json') as json_file: #./JSON/commandes_faites.json
+        fichier = json.load(json_file)
+        listCommandes = fichier['commandes']
+        for arrondissement in listArrondissements :
+            listProduit_UnArrondissement = dict()
+            for order in listCommandes :
+                if(order["Date"] == todayDate and order["CP"]== arrondissement):
+                    for unProduit in order:
+                        #SI Le produit est déjà dans notre dictionnaire de l'arrondissement et ce n'est pas l'id ou la date ou le CP
+                        if(unProduit in listProduit_UnArrondissement.keys() and unProduit != "id" and unProduit != "Date" and unProduit != "CP"): 
+                            addValue = listProduit_UnArrondissement[unProduit] + int(order[unProduit])
+                            listProduit_UnArrondissement[unProduit] = addValue
+                        #Sinon si ce n'est pas l'id ou la date ou le CP
+                        #Alors on l'ajoute au dico final
+                        elif(unProduit != "id" and unProduit != "Date" and unProduit != "CP"):
+                            listProduit_UnArrondissement[unProduit] = int(order[unProduit])
+            #On ajoute les clés (donc les produits) à la liste des produits           
+            dicoPorduitOneDay['Produit'].extend(listProduit_UnArrondissement.keys())
+            #On ajoute la quantité totale de chaque porduit pr cet arrondissement à la liste des quantités  
+            dicoPorduitOneDay['Quantite'].extend(listProduit_UnArrondissement.values())
+            dicoPorduitOneDay['Arrondissement'].extend([arrondissement]*len(listProduit_UnArrondissement.keys()))
+        
+        
+    dataPandasFormat = pd.DataFrame(dicoPorduitOneDay)
+    #Trie par ordre décroissant
+    dataPandasFormat_Sorted_Desc = dataPandasFormat.sort_values(by="Quantite", ascending=False).reset_index(drop=True)
+    print("Sorted_Desc : \n", dataPandasFormat_Sorted_Desc)
+    #Modification des colonnes en mettant les CP en index de colonne
+    dataPandasFormat_Pivot = dataPandasFormat_Sorted_Desc.pivot("Produit","Arrondissement","Quantite")
+    dataPandasFormat_Pivot = dataPandasFormat_Pivot.fillna(0) #Remplace tous les NaN par des 0
+    dataPandas_HtmlFormat = dataPandasFormat_Pivot.to_html(table_id='OrderOfTheDay', justify='center')
+    return dataPandas_HtmlFormat
