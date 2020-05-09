@@ -171,11 +171,10 @@ def Arrondissement_Map():
                             mapbox_style="carto-positron",
                             zoom=11, center = {"lat": 48.8534, "lon": 2.3488},
                             opacity=0.5,
-                            labels={'quantite':'quantite de produit'}
+                            labels={'quantite':'quantite de produit'},
                             )) 
     
-    
-    return plot(fig)
+    return plot(fig, output_type='div')
 
 def Quantite_Client():
     if(os.path.isfile('assets/Image/Totaux_Personnes_Courbe.png')):

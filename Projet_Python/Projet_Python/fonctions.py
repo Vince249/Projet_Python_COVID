@@ -148,10 +148,10 @@ def Admin(request):
     methodes_Statistiques.Quantite_Client()
     methodes_Statistiques.GraphTotalCommande()
 
-    #map_produits = methodes_Statistiques.Arrondissement_Map()
+    map_produits = methodes_Statistiques.Arrondissement_Map()
 
     return render(request, 'HTML/admin.html',{
         'id_admin' : id_utilisateur,
         'map':m,
-        #'map_produits' : map_produits
+        'map_produits' : map_produits
     })

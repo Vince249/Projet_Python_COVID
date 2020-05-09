@@ -33,6 +33,10 @@
 			<figcaption>TreeMap mettant en valeur les produits les plus commandés</figcaption>
 		</figure>
 		<br/>
+		
+		{% autoescape off %}
+		{{ map_produits }}
+		{% endautoescape %}
 
 	</body>
 </html>
