@@ -6,11 +6,8 @@
 		<title>Création Compte</title>
         <meta name="description" content="The Account Creation Page">
         <link rel="stylesheet" href="{% static 'CSS/creation.css' %}"
-	</head>
-    <header>
-        <p><a href="/">Home</a> > Création</p>
-        <h1>Créer votre compte</h1>
-    </header>
+    </head>
+    <h2>GROUPE ALPHA</h2>
     <body>
         <nav class="navbar">
             <img class="logo" src="{% static 'Image/loup alpha.png' %}" />
@@ -21,22 +18,55 @@
                 <li><a href="#"> NOUS CONTACTER</a></li>
             </ul>
         </nav>
-        <h1>Créer votre compte</h1>
+        <p><a href="/">Home</a> > Création</p>
 
         <p>{{erreur}}</p>
-        <form method="POST" action="/creation">
-            {% csrf_token %}
-            {{Form_Creation.as_p}}
+
+        <div class="CreateBox">
+            <h1>Créer votre compte</h1>
             <br>
-            <p>Vous pouvez chercher la longitude et latitude de votre adresse <a href="https://www.coordonnees-gps.fr/" target="_blank">ici !</a></p>
-            <p>Une fois cela fait vous pouvez utiliser les bouton ci-dessous pour poursuivre votre création de compte ou vous assurer d'avoir entré les bonnes coordonnées GPS </p>
-            <br>
-            <input type="submit" name='creation' value="Continuer votre inscription">
-            <input type="submit" name="bouton" value="Afficher adresse">
-        </form>
+            <form method="POST" action="/creation">
+                {% csrf_token %}
+                {{Form_Creation.as_p}}
+                <br>
+                <p>Vous pouvez chercher la longitude et latitude de votre adresse <a href="https://www.coordonnees-gps.fr/" target="_blank">ici !</a></p>
+                <p>Une fois cela fait vous pouvez utiliser les bouton ci-dessous pour poursuivre votre création de compte ou vous assurer d'avoir entré les bonnes coordonnées GPS </p>
+                <br>
+                <input type="submit" name='creation' value="Continuer votre inscription">
+                <input type="submit" name="bouton" value="Afficher adresse">
+            </form>
+        </div>
         <br>
         <br>
-        {{map|safe}}
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="Map">
+            {{map|safe}}
+        </div>
 	</body>
 </html>
 
