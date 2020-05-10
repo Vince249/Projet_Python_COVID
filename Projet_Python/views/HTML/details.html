@@ -12,24 +12,53 @@
         <p><a href="/">Home</a> > <a href="/creation">Creation</a> > Détails</p>
     </header>
     <body>
-
-        <form method="POST" action="/details">
-            {% csrf_token %}
-            {{ Form_Set.management_form }}
-            {% for forms in Form_Set %}
-                <p>Personne {{forloop.counter}}</p>
-                {{forms.as_p}}
-                <br>
-            {% endfor %}
-            <br>
-            <br>
-            <input type="submit" name='details' value="Créer compte">
-        </form>
-        
+        <nav class="navbar">
+            <img class="logo" src="{% static 'Image/loup alpha.png' %}" />
+            <ul>
+                <li><a class="active" href="#">ACCUEIL</a></li>
+                <li><a href="/creation">CREATION</a></li>
+                <li><a href="#contact_urgence">CONTACT URGENCE</a></li>
+                <li><a href="#"> NOUS CONTACTER</a></li>
+            </ul>
+        </nav>
+        <div class="createinbox">
+            <form method="POST" action="/details">
+                {% csrf_token %}
+                {{ Form_Set.management_form }}
+                {% for forms in Form_Set %}
+                    <h1 class="personne">----- Personne {{forloop.counter}} -----</h1>
+                    {{forms.as_p}}
+                    <br>
+                {% endfor %}
+                <br/>
+                <br/>
+                <input type="submit" name='details' value="Créer compte">
+            </form>
+        </div>
         
         {{erreur}}
 
-    </body>
+
+        <nav class="navbarfooter">
+            <footer>
+              
+              <br/>
+              <h3 id="contact_urgence">Contacts</h3>
+              <br/>
+              
+              <ul>
+                <br/>
+                <li>Centre d'aide : 0 800 130 000</li>
+                <li>Samu : 15</li>
+                <li>Pompier : 18</li>
+                <li>Police : 17</li>
+                <li>Site Web <a href="https://www.gouvernement.fr/info-coronavirus">info Covid-19</a></li>
+              </ul>
+        
+            </footer>
+        </nav>
+
+    </body>    
 </html>
 
 
