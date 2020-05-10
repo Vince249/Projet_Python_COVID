@@ -58,7 +58,7 @@ body{
  
 .loginbox{
     width: 500px;
-    height: 390px;
+    height: 480px;
     background: #000;
     border: 1px solid #cc0000;
     opacity: 0.85;   
@@ -96,6 +96,7 @@ input{
     border: 1.5px solid #cc0000;
     outline: none; 
     border-radius: 10px;
+    width: 200px;
     height: 30px;
 }
 
