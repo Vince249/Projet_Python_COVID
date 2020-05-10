@@ -8,8 +8,8 @@
 		<meta name="description" content="The Administrateur Page">
 		<link rel="stylesheet" href="{% static 'CSS/admin.css' %}">
 	</head>
+	<p><a href="/">Home</a> > Admin</p>
     <header>
-		<p><a href="/">Home</a> > Admin</p>
         <h2>Page d'administration</h2>
         <p>Bienvenue {{id_admin}}!</p>
     </header>
@@ -18,8 +18,7 @@
 		
 		
 
-		<br/> <br/>
-		<h2>Aperçu des statistiques</h2>
+		<br/> <br/> <br/> <br/> <br/>
 		<h3>Analyse de la quantité de produits commandée</h3>
 		<figure>
 			<img src="{% static 'Image/TreeMap_Quantite-totale-produit.png' %}" 
@@ -47,7 +46,10 @@
 
 
 		<h3>Infos Entrepôts</h3>
-		{{html_entrepot|safe}}
+		<div id = entrepot>
+			{{html_entrepot|safe}}
+
+		</div>
 		<br/>
 		
 
