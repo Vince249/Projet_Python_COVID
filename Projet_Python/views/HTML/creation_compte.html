@@ -2,16 +2,24 @@
 <!doctype html>
 
 <html lang="en">
-	<head>
 		<meta charset="utf-8">
 		<title>Création Compte</title>
         <meta name="description" content="The Account Creation Page">
         <link rel="stylesheet" href="{% static 'CSS/creation.css' %}"
 	</head>
-    <header>
-        <h1>Créer votre compte</h1>
-    </header>
+
     <body>
+        <nav class="navbar">
+            <img class="logo" src="{% static 'Image/loup alpha.png' %}" />
+            <ul>
+                <li><a class="active" href="#">CREATION</a></li>
+                <li><a href="/">CONNEXION</a></li>
+                <li><a href="#">CONTACT URGENCE</a></li>
+                <li><a href="#"> NOUS CONTACTER</a></li>
+            </ul>
+        </nav>
+        <h1>Créer votre compte</h1>
+
         <p>{{erreur}}</p>
         <form method="POST" action="/creation">
             {% csrf_token %}
