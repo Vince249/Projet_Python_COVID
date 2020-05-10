@@ -81,5 +81,13 @@
 		{{orderOfTheDay|safe}}
 		<br/><br/>
 
+
+		<figure >
+			<!--{% autoescape off %}--> <!-- semble fonctionner sans aussi -->
+			{{ map_livraison_du_jour }}
+			<!--{% endautoescape %}-->
+		<figcaption>Carte montrant le nombre de livraison à effectuer aujourd'hui</figcaption> 
+		</figure>
+		<br/><br/>
 	</body>
 </html>

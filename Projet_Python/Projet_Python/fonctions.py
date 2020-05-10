@@ -60,6 +60,7 @@ def Commande(request):
                     print('data', data)
                     #* Mettre les DATA dans le JSON
                     methodes_JSON.EnregistrerCommande(data, id_utilisateur) 
+                    methodes_JSON.Remplissage_Livraison(data, id_utilisateur)
                     message='Commande réussie'
         FormProductList = form.ProduitForm()
         return render(request, 'HTML/commande.html',{
@@ -183,7 +184,8 @@ def Admin(request):
         FormChoixProduit = form.Choix_Produit()
 
         map_produits = methodes_Statistiques.Arrondissement_Map(choix)
-
+        map_livraison_du_jour = methodes_Statistiques.Livraisons_Map()
+        
         return render(request, 'HTML/admin.html',{
             'id_admin' : id_utilisateur,
             'map':m,
@@ -192,6 +194,7 @@ def Admin(request):
             'orderOfTheDay':orderOfTheDay,
             'FormChoixProduit' : FormChoixProduit,
             'map_entrepot' : map_entrepot,
+            'map_livraison_du_jour' : map_livraison_du_jour,
         })
     else:
         erreur='Accès refusé, vous devez être admin pour voir cette page'
