@@ -6,9 +6,11 @@
 		<title>Création Compte</title>
         <meta name="description" content="The Account Creation Page">
         <link rel="stylesheet" href="{% static 'CSS/creation.css' %}"
+        
     </head>
-    <h2>GROUPE ALPHA</h2>
+
     <body>
+        <p id = Bandeau><a href="/">Home</a> > Création</p>
         <nav class="navbar">
             <img class="logo" src="{% static 'Image/loup alpha.png' %}" />
             <ul>
@@ -18,18 +20,17 @@
                 <li><a href="#"> NOUS CONTACTER</a></li>
             </ul>
         </nav>
-        <p><a href="/">Home</a> > Création</p>
-
         <p>{{erreur}}</p>
 
         <div class="CreateBox">
             <h1>Créer votre compte</h1>
-            <br>
+            <br> <br>
             <form method="POST" action="/creation">
                 {% csrf_token %}
                 {{Form_Creation.as_p}}
                 <br>
                 <p>Vous pouvez chercher la longitude et latitude de votre adresse <a href="https://www.coordonnees-gps.fr/" target="_blank">ici !</a></p>
+                <br>
                 <p>Une fois cela fait vous pouvez utiliser les bouton ci-dessous pour poursuivre votre création de compte ou vous assurer d'avoir entré les bonnes coordonnées GPS </p>
                 <br>
                 <input type="submit" name='creation' value="Continuer votre inscription">
@@ -64,9 +65,11 @@
         <br>
         <br>
         <br>
-        <div class="Map">
+        <figure>
             {{map|safe}}
-        </div>
+
+        </figure>
+
 	</body>
 </html>
 
