@@ -15,10 +15,17 @@
     </header>
     <body>
 		
+		
+		
+
+		<br/> <br/>
 		<h2>Aperçu des statistiques</h2>
 		<h3>Analyse de la quantité de produits commandée</h3>
 		<figure>
-			<img src="{% static 'Image/TreeMap_Quantite-totale-produit.png' %}" alt="Treemap de la quantité de produits commandée" title="Pie chart des produits" />
+			<img src="{% static 'Image/TreeMap_Quantite-totale-produit.png' %}" 
+			alt="Treemap de la quantité de produits commandée" 
+			title="Pie chart des produits" 
+			/>
 			<figcaption>TreeMap mettant en valeur les produits les plus commandés</figcaption>
 		</figure>
 		<br/>
@@ -38,14 +45,36 @@
 		</figure>
 		<br/>
 
+
 		<h3>Infos Entrepôts</h3>
 		{{html_entrepot|safe}}
 		<br/>
 		
-		{% autoescape off %}
-		{{ map_produits }}
-		{% endautoescape %}
 
+		<h3>Position des entrepôts</h3>
+		<figure >
+			{{map_entrepot|safe}}
+		<figcaption>Carte affichant la position de chaque entrepôt dans leur arrondissement respectif : cliquez sur un marqueur pour plus de détails</figcaption> 
+		</figure>
+
+
+
+		<br>
+		<h3>Infos sur produits commandés par arrondissement</h3>
+		<form method="POST" action="/admin">
+			{% csrf_token %}
+			{{FormChoixProduit}}
+			<input type="submit" name="Bouton_Choix_Produit" value="Valider">
+		</form>
+		<figure >
+			<!--{% autoescape off %}--> <!-- semble fonctionner sans aussi -->
+			{{ map_produits }}
+			<!--{% endautoescape %}-->
+		<figcaption>Graphique montrant la quantité cumulée du nombre de produits commandés depuis le lancement de l'application</figcaption> 
+		</figure>
+		<br>
+		
+		
 		<h3>Total de produits commandés aujourd'hui par arrondissements</h3>
 		{{orderOfTheDay|safe}}
 		<br/><br/>

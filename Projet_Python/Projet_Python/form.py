@@ -5,6 +5,7 @@ class LoginClientForm(forms.Form):
     id_client = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Identifiant'}))
     pwd_client = forms.CharField(label = '',widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
 
+
 class LoginAdminForm(forms.Form):
     id_admin = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Identifiant'}))
     pwd_admin = forms.CharField(label = '',widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
@@ -63,8 +64,42 @@ class CreationForm(forms.Form):
     nb_animal = forms.IntegerField(label = '',min_value=0,widget=forms.NumberInput(attrs={'placeholder': "Nombre d'animaux"}))
     nb_foyer = forms.IntegerField(label = '',min_value=0,widget=forms.NumberInput(attrs={'placeholder': "Nb personnes foyer"}))
 
+
 class CreationPersonne(forms.Form):
     nom_box = forms.CharField(label="",required=True,widget=forms.TextInput(attrs={'placeholder': 'Nom'}))
     prenom_box = forms.CharField(label="",required=True,widget=forms.TextInput(attrs={'placeholder': 'Prénom'}))
     age_box = forms.IntegerField(label = '',required=True,min_value=0,widget=forms.NumberInput(attrs={'placeholder': 'Âge'}))
+
+class Choix_Produit(forms.Form):
+    #Liste de tout nos produits 
+    Product_Choice = [
+       ("",""),
+       ('Frites','Frites'),
+       ('Pate', 'Pate'),
+       ('Epice', 'Epice'),
+       ('SelPoivre','SelPoivre'),
+       ('Assaisonnements','Assaisonnements'),
+       ('Pomme_de_terre','Pomme_de_terre'),
+       ('Tomate','Tomate'),
+       ('Pomme','Pomme'),
+       ('Citron','Citron'),
+       ('Choucroute','Choucroute'),
+       ('Riz','Riz'),
+       ('Farine','Farine'),
+       ('Sucre','Sucre'),
+       ('Oeuf','Oeuf'),
+       ('Pain','Pain'),
+       ('Lait','Lait'),
+       ('Beurre','Beurre'),
+       ('Fromage','Fromage'),
+       ('Creme','Creme'),
+       ('Poulet','Poulet'),
+       ('Poisson','Poisson'),
+       ('MedKit','MedKit'),
+       ('Pilule','Pilule'),
+       ('KitSoin','KitSoin'),
+       ('KitEntretien','KitEntretien'),
+    ]
+    Product_Choice.sort(key=lambda tup: tup[0]) #on les trie pour plus de lisibilité
+    choix_produit = forms.ChoiceField(label="Choix du produit à afficher ", choices=Product_Choice)
 

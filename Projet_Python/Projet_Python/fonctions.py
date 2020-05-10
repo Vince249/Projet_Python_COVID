@@ -11,6 +11,7 @@ from .methode_JSON import methodes_Statistiques
 id_utilisateur = ""
 nb_personne_foyer = 0
 FormCreation = form.CreationForm()
+choix = "Frites" #choix par défaut
 
 
 def Home(request):
@@ -47,6 +48,7 @@ def Home(request):
     })
 
 
+### Méthode déclanchant les actions liées à la création d'une commande par un utilisateur ###
 def Commande(request):
     if(id_utilisateur!=""):
         message=''
@@ -90,7 +92,9 @@ def Creation(request):
     global id_utilisateur 
     global nb_personne_foyer
     global FormCreation
-    m= folium.Map(location=[43.634, 1.433333],width=750, height=500,zoom_start=1)
+    fig = folium.Figure(width=750, height=600)
+    m = folium.Map(location=[48.8534, 2.3488], tiles='OpenStreetMap', zoom_start=10).add_to(fig) 
+
     if(request.method !='POST'):
         FormCreation = form.CreationForm()
     if(request.method=='POST'):
@@ -121,7 +125,6 @@ def Creation(request):
         'map':m
     })
     
-
 
 def Details(request):
     if(id_utilisateur!=""):
@@ -159,17 +162,27 @@ def Details(request):
         })
 
 
+### Méthode déclanchant les actions de consultation des données par l'administrateur (la commune) ###
 def Admin(request):
     if(id_utilisateur=='admin'):
         m= folium.Map(location=[43.634, 1.433333],zoom_start=20)
         m=m._repr_html_()
         methodes_Statistiques.ConvertToStatisticsUse()#Convertion du tableau pour qu'il puisse être utilisé
-        methodes_Statistiques.TreeMap_Product()
-        methodes_Statistiques.Quantite_Client()
+        methodes_Statistiques.TreeMap_Product() #Création du TreeMap
+        methodes_Statistiques.Quantite_Client() 
         methodes_Statistiques.GraphTotalCommande()
-        html_entrepot = methodes_Statistiques.EntrepotArrondissement()
-        orderOfTheDay = methodes_Statistiques.DetailCommandeToday()
-        map_produits = methodes_Statistiques.Arrondissement_Map()
+        html_entrepot = methodes_Statistiques.EntrepotArrondissementTab() #Création du contenu HTML pour affichage de la liste des entrepots de la ville dans la page HTML admin
+        map_entrepot = methodes_Statistiques.EntrepotArrondissementMap()
+        orderOfTheDay = methodes_Statistiques.DetailCommandeToday() #Création du contenu HTML pour affichage de la synthèse des commandes détailléees du jour dans la page HTML admin
+        
+        #selection du produit pour affichage personalisé de la map qui suit
+        global choix
+        if(request.method == 'POST'):
+            if(request.POST.get('Bouton_Choix_Produit')):
+                choix=request.POST['choix_produit']
+        FormChoixProduit = form.Choix_Produit()
+
+        map_produits = methodes_Statistiques.Arrondissement_Map(choix)
 
         return render(request, 'HTML/admin.html',{
             'id_admin' : id_utilisateur,
@@ -177,6 +190,8 @@ def Admin(request):
             'map_produits' : map_produits,
             'html_entrepot':html_entrepot,
             'orderOfTheDay':orderOfTheDay,
+            'FormChoixProduit' : FormChoixProduit,
+            'map_entrepot' : map_entrepot,
         })
     else:
         erreur='Accès refusé, vous devez être admin pour voir cette page'
