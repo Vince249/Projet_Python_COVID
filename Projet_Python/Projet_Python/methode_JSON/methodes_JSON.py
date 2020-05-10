@@ -34,6 +34,7 @@ def EnregistrerPersonnes(data):
 	write_json(fichier,'./JSON/infos_client.json')
 	return
 
+
 ### Méthode ajoutant la commande passée par un client à la BDD des commandes effectuées ###
 def EnregistrerCommande(data, id):
 	#récupération CP de la personne ayant commandé (utile pour la partie admin)
@@ -59,6 +60,7 @@ def EnregistrerCommande(data, id):
 	write_json(fichier,'./JSON/commandes_faites.json')
 	return
 
+
 ### Méthode vérifiant si l'Id et le password entrés par le client sont dans la base de données clients ###
 def VerifClient(id,pwd):
 	with open('./JSON/infos_client.json') as json_file:
@@ -70,6 +72,7 @@ def VerifClient(id,pwd):
 				check=True
 				break
 	return check
+
 
 ### Méthode vérifiant si l'Id et le password entrés par l'admin sont dans la base de données admin ###
 def VerifAdmin(id,pwd):

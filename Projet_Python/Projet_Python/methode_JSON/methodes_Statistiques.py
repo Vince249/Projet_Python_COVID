@@ -29,6 +29,7 @@ import folium
 #Utilisé dans les méthodes : Histo_Product() ; PieChart_Product() ;TreeMap_Product()
 commandeJson = dict()
 
+
 ### Méthode mettant à jour le dictionnaire commandeJson
 def ConvertToStatisticsUse():
     with open('./JSON/commandes_faites.json') as json_file: #On importe le fichier des commanes
@@ -50,6 +51,7 @@ def ConvertToStatisticsUse():
     #On trie le dictionnaire par ses valeurs d'une facon decroissante
     sorted(commandeJson.items(), key=lambda x: x[1], reverse=True) #reverse=True : Trie dansl l'ordre decroissant 
     print("CommandesJSON",commandeJson)
+
 
 ### Méthode faisant l'Histogramme de la quantité de commande de chaque produit commandé depuis le début du site ###
 # Lien Web : 
@@ -74,7 +76,6 @@ def Histo_Product():
 ### Méthode faisant le Diagramme circulaire (Pie Chart)amme de la quantité de commande de chaque produit commandé depuis le début du site ###
 #Site Web : Pie Chart : 
 # https://www.science-emergence.com/Articles/Simple-diagramme-circulaire-avec-matplotlib/
-
 def PieChart_Product():
     if(os.path.isfile('assets/Image/Pie-Chart_Quantite-totale-produit.png')):
         os.remove('assets/Image/Pie-Chart_Quantite-totale-produit.png')#Supprimer l'image actuelle
@@ -151,7 +152,6 @@ def GraphTotalCommande():
     myFig.get_figure().savefig('assets/Image/Cumule-Commandes.png', bbox_inches='tight')
 
 
-
 #n'est jamais appelé car elle a pour but de ne pas faire planter la carte si le produit choisi par l'admin n'a jamais été commandé
 def Sauvegarde_Commande_Initialisation_Carte():
     {
@@ -184,10 +184,6 @@ def Sauvegarde_Commande_Initialisation_Carte():
             "KitSoin":"0",
             "KitEntretien":"0"
         },
-
-
-
-
 def Arrondissement_Map(Product_name):
     with open('./JSON/arrondissements.geojson') as json_file:
         data_arrondissements = json.load(json_file)
@@ -199,7 +195,7 @@ def Arrondissement_Map(Product_name):
 
     df = pd.DataFrame(commandes)
     df = df.fillna(0) #si une commande contient certains produits mais pas d'autres, leur valeur dans le dataframe sera "NaN" et ne pourra être lu lors de la conversion en int
-
+    
     #on fait un astype(dict) avec dict contenant le nom d'une colonne et un type pour convertir une colonne en un type particulier
     #chaque colonne de produit ayant une quantité de type str, on convertit la colonne voulu (=le produit selectionné) en int afin de pouvoir faire sum
     #on met le reset index pour conserver un dataframe, sinon on a un SeriesFrame
@@ -215,12 +211,16 @@ def Arrondissement_Map(Product_name):
                     labels={'quantite':'quantite de produit'},
                     ))
     
-    fig.update_layout(height=600,
-                    width=900,
-                    title_text='Quantité du produit commandé par arrondissement',
+
+    fig.update_layout(autosize=False,
+                    height=600,
+                    width=830,
+                    margin={"r":0,"t":0,"l":0,"b":0}
+                    #title_text='Quantité du produit commandé par arrondissement',
                     )
 
     return plot(fig, output_type='div')
+
 
 def Quantite_Client():
     if(os.path.isfile('assets/Image/Totaux_Personnes_Courbe.png')):
@@ -261,6 +261,7 @@ def Quantite_Client():
                     title="Evolution du nombre d'utilisateur depuis le " + startdate.strftime(("%Y-%m-%d")))
     fig.xaxis.set_major_locator(mdates.DayLocator(bymonthday=range(1,32,2)))
     fig.get_figure().savefig('assets/Image/Totaux_Personnes_Courbe.png', bbox_inches='tight')
+
 
 def EntrepotArrondissementTab():
     df=pd.DataFrame({ 'Arrondissement':[75001,75002,75003,75004,75005,75006,75007,75008,75009,75010,75011,75012,75013,75014,75015,75016,75017,75018,75019,75020],
@@ -320,16 +321,15 @@ def EntrepotArrondissementMap():
                                  '28 Rue de la Dhuis, 75020 Paris, France']
     })
 
-
     with open('./JSON/arrondissements.geojson') as json_file:
         data_arrondissements = json.load(json_file)
 
-
-
     locations = df[['Latitude', 'Longitude']]
     locationlist = locations.values.tolist()
+    
     fig = folium.Figure(width=750, height=600)
     map = folium.Map(location=[48.8534, 2.3488], tiles='CartoDB positron', zoom_start=12).add_to(fig)   
+    
     for point in range(0, len(locationlist)):
         folium.Marker(locationlist[point], popup=df['Adresse'][point],icon=folium.Icon(icon="cloud",color="red")).add_to(map) #on peut changer l'icone, j'ai mis celui-ci pour montrer que c'était possible
     folium.GeoJson(data_arrondissements,name='geojson',style_function=lambda x:{'fillColor': 'blue', 'color': 'blue'}).add_to(map)

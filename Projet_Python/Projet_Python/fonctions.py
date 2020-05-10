@@ -13,6 +13,7 @@ nb_personne_foyer = 0
 FormCreation = form.CreationForm()
 choix = "Frites" #choix par défaut
 
+
 def Home(request):
     global id_utilisateur
     global nb_personne_foyer
@@ -45,6 +46,7 @@ def Home(request):
         'Form_Login_Client' : FormLoginClient,
         'Form_Login_Admin' : FormLoginAdmin,
     })
+
 
 ### Méthode déclanchant les actions liées à la création d'une commande par un utilisateur ###
 def Commande(request):
@@ -124,7 +126,6 @@ def Creation(request):
     })
     
 
-
 def Details(request):
     if(id_utilisateur!=""):
         FormSetDetails = formset_factory(form.CreationPersonne, extra=nb_personne_foyer)
@@ -159,6 +160,7 @@ def Details(request):
         return render(request, 'HTML/acces_refuse.html',{
             'erreur' : erreur,
         })
+
 
 ### Méthode déclanchant les actions de consultation des données par l'administrateur (la commune) ###
 def Admin(request):
