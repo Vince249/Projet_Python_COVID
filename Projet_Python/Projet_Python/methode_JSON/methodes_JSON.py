@@ -35,6 +35,7 @@ def EnregistrerPersonnes(data):
 	return
 
 
+### Méthode ajoutant la commande passée par un client à la BDD des commandes effectuées ###
 def EnregistrerCommande(data, id):
 	#récupération CP de la personne ayant commandé (utile pour la partie admin)
 	CP=""
@@ -53,13 +54,14 @@ def EnregistrerCommande(data, id):
 				datacleaned[k]=v
 		datacleaned['id']=id
 		datacleaned['CP']=CP
-		datacleaned['Date'] = (datetime.now()).strftime("%Y-%m-%d") #Ajout de la date au format YYYY-mm-dd
+		datacleaned['Date'] = (datetime.now()).strftime("%Y-%m-%d") #Ajout de la date au format YYYY-mm-dd 
 		
 		temp.append(datacleaned)
 	write_json(fichier,'./JSON/commandes_faites.json')
 	return
 
 
+### Méthode vérifiant si l'Id et le password entrés par le client sont dans la base de données clients ###
 def VerifClient(id,pwd):
 	with open('./JSON/infos_client.json') as json_file:
 		fichier = json.load(json_file)
@@ -72,6 +74,7 @@ def VerifClient(id,pwd):
 	return check
 
 
+### Méthode vérifiant si l'Id et le password entrés par l'admin sont dans la base de données admin ###
 def VerifAdmin(id,pwd):
 	with open('./JSON/admin_login.json') as json_file:
 		fichier = json.load(json_file)
