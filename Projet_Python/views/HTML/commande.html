@@ -15,23 +15,24 @@
     <nav class="navbar">
       <img class="logo" src="{% static 'Image/loup alpha.png' %}" />
       <ul>
-          <li><a class="active" href="#">COMMANDE</a></li>
-          <li><a href="/">DECONNEXION</a></li>
-          <li><a href="#contact_urgence">CONTACT URGENCE</a></li>
-          <li><a href="#"> NOUS CONTACTER</a></li>
+        <li><a class="active" href="#">COMMANDE</a></li>
+        <li><a href="/">DECONNEXION</a></li>
+        <li><a href="#contact_urgence">CONTACT URGENCE</a></li>
+        <li><a href="#"> NOUS CONTACTER</a></li>
       </ul>
     </nav>
 
     <br/>
     <br/>
 
-    <h2 id="compte_perso"><span title="Salut!" >Bonjour {{id_personne}}</span></h2> <!--Affichage en titre type 2-->
+    <h1 id="compte_perso"><span title="Salut!" >Bonjour {{id_personne}}</span></h1> <!--Affichage en titre type 1-->
 
     <br/>
     <br/>
 
     <form id="allergie" action="/commande/allergie/">
-      <input type="SUBMIT" value="Besoins spéciaux (allergie)"></form>
+      <input type="SUBMIT" value="Besoins spéciaux (allergie)">
+    </form>
 
     <br/>
     <br/>
@@ -39,10 +40,12 @@
     <!-- Lien pour un for en HTMl : https://docs.djangoproject.com/fr/3.0/ref/templates/builtins/#for -->
   
         <!-- forloop.counter : L’itération actuelle de la boucle (index à partir de 1) -->
+
     <div class="forminbox">
+
       <br/>
+
       <h2 id="Nourriture">----- Produits alimentaires -----</h2>
-      <br/>
       <form class="lesforms" method="POST" action="/commande">  
         {% csrf_token %} <!-- une protection contre le « Cross site request forgery » (CSRF) : Protège des attaques CSRF -->
         <!-- {{Form_Product_List.as_p}} -->
@@ -95,15 +98,21 @@
         <br/>
         <input id="valider" type="submit" name="Commande" value="Valider commande">
       </form>
+
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <p>{{message}}</p>
+
     </div>
-    
-      
+
     <br/>
     <br/>
 
     <nav class="navbarfooter">
       <footer>
-        <p>{{message}}</p>
+        
         <br/>
         <h3 id="contact_urgence">Contacts</h3>
         <br/>
@@ -118,8 +127,7 @@
         </ul>
   
       </footer>
-    </nav>
-    
+    </nav>   
 
   </body>
   

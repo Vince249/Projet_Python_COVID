@@ -3,6 +3,15 @@
     padding: 0;
 }
 
+body{
+    margin: 0;
+    padding: 0;
+    background-image: url(../Image/order.png);
+    background-size: cover;
+    background-position: top;
+    font-family: sans-serif;
+}
+
 .navbar{
     height: 200px;
     width: 100%;
@@ -42,26 +51,30 @@
 }
 
 body #compte_perso{
-    float: left;
+    text-align: left;
 }
 
 body h2{
     text-align: center;
     margin-bottom: 20px;
 }
+
 body h3{
     text-align: center;
     margin-bottom: 20px;
 }
+
 body form{
     text-align: center;
 }
+
 body #allergie{
     float: right;
 }
+
 footer h3{
     text-align: center;
-    font-style: bold;
+    font-weight: bold;
 }
 
 body .lesforms{
@@ -69,27 +82,39 @@ body .lesforms{
     text-align: right;
 }
 
-footer ul li{
+.navbarfooter ul li{
     list-style: none;
     text-align: center;
+    font-weight: bold;
 }
+
+.navbarfooter #contact_urgence{
+    font-size: 20px;
+}
+
+.navbarfooter ul li a{
+    color: white;
+    text-decoration: none;
+}
+
 footer p{
     text-align: center;
 }
 
 .forminbox{
-    width: 350px;
-    height: 1700px;
+    width: 400px;
+    height: 1800px;
     background: whitesmoke;
     color: #000;
-    top: 170%;
+    opacity: 0.94;
+    top: 165%;
     left: 50%;
+    text-align: center;
     position: absolute;
     transform: translate(-50%,-50%);
     box-sizing: border-box;
-    text-align: center;
-}
-
+    box-shadow: 5px 5px 10px black;
+} 
 
 .navbarfooter{
     position: relative;
@@ -104,11 +129,8 @@ h2{
     font-style: italic;
 }
 
-body{
-    background: whitesmoke;
-}
-
 #allergie input{
+    cursor: pointer;
     border: 1.5px solid #000;
     border-radius: 15px;
     height: 20px;
@@ -116,10 +138,18 @@ body{
 }
 
 .forminbox input{
+    cursor: pointer;
     text-align: center;    
     border: 1.5px solid #000;
     outline: none; 
     border-radius: 15px;
     height: 20px;
-    width: 350px; 
+    width: 400px; 
+} 
+
+#allergie input[type="SUBMIT"] :hover{
+    cursor: pointer;
+    background: #ffc107;
+    color: #000;
 }
+
