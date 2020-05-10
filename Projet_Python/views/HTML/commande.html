@@ -22,6 +22,9 @@
       </ul>
     </nav>
 
+    <br/>
+    <br/>
+
     <h2 id="compte_perso"><span title="Salut!" >Bonjour {{id_personne}}</span></h2> <!--Affichage en titre type 2-->
 
     <br/>
@@ -36,66 +39,90 @@
     <!-- Lien pour un for en HTMl : https://docs.djangoproject.com/fr/3.0/ref/templates/builtins/#for -->
   
         <!-- forloop.counter : L’itération actuelle de la boucle (index à partir de 1) -->
-    <h2 id="Nourriture">Produits alimentaires</h2>
-
-    <form class="lesforms" method="POST" action="/commande">  
-      {% csrf_token %} <!-- une protection contre le « Cross site request forgery » (CSRF) : Protège des attaques CSRF -->
-      <!-- {{Form_Product_List.as_p}} -->
-      {% for product in Form_Product_List %}
-        {% if forloop.first %}
-          <h3 id="Condiements">Condiments</h3>
-        {% endif %}
-        {% if forloop.counter == 4 %}
-          <h3 id="Legumes">Légumes de saison</h3>
-        {% endif %}
-        {% if forloop.counter == 6 %}
-          <h3 id="Fruis">Fruits de saison</h3>
-        {% endif %}
-        {% if forloop.counter == 8 %}
-          <h3 id="Conserve">Aliment ayant une longue conservation</h3>
-        {% endif %}
-        {% if forloop.counter == 12 %}
-          <h3 id="Base">Matières premières</h3>
-        {% endif %}
-        {% if forloop.counter == 16 %}
-          <h3 id="Laitier_Viande">Produits laitiers et viande</h3>
-        {% endif %}
-        {% if forloop.counter == 22 %}
-          <h2 id="Hygiene">Hygiène et Santé</h2>
-        {% endif %}
-        {% if forloop.counter == 25 %}
-          <h2 id="Entretien">Produits d'entretien</h2>
-        {% endif %}
-      
-        {{product.name}} {{product}}
+    <div class="forminbox">
+      <br/>
+      <h2 id="Nourriture">----- Produits alimentaires -----</h2>
+      <br/>
+      <form class="lesforms" method="POST" action="/commande">  
+        {% csrf_token %} <!-- une protection contre le « Cross site request forgery » (CSRF) : Protège des attaques CSRF -->
+        <!-- {{Form_Product_List.as_p}} -->
+        {% for product in Form_Product_List %}
+          {% if forloop.first %}
+            <br/>
+            <h3 id="Condiements">Condiments</h3>
+            <br/>
+          {% endif %}
+          {% if forloop.counter == 4 %}
+            <br/>
+            <h3 id="Legumes">Légumes de saison</h3>
+            <br/>
+          {% endif %}
+          {% if forloop.counter == 6 %}
+            <br/>
+            <h3 id="Fruis">Fruits de saison</h3>
+            <br/>
+          {% endif %}
+          {% if forloop.counter == 8 %}
+            <br/>
+            <h3 id="Conserve">Aliment ayant une longue conservation</h3>
+            <br/>
+          {% endif %}
+          {% if forloop.counter == 12 %}
+            <br/>
+            <h3 id="Base">Matières premières</h3>
+            <br/>
+          {% endif %}
+          {% if forloop.counter == 16 %}
+            <br/>
+            <h3 id="Laitier_Viande">Produits laitiers et viande</h3>
+            <br/>
+          {% endif %}
+          {% if forloop.counter == 22 %}
+            <br/>
+            <h2 id="Hygiene">----- Hygiène et Santé -----</h2>
+            <br/>
+          {% endif %}
+          {% if forloop.counter == 25 %}
+            <br/>
+            <h2 id="Entretien">----- Produits d'entretien -----</h2>
+            <br/>
+          {% endif %}
+        
+          {{product.name}} {{product}}
+          <br/>
+          <br/>
+        {% endfor %}
         <br/>
-        <br/>
-      {% endfor %}
-      <input type="submit" name="Commande" value="Valider commande">
-    </form>
+        <input id="valider" type="submit" name="Commande" value="Valider commande">
+      </form>
+    </div>
     
       
     <br/>
     <br/>
 
-    <footer>
-      <p>{{message}}</p>
-      <br/>
-      <h3 id="contact_urgence">Contacts</h3>
-      <br/>
-      <br/>
-      
-      <ul>
-        <li>Centre d'aide : 0 800 130 000</li>
-        <li>Samu : 15</li>
-        <li>Pompier : 18</li>
-        <li>Police : 17</li>
-        <li>Site Web <a href="https://www.gouvernement.fr/info-coronavirus">info Covid-19</a></li>
-      </ul>
-
-    </footer>
+    <nav class="navbarfooter">
+      <footer>
+        <p>{{message}}</p>
+        <br/>
+        <h3 id="contact_urgence">Contacts</h3>
+        <br/>
+        
+        <ul>
+          <br/>
+          <li>Centre d'aide : 0 800 130 000</li>
+          <li>Samu : 15</li>
+          <li>Pompier : 18</li>
+          <li>Police : 17</li>
+          <li>Site Web <a href="https://www.gouvernement.fr/info-coronavirus">info Covid-19</a></li>
+        </ul>
+  
+      </footer>
+    </nav>
+    
 
   </body>
+  
 </html>
 
 

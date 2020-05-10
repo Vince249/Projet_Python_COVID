@@ -59,8 +59,9 @@ body form{
 body #allergie{
     float: right;
 }
-body footer h3{
-    float: left;
+footer h3{
+    text-align: center;
+    font-style: bold;
 }
 
 body .lesforms{
@@ -68,9 +69,57 @@ body .lesforms{
     text-align: right;
 }
 
-body footer ul li{
+footer ul li{
     list-style: none;
-}
-body footer p{
     text-align: center;
+}
+footer p{
+    text-align: center;
+}
+
+.forminbox{
+    width: 350px;
+    height: 1700px;
+    background: whitesmoke;
+    color: #000;
+    top: 170%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    text-align: center;
+}
+
+
+.navbarfooter{
+    position: relative;
+    position: absolute;
+    bottom: -230%;
+    height: 200px;
+    width: 100%;
+    background: rgba(0,0,0,0.4);
+}
+
+h2{
+    font-style: italic;
+}
+
+body{
+    background: whitesmoke;
+}
+
+#allergie input{
+    border: 1.5px solid #000;
+    border-radius: 15px;
+    height: 20px;
+    width: 280px; 
+}
+
+.forminbox input{
+    text-align: center;    
+    border: 1.5px solid #000;
+    outline: none; 
+    border-radius: 15px;
+    height: 20px;
+    width: 350px; 
 }

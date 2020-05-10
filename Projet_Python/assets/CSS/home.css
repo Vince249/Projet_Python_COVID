@@ -96,6 +96,7 @@ input{
     border: 1.5px solid #cc0000;
     outline: none; 
     border-radius: 10px;
+    height: 30px;
 }
 
 .form1{
@@ -141,6 +142,10 @@ input{
 a:link{
     text-decoration: none;
     color: red;
+}
+
+body .loginbox .login{
+    color: white;
 }
 
 
