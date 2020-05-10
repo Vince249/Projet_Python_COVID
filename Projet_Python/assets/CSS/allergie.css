@@ -1,3 +1,97 @@
-body{
-    background-color: red;
+*{
+    margin: 0;
+    padding: 0;
 }
+
+.navbar{
+    height: 200px;
+    width: 100%;
+    background: rgba(0,0,0,0.4);
+}
+
+.navbar ul{
+    float: right;
+}
+
+.navbar ul li{
+    list-style: none;
+    margin: 60px 30px;
+    display: inline-block;
+    line-height: 80px;
+}
+
+.navbar ul li a{
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    padding: 6px 13px;
+    transition: .4s;
+}
+
+.navbar ul li a.active,
+.navbar ul li a:hover{
+    background: red;
+    opacity: 0.7;
+    border-radius: 5px;
+}
+
+.logo{
+    height: auto;
+    width: 140px;
+    padding: 20px 100px;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    background-image: url(../Image/allergen_icons.jpg); 
+    background-size: cover;
+    background-position: top;
+    font-family: sans-serif;
+
+}
+
+footer h3{
+    text-align: center;
+    font-weight: bold;
+}
+
+body .lesforms{
+    width: 100%;
+    text-align: right;
+}
+
+.navbarfooter ul li{
+    list-style: none;
+    text-align: center;
+    font-weight: bold;
+}
+
+.navbarfooter #contact_urgence{
+    font-size: 20px;
+}
+
+.navbarfooter ul li a{
+    color: white;
+    text-decoration: none;
+}
+
+footer p{
+    text-align: center;
+}
+
+.navbarfooter{
+    position: relative;
+    position: absolute;
+    bottom: -200%;
+    height: 200px;
+    width: 100%;
+    background: rgba(0,0,0,0.4);
+}
+
+body h2{
+    text-align: center;
+    font-weight: bold;
+    font-style: italic;
+}
+
