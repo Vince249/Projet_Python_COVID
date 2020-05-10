@@ -188,12 +188,17 @@ def Arrondissement_Map(Product_name):
     with open('./JSON/arrondissements.geojson') as json_file:
         data_arrondissements = json.load(json_file)
 
-
     with open('./JSON/commandes_faites.json') as json_file:
         fichier = json.load(json_file)
         commandes=fichier['commandes']
 
-    df = pd.DataFrame(commandes)
+    df_temp = pd.DataFrame(commandes)
+    df_temp['Date']= pd.to_datetime(df_temp['Date']) #on convertit la colonne 'Date' en objet date
+    
+    trente_jours_avant = date.today() - timedelta(days=30)
+    df = df_temp[df_temp['Date'] >= pd.Timestamp(trente_jours_avant)] #on ne selectionne que les 30 derniers jours
+
+    print(df)
     df = df.fillna(0) #si une commande contient certains produits mais pas d'autres, leur valeur dans le dataframe sera "NaN" et ne pourra être lu lors de la conversion en int
     
     #on fait un astype(dict) avec dict contenant le nom d'une colonne et un type pour convertir une colonne en un type particulier
