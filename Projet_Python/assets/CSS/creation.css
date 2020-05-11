@@ -51,23 +51,22 @@ body{
 }
 
 .CreateBox{
-    padding: 10px;
-    width: 550px;
-    height: 830px;
+    width: 890px;
+    height: 980px;
+    padding: 50px;
     background: #000;
     border: 1px solid #cc0000;
     opacity: 0.85;   
     color: #fff;
-    top: 90%;
+    top: 100%;
     left: 52%;
     position: absolute;
     transform: translate(-50%,-50%);
     box-sizing: border-box;
     text-align: center;
+    margin-right: 20px;
     box-shadow: 5px 5px 10px black;
 }
-
-
 
 input{
     height: 30px;
@@ -86,7 +85,7 @@ h1{
 
 figure{
     margin: 370px;
-    margin-left: 400px;
+    margin-left: 430px;
 }
 
 footer h3{
@@ -116,10 +115,14 @@ footer p{
 .navbarfooter{
     position: relative;
     position: absolute;
-    bottom: -155%;
+    bottom: -207%;
     height: 200px;
     width: 100%;
     background: rgba(0,0,0,0.4);
 }
 
- 
+p a{
+    color: red;
+    text-decoration: none;
+}
+
