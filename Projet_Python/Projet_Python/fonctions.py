@@ -12,6 +12,7 @@ id_utilisateur = ""
 nb_personne_foyer = 0
 FormCreation = form.CreationForm()
 choix = "Frites" #choix par défaut
+choix_commande = "Frites" #choix par défaut
 
 
 def Home(request):
@@ -186,6 +187,16 @@ def Admin(request):
         map_produits = methodes_Statistiques.Arrondissement_Map(choix)
         map_livraison_du_jour = methodes_Statistiques.Livraisons_Map()
         
+
+        global choix_commande
+        if(request.method == 'POST'):
+            if(request.POST.get('Bouton_Choix_Produit_Commande')):
+                choix_commande=request.POST['choix_produit_commande']
+                print(choix_commande)
+        FormChoixProduitCommande = form.Choix_Produit_Commande()
+
+        #html_graph = methodes_Statistiques.NomFonction(choix_commande) #fonction armand
+
         return render(request, 'HTML/admin.html',{
             'id_admin' : id_utilisateur,
             'map':m,
@@ -195,6 +206,8 @@ def Admin(request):
             'FormChoixProduit' : FormChoixProduit,
             'map_entrepot' : map_entrepot,
             'map_livraison_du_jour' : map_livraison_du_jour,
+            'FormChoixProduitCommande' : FormChoixProduitCommande,
+            #'html_graph' : html_graph -> fonction armand
         })
     else:
         erreur='Accès refusé, vous devez être admin pour voir cette page'

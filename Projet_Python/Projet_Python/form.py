@@ -103,3 +103,36 @@ class Choix_Produit(forms.Form):
     Product_Choice.sort(key=lambda tup: tup[0]) #on les trie pour plus de lisibilité
     choix_produit = forms.ChoiceField(label="Choix du produit à afficher ", choices=Product_Choice)
 
+
+class Choix_Produit_Commande(forms.Form):
+    #Liste de tout nos produits 
+    Product_Choice = [
+       ("",""),
+       ('Frites','Frites'),
+       ('Pate', 'Pate'),
+       ('Epice', 'Epice'),
+       ('SelPoivre','SelPoivre'),
+       ('Assaisonnements','Assaisonnements'),
+       ('Pomme_de_terre','Pomme_de_terre'),
+       ('Tomate','Tomate'),
+       ('Pomme','Pomme'),
+       ('Citron','Citron'),
+       ('Choucroute','Choucroute'),
+       ('Riz','Riz'),
+       ('Farine','Farine'),
+       ('Sucre','Sucre'),
+       ('Oeuf','Oeuf'),
+       ('Pain','Pain'),
+       ('Lait','Lait'),
+       ('Beurre','Beurre'),
+       ('Fromage','Fromage'),
+       ('Creme','Creme'),
+       ('Poulet','Poulet'),
+       ('Poisson','Poisson'),
+       ('MedKit','MedKit'),
+       ('Pilule','Pilule'),
+       ('KitSoin','KitSoin'),
+       ('KitEntretien','KitEntretien'),
+    ]
+    Product_Choice.sort(key=lambda tup: tup[0]) #on les trie pour plus de lisibilité
+    choix_produit_commande = forms.ChoiceField(label="Choix du produit à afficher ", choices=Product_Choice)

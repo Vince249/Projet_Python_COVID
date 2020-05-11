@@ -89,5 +89,20 @@
 		<figcaption>Carte montrant le nombre de livraison à effectuer aujourd'hui</figcaption> 
 		</figure>
 		<br/><br/>
+
+
+		<h3>Titre à spécifier</h3>
+		<form method="POST" action="/admin">
+			{% csrf_token %}
+			{{FormChoixProduitCommande}}
+			<input type="submit" name="Bouton_Choix_Produit_Commande" value="Valider">
+		</form>
+		<figure >
+			<!-- html_graph -->
+		<figcaption>A spécifier aussi</figcaption> 
+		</figure>
+		<br>
+
+
 	</body>
 </html>
