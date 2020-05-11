@@ -1,7 +1,7 @@
 .DS_Store
 .vscode
 virtual_environment_MAC/
-virtual_environment
+virtual_environment/
 *.pyc
 test/
 .vscode/
