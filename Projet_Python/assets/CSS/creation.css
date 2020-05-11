@@ -41,9 +41,6 @@
     padding: 20px 100px;
 }
 
-body{ background: white;}
-
-
 body{
     margin: 0;
     padding: 0;
@@ -54,14 +51,15 @@ body{
 }
 
 .CreateBox{
+    padding: 10px;
     width: 550px;
-    height: 450px;
+    height: 830px;
     background: #000;
     border: 1px solid #cc0000;
     opacity: 0.85;   
     color: #fff;
-    top: 65%;
-    left: 50%;
+    top: 90%;
+    left: 52%;
     position: absolute;
     transform: translate(-50%,-50%);
     box-sizing: border-box;
@@ -69,7 +67,12 @@ body{
     box-shadow: 5px 5px 10px black;
 }
 
+
+
 input{
+    height: 30px;
+    width: 300px;
+    margin: 5px;
     text-align: center;    
     border: 1.5px solid #cc0000;
     outline: none; 
@@ -77,16 +80,46 @@ input{
 }
 
 h1{
-    font-style: oblique;
-    font-family: "Times New Roman", sans-serif;
-}
-
-p{
-    font-style: oblique;
-    font-family: "Times New Roman", sans-serif;
+    color: red;
+    font-style: italic;
 }
 
 figure{
-    left: 50%;
+    margin: 370px;
+    margin-left: 400px;
 }
+
+footer h3{
+    text-align: center;
+    font-weight: bold;
+}
+
+.navbarfooter ul li{
+    list-style: none;
+    text-align: center;
+    font-weight: bold;
+}
+
+.navbarfooter #contact_urgence{
+    font-size: 20px;
+}
+
+.navbarfooter ul li a{
+    color: white;
+    text-decoration: none;
+}
+
+footer p{
+    text-align: center;
+}
+
+.navbarfooter{
+    position: relative;
+    position: absolute;
+    bottom: -155%;
+    height: 200px;
+    width: 100%;
+    background: rgba(0,0,0,0.4);
+}
+
  

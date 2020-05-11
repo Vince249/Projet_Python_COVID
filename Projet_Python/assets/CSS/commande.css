@@ -102,12 +102,13 @@ footer p{
 }
 
 .forminbox{
-    width: 400px;
-    height: 1800px;
+    padding: 100px;
+    width: 630px;
+    height: 2000px;
     background: whitesmoke;
     color: #000;
     opacity: 0.94;
-    top: 165%;
+    top: 175%;
     left: 50%;
     text-align: center;
     position: absolute;
@@ -119,7 +120,7 @@ footer p{
 .navbarfooter{
     position: relative;
     position: absolute;
-    bottom: -230%;
+    bottom: -250%;
     height: 200px;
     width: 100%;
     background: rgba(0,0,0,0.4);
@@ -133,17 +134,18 @@ h2{
     cursor: pointer;
     border: 1.5px solid #000;
     border-radius: 15px;
-    height: 20px;
+    height: 40px;
     width: 280px; 
 }
 
 .forminbox input{
+    margin: 20px;
     cursor: pointer;
     text-align: center;    
     border: 1.5px solid #000;
     outline: none; 
     border-radius: 15px;
-    height: 20px;
+    height: 40px;
     width: 400px; 
 } 
 

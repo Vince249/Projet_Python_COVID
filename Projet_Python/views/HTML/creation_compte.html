@@ -17,20 +17,21 @@
             <ul>
                 <li><a class="active" href="#">CREATION</a></li>
                 <li><a href="/">CONNEXION</a></li>
-                <li><a href="#">CONTACT URGENCE</a></li>
+                <li><a href="#contact_urgence">CONTACT URGENCE</a></li>
                 <li><a href="#"> NOUS CONTACTER</a></li>
             </ul>
         </nav>
         <p>{{erreur}}</p>
 
         <div class="CreateBox">
-            <h1>Créer votre compte</h1>
+            <br/>
+            <h1>----- Créer votre compte -----</h1>
             <br> <br>
             <form method="POST" action="/creation">
                 {% csrf_token %}
                 {{Form_Creation.as_p}}
                 <br>
-                <p>Vous pouvez chercher la longitude et latitude de votre adresse <a href="https://www.coordonnees-gps.fr/" target="_blank">ici !</a></p>
+                <p>Vous pouvez chercher la longitude et latitude de votre adresse <a href="https://www.coordonnees-gps.fr/" target="_blank">ici.</a></p>
                 <br>
                 <p>Une fois cela fait vous pouvez utiliser les bouton ci-dessous pour poursuivre votre création de compte ou vous assurer d'avoir entré les bonnes coordonnées GPS </p>
                 <br>
@@ -38,38 +39,58 @@
                 <input type="submit" name="bouton" value="Afficher adresse">
             </form>
         </div>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
         <figure>
+
             {{map|safe}}
 
         </figure>
+
+        <nav class="navbarfooter">
+            <footer>
+              
+              <br/>
+              <h3 id="contact_urgence">Contacts</h3>
+              <br/>
+              
+              <ul>
+                <br/>
+                <li>Centre d'aide : 0 800 130 000</li>
+                <li>Samu : 15</li>
+                <li>Pompier : 18</li>
+                <li>Police : 17</li>
+                <li>Site Web <a href="https://www.gouvernement.fr/info-coronavirus">info Covid-19</a></li>
+              </ul>
+        
+            </footer>
+          </nav> 
 
 	</body>
 </html>
