@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+header{
+    background: rgba(0,0,0,0.4);
+}
+
 body{
     margin: 0;
     padding: 0;
@@ -155,3 +159,8 @@ h2{
     color: #000;
 }
 
+#messagereussi{
+    color: red;
+    font-weight: bold;
+    font-size: 30px;
+}
