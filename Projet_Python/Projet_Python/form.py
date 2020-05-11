@@ -52,17 +52,17 @@ class ProduitForm(forms.Form):
     
 
 class CreationForm(forms.Form):
-    id_box = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Identifiant Foyer'}))
-    Email = forms.CharField(label="",max_length = 254,widget=forms.EmailInput(attrs={'placeholder': 'Email'}))
-    pwd = forms.CharField(label = '',widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
-    tel = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Téléphone'}))
-    ville = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Ville'}))
-    codeP = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Code Postal'}))
-    adresse = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Adresse'}))
-    latitude = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Latitude'}))
-    longitude = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Longitude'}))
-    nb_animal = forms.IntegerField(label = '',min_value=0,widget=forms.NumberInput(attrs={'placeholder': "Nombre d'animaux"}))
-    nb_foyer = forms.IntegerField(label = '',min_value=0,widget=forms.NumberInput(attrs={'placeholder': "Nb personnes foyer"}))
+    id_box = forms.CharField(label="Identifiant ",widget=forms.TextInput(attrs={'placeholder': 'Identifiant Foyer'}))
+    pwd = forms.CharField(label = 'Mot de passe ',widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
+    Email = forms.CharField(label="Email ",max_length = 254,widget=forms.EmailInput(attrs={'placeholder': 'Email'}))
+    tel = forms.CharField(label="N° téléphone ",widget=forms.TextInput(attrs={'placeholder': 'Téléphone'}))
+    adresse = forms.CharField(label="Adresse ",widget=forms.TextInput(attrs={'placeholder': 'Adresse'}))
+    ville = forms.CharField(label="Ville ",widget=forms.TextInput(attrs={'placeholder': 'Ville'}))
+    codeP = forms.CharField(label="Code Postal",widget=forms.TextInput(attrs={'placeholder': 'Code Postal'}))
+    latitude = forms.CharField(label="Latitude ",widget=forms.TextInput(attrs={'placeholder': 'Latitude'}))
+    longitude = forms.CharField(label="Longitude ",widget=forms.TextInput(attrs={'placeholder': 'Longitude'}))
+    nb_animal = forms.IntegerField(label = "Nombre d'animaux ",min_value=0,widget=forms.NumberInput(attrs={'placeholder': "Nombre d'animaux"}))
+    nb_foyer = forms.IntegerField(label = 'Nombre de personnes ',min_value=0,widget=forms.NumberInput(attrs={'placeholder': "Nb personnes foyer"}))
 
 
 class CreationPersonne(forms.Form):
