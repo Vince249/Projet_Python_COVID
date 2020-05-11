@@ -152,38 +152,6 @@ def GraphTotalCommande():
     myFig.get_figure().savefig('assets/Image/Cumule-Commandes.png', bbox_inches='tight')
 
 
-#n'est jamais appelé car elle a pour but de ne pas faire planter la carte si le produit choisi par l'admin n'a jamais été commandé
-def Sauvegarde_Commande_Initialisation_Carte():
-    {
-            "CP":"75001",
-            "id":"a",
-            "Date":"2020-04-30",
-            "Choucroute":"0",
-            "Farine":"0",
-            "Frites":"0",
-            "Oeuf":"0",
-            "Pate":"0",
-            "Poulet":"0",
-            "SelPoivre":"0",
-            "Epice":"0",
-            "Assaisonnements":"0",
-            "Pomme_de_terre":"0",
-            "Tomate":"0",
-            "Pomme":"0",
-            "Citron":"0",
-            "Riz":"0",
-            "Sucre":"0",
-            "Pain":"0",
-            "Lait":"0",
-            "Beurre":"0",
-            "Fromage":"0",
-            "Creme":"0",
-            "Poisson":"0",
-            "MedKit":"0",
-            "Pilule":"0",
-            "KitSoin":"0",
-            "KitEntretien":"0"
-        },
 def Arrondissement_Map(Product_name):
     with open('./JSON/arrondissements.geojson') as json_file:
         data_arrondissements = json.load(json_file)
@@ -192,13 +160,13 @@ def Arrondissement_Map(Product_name):
         fichier = json.load(json_file)
         commandes=fichier['commandes']
 
-    df_temp = pd.DataFrame(commandes)
+    #on initialise les colonnes pour éviter que si le produit choisi n'a jamais été commandé le site plante car si on selectionne un produit qui n'a jamais été commandé et que la colonne n'existe pas, le dataframe bug
+    df_temp = pd.DataFrame(commandes,columns=["id","CP","Date","Choucroute","Farine","Frites","Oeuf","Pate","Poulet","SelPoivre","Epice","Assaisonnements","Pomme_de_terre","Tomate","Pomme","Citron","Riz","Sucre","Pain","Lait","Beurre","Fromage","Creme","Poisson","MedKit","Pilule","KitSoin","KitEntretien"])
     df_temp['Date']= pd.to_datetime(df_temp['Date']) #on convertit la colonne 'Date' en objet date
-    
+
     trente_jours_avant = date.today() - timedelta(days=30)
     df = df_temp[df_temp['Date'] >= pd.Timestamp(trente_jours_avant)] #on ne selectionne que les 30 derniers jours
 
-    print(df)
     df = df.fillna(0) #si une commande contient certains produits mais pas d'autres, leur valeur dans le dataframe sera "NaN" et ne pourra être lu lors de la conversion en int
     
     #on fait un astype(dict) avec dict contenant le nom d'une colonne et un type pour convertir une colonne en un type particulier
@@ -383,3 +351,45 @@ def DetailCommandeToday():
     #Sauvegarde du dataFrame sous forme de tableau html
     dataPandas_HtmlFormat = dataPandasFormat_Pivot.to_html(table_id='OrderOfTheDay', justify='center')
     return dataPandas_HtmlFormat
+
+
+def Livraisons_Map():
+    with open('./JSON/arrondissements.geojson') as json_file:
+        data_arrondissements = json.load(json_file)
+
+    with open('./JSON/livraisons.json') as json_file:
+        fichier = json.load(json_file)
+        liste_livraisons=fichier['liste_livraisons']
+
+    #on initialise les colonnes pour éviter que si le produit choisi n'a jamais été commandé le site plante car si on selectionne un produit qui n'a jamais été commandé et que la colonne n'existe pas, le dataframe bug
+    df_temp = pd.DataFrame(liste_livraisons)
+    df_temp['Date_livraison']= pd.to_datetime(df_temp['Date_livraison']) #on convertit la colonne 'Date' en objet date
+
+    df = df_temp[df_temp['Date_livraison'] >= pd.Timestamp(date.today())] #on ne veut qu'aujourd'hui puisqu'on veut les livraisons de la journée
+
+    df = df.fillna(0) #si une commande contient certains produits mais pas d'autres, leur valeur dans le dataframe sera "NaN" et ne pourra être lu lors de la conversion en int
+    
+    print("livraisons",df)
+    
+    #on met le reset index pour conserver un dataframe, sinon on a un SeriesFrame
+    #on groupy by codeP et on compte dans chaque codeP le nombre de personne ayant passé une commande
+    fig = go.Figure(px.choropleth_mapbox(df.groupby('codeP').count().reset_index(),
+                    geojson=data_arrondissements, 
+                    locations='codeP', 
+                    color='id', #la couleur dépend du nombre de personne à livrer 
+                    #color_continuous_scale="Viridis", #couleur peut etre changer surement
+                    mapbox_style="carto-positron",
+                    zoom=11, center = {"lat": 48.8534, "lon": 2.3488},
+                    opacity=0.5,
+                    labels={'id':'Nombre de livraison'},
+                    ))
+    
+
+    fig.update_layout(autosize=False,
+                    height=600,
+                    width=830,
+                    margin={"r":0,"t":0,"l":0,"b":0},
+                    #title_text='Quantité du produit commandé par arrondissement',
+                    )
+
+    return plot(fig, output_type='div')

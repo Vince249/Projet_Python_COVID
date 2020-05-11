@@ -4,7 +4,7 @@
 
 from datetime import datetime
 import json 
-from datetime import date
+from datetime import date,timedelta
 
 
 # function to add to JSON 
@@ -58,6 +58,49 @@ def EnregistrerCommande(data, id):
 		
 		temp.append(datacleaned)
 	write_json(fichier,'./JSON/commandes_faites.json')
+	return
+
+
+### Méthode créant la livraison associé à la commande venant d'être passée. Nous avons fixer le jour de livraison à j+1 par rapport à la date de la commande ###
+def Remplissage_Livraison(data,id):
+	#initialisation des données que l'on veut récupérer
+	tel=""
+	ville=""
+	codeP=""
+	adresse=""
+	produits_commande={}
+
+	#commande à livrer
+	for k,v in data.items():
+			if (v != '0'):
+				produits_commande[k]=v
+
+	#on donne la valeur qu'il faut aux données initialisées précédemment
+	with open('./JSON/infos_client.json') as json_file:
+		fichier = json.load(json_file)
+		temp = fichier['foyers']
+		for element in temp:
+			if (element["id_box"]==id): 
+				tel = element["tel"]
+				ville=element["ville"]
+				codeP=element["codeP"]
+				adresse=element["adresse"]
+	
+  
+	with open('./JSON/livraisons.json') as json_file:
+		fichier = json.load(json_file)
+		temp = fichier['liste_livraisons']
+		datacleaned={}
+		datacleaned['id']=id
+		datacleaned['tel']=tel
+		datacleaned['ville']=ville
+		datacleaned['codeP']=codeP
+		datacleaned['adresse']=adresse
+		datacleaned['Date_livraison'] = (date.today() + timedelta(days=1)).strftime("%Y-%m-%d") #Ajout de la date au format YYYY-mm-dd -> par défaut on dit que la livraison se fait au jour j+1 par rapport à la date de la commande
+		datacleaned['produits_commande']=produits_commande
+
+		temp.append(datacleaned)
+	write_json(fichier,'./JSON/livraisons.json')
 	return
 
 
