@@ -62,7 +62,7 @@ class CreationForm(forms.Form):
     latitude = forms.CharField(label="Latitude ",widget=forms.TextInput(attrs={'placeholder': 'Latitude'}))
     longitude = forms.CharField(label="Longitude ",widget=forms.TextInput(attrs={'placeholder': 'Longitude'}))
     nb_animal = forms.IntegerField(label = "Nombre d'animaux ",min_value=0,widget=forms.NumberInput(attrs={'placeholder': "Nombre d'animaux"}))
-    nb_foyer = forms.IntegerField(label = 'Nombre de personnes ',min_value=0,widget=forms.NumberInput(attrs={'placeholder': "Nb personnes foyer"}))
+    nb_foyer = forms.IntegerField(label = 'Nombre de personnes ',min_value=0,widget=forms.NumberInput(attrs={'placeholder': "Nombre de personnes dans le foyer"}))
 
 
 class CreationPersonne(forms.Form):

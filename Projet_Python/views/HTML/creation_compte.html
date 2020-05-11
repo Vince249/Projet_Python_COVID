@@ -6,7 +6,7 @@
 		<meta charset="utf-8">
 		<title>Création Compte</title>
         <meta name="description" content="The Account Creation Page">
-        <link rel="stylesheet" href="{% static 'CSS/creation.css' %}"
+        <link rel="stylesheet" href="{% static 'CSS/creation.css' %}">
         
     </head>
 
@@ -29,7 +29,46 @@
             <br> <br>
             <form method="POST" action="/creation">
                 {% csrf_token %}
-                {{Form_Creation.as_p}}
+                {% for field in Form_Creation %}
+                    {% if forloop.counter == 1 %}
+                        <p>Identifiant</p>
+                    {% endif %}                    
+                    {% if forloop.counter == 2 %}
+                        <p>Mot de passe</p>
+                    {% endif %}
+                    {% if forloop.counter == 3 %}
+                        <p>Email</p>
+                    {% endif %}
+                    {% if forloop.counter == 4 %}
+                        <p>Numéro téléphone</p>
+                    {% endif %}
+                    {% if forloop.counter == 5 %}
+                        <p>Adresse</p>
+                    {% endif %}
+                    {% if forloop.counter == 6 %}
+                        <p>Ville</p>
+                    {% endif %}
+                    {% if forloop.counter == 7 %}
+                        <p>Code postal</p>
+                    {% endif %}
+                    {% if forloop.counter == 8 %}
+                        <p>Latitude</p>
+                    {% endif %}
+                    {% if forloop.counter == 9 %}
+                        <p>Longitude</p>
+                    {% endif %}
+                    {% if forloop.counter == 10 %}
+                        <p>Nombre d'animaux</p>
+                    {% endif %}
+                    {% if forloop.counter == 11 %}
+                        <p>Nombre de personnes dans le foyer</p>
+                    {% endif %}
+                    
+                    {{field}}
+                    <br>
+
+
+                {% endfor %}
                 <br>
                 <p>Vous pouvez chercher la longitude et latitude de votre adresse <a href="https://www.coordonnees-gps.fr/" target="_blank">ici.</a></p>
                 <br>
@@ -46,6 +85,19 @@
         <br/>
         <br/>
         <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>       
         <br/>
         <br/>
         <br/>
