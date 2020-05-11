@@ -13,12 +13,9 @@ import pandas as pd
 from pandas import DataFrame
 import datetime
 from datetime import timedelta, date
-import json
 from matplotlib.ticker import  MaxNLocator
 
-
 import json
-import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from plotly.offline import plot
@@ -34,11 +31,11 @@ commandeJson = dict()
 def ConvertToStatisticsUse():
     with open('./JSON/commandes_faites.json') as json_file: #On importe le fichier des commanes
         fichier = json.load(json_file)
-        print(fichier)
+        #print(fichier)
     json_file.close()
     #On va le travailler pour l'avoir sous le format : commandeJson = {"tomates" : 12, "pain" : 5, "riz": 9, "pate" : 6, "farine":4}
     for uneCommande in fichier["commandes"]:#Commande n°1
-        print("uneCommande => ", uneCommande)
+        #print("uneCommande => ", uneCommande)
         for unProduit in uneCommande:
             #SI Le produit est déjà dans notre dictionnaire final et ce n'est pas l'id ou la date ou le CP
             if(unProduit in commandeJson.keys() and unProduit != "id" and unProduit != "Date" and unProduit != "CP" and uneCommande[str(unProduit)] != "0"): 
@@ -50,7 +47,7 @@ def ConvertToStatisticsUse():
                 commandeJson[unProduit] = int(uneCommande[unProduit])
     #On trie le dictionnaire par ses valeurs d'une facon decroissante
     sorted(commandeJson.items(), key=lambda x: x[1], reverse=True) #reverse=True : Trie dansl l'ordre decroissant 
-    print("CommandesJSON",commandeJson)
+    #print("CommandesJSON",commandeJson)
 
 
 ### Méthode faisant l'Histogramme de la quantité de commande de chaque produit commandé depuis le début du site ###
@@ -97,7 +94,7 @@ def TreeMap_Product():
         os.remove('assets/Image/TreeMap_Quantite-totale-produit.png')#Supprimer l'image actuelle
     #Slicing d'un dictionnaire : ici on garde le top 10 des produits (car le dictionnaire est déjà trié par ordre décroissant suivant ses valeurs)
     topTen = dict(list(commandeJson.items())[0:10]) #10 premiers elements du dictionnaire
-    print("TOP 10 :\n", topTen)
+    #print("TOP 10 :\n", topTen)
     colors = ['orangered', 'darkorange', 'gold','yellow','greenyellow','palegreen', 'turquoise','paleturquoise','lavender','pink']
     plt.figure(figsize=(8, 6))
     plt.rc('font', size=10) 
@@ -150,6 +147,41 @@ def GraphTotalCommande():
                             grid=True, legend = False, figsize=(15,6), color='g')
     myFig.xaxis.set_major_locator(mdates.DayLocator(bymonthday=range(1,32,2)))
     myFig.get_figure().savefig('assets/Image/Cumule-Commandes.png', bbox_inches='tight')
+
+### Méthode faisant un histogramme horizontal de la quantité commandée la semaine précédente selon les jours pour un produit ###
+def Histo_ConsoProduit(NomProduit):
+    if(os.path.isfile('assets/Image/TreeMap_Quantite-totale-produit.png')): #Si le fichier existe
+        os.remove('assets/Image/HistoHorizontal_Quantite-Produit-Semaine.png')#Supprimer l'image actuelle
+    
+    with open('./JSON/commandes_faites.json') as json_file:
+        fichier = json.load(json_file)
+        commandes=fichier['commandes']
+
+    df_Commande = pd.DataFrame(commandes)
+    df_Commande['Date']= pd.to_datetime(df_Commande['Date']) #on convertit la colonne 'Date' en objet date
+
+    valToday = datetime.datetime.today().weekday() #Valeur du jour actuel (commence à lundi avec lundi=0)
+    startDate = date.today() - timedelta(days = valToday, weeks = 1)#On revient à lundi de la semaine dernière 
+    endDate = startDate + timedelta(days = 6) #Renvoie au dimanche de la semaine dernière
+
+    df_Semaine = df_Commande[df_Commande['Date'] >= pd.Timestamp(startDate)] #on ne selectionne que la semaine précédente
+    df_Semaine = df_Semaine[df_Semaine['Date'] <= pd.Timestamp(endDate)]
+    df_Semaine = df_Semaine.fillna(0) #NaN devient 0
+    #print("\n\ndf_Semaine : \n", df_Semaine)
+    #Convertion des quantité de string à int avec astype()
+    #Groupe by date sur la semaine concernée
+    #Sum des quantités des produits ayant le même nom pour 1 date précise
+    df_GroupBy = df_Semaine.astype({NomProduit:int}).groupby('Date')[NomProduit].sum().reset_index()
+    #On ajoute une colonne associant les dates au nom du jour de cette date
+    df_GroupBy['Day'] = "days"
+    for i in range(len(df_GroupBy.index)):
+        df_GroupBy['Day'][i]= df_GroupBy['Date'][i].strftime('%A') # %A donne le nom du jour en entier (mais en anglais)
+    
+    #print("\n\ndf_Groupy : \n",df_GroupBy)
+    df_GroupBy.plot(x='Day', y=NomProduit, kind='barh', figsize=(9,6), legend=False)
+    plt.title("Diagramme de la consommation du produit : "+ NomProduit +"  sur la semaine précédente en fonction du jour ")
+    plt.savefig('assets/Image/HistoHorizontal_Quantite-Produit-Semaine.png', bbox_inches='tight')
+    plt.close()
 
 
 def Arrondissement_Map(Product_name):
@@ -369,7 +401,7 @@ def Livraisons_Map():
 
     df = df.fillna(0) #si une commande contient certains produits mais pas d'autres, leur valeur dans le dataframe sera "NaN" et ne pourra être lu lors de la conversion en int
     
-    print("livraisons",df)
+    #print("livraisons",df)
     
     #on met le reset index pour conserver un dataframe, sinon on a un SeriesFrame
     #on groupy by codeP et on compte dans chaque codeP le nombre de personne ayant passé une commande

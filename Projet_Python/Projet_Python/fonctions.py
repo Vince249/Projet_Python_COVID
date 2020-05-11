@@ -195,7 +195,7 @@ def Admin(request):
                 print(choix_commande)
         FormChoixProduitCommande = form.Choix_Produit_Commande()
 
-        #html_graph = methodes_Statistiques.NomFonction(choix_commande) #fonction armand
+        html_graph = methodes_Statistiques.Histo_ConsoProduit(choix_commande) #fonction armand
 
         return render(request, 'HTML/admin.html',{
             'id_admin' : id_utilisateur,
@@ -207,7 +207,7 @@ def Admin(request):
             'map_entrepot' : map_entrepot,
             'map_livraison_du_jour' : map_livraison_du_jour,
             'FormChoixProduitCommande' : FormChoixProduitCommande,
-            #'html_graph' : html_graph -> fonction armand
+            'html_graph' : html_graph #-> fonction armand
         })
     else:
         erreur='Accès refusé, vous devez être admin pour voir cette page'
