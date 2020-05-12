@@ -150,16 +150,16 @@ def GraphTotalCommande():
 
 ### Méthode faisant un histogramme horizontal de la quantité commandée la semaine précédente selon les jours pour un produit ###
 def Histo_ConsoProduit(NomProduit):
-    if(os.path.isfile('assets/Image/TreeMap_Quantite-totale-produit.png')): #Si le fichier existe
+    if(os.path.isfile('assets/Image/HistoHorizontal_Quantite-Produit-Semaine.png')): #Si le fichier existe
         os.remove('assets/Image/HistoHorizontal_Quantite-Produit-Semaine.png')#Supprimer l'image actuelle
     
     with open('./JSON/commandes_faites.json') as json_file:
         fichier = json.load(json_file)
         commandes=fichier['commandes']
 
-    df_Commande = pd.DataFrame(commandes)
+    df_Commande = pd.DataFrame(commandes,columns=["id","CP","Date","Choucroute","Farine","Frites","Oeuf","Pate","Poulet","SelPoivre","Epice","Assaisonnements","Pomme_de_terre","Tomate","Pomme","Citron","Riz","Sucre","Pain","Lait","Beurre","Fromage","Creme","Poisson","MedKit","Pilule","KitSoin","KitEntretien"])
     df_Commande['Date']= pd.to_datetime(df_Commande['Date']) #on convertit la colonne 'Date' en objet date
-
+    print(df_Commande)
     valToday = datetime.datetime.today().weekday() #Valeur du jour actuel (commence à lundi avec lundi=0)
     startDate = date.today() - timedelta(days = valToday, weeks = 1)#On revient à lundi de la semaine dernière 
     endDate = startDate + timedelta(days = 6) #Renvoie au dimanche de la semaine dernière
