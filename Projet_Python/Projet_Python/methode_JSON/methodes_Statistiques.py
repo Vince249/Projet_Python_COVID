@@ -178,8 +178,9 @@ def Histo_ConsoProduit(NomProduit):
         df_GroupBy['Day'][i]= df_GroupBy['Date'][i].strftime('%A') # %A donne le nom du jour en entier (mais en anglais)
     
     #print("\n\ndf_Groupy : \n",df_GroupBy)
-    df_GroupBy.plot(x='Day', y=NomProduit, kind='barh', figsize=(9,6), legend=False)
+    df_GroupBy.plot(x='Day', y=NomProduit, kind='barh', figsize=(9,6))
     plt.title("Diagramme de la consommation du produit : "+ NomProduit +"  sur la semaine précédente en fonction du jour ")
+    plt.xlabel("Quantité totale")
     plt.savefig('assets/Image/HistoHorizontal_Quantite-Produit-Semaine.png', bbox_inches='tight')
     plt.close()
 
