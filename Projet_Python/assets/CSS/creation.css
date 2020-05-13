@@ -83,6 +83,11 @@ h1{
     font-style: italic;
 }
 
+#erreur_msg{
+    color: red;
+    font-style: bold;
+}
+
 figure{
     margin: 370px;
     margin-left: 430px;
@@ -115,7 +120,7 @@ footer p{
 .navbarfooter{
     position: relative;
     position: absolute;
-    bottom: -225%;
+    bottom: -222%;
     height: 200px;
     width: 100%;
     background: rgba(0,0,0,0.4);
