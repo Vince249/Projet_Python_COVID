@@ -1,15 +1,15 @@
-Le projet vous est donné avec un environnement virtuel. Cependant, utilisant 2 OS différents au sein de l'équipe (MAC et Windows) nous avons dû nous adapter. 
-
-En effet, afin d'accéder à cet environnement virtuel sur Windows vous n'avez rien à faire si ce n'est ouvrir un nouveau terminal pour vous en assurer. Si celui-ci ne s'active pas, saisissez la commande suivante : virtual_environment/Scripts/activate.
-
-Sur MAC, nous avons dû créer un autre environnement virtuel car le fichier settings.json (dans le folder .vscode) exécute un fichier (python.exe) se trouvant dans le dossier "Scripts" qui est inexistant pour les utilisateurs de cet OS. Si ces derniers l'utilisaient, il se retrouvaient sans interpréteur python.
-Ainsi, afin d'utiliser cet autre environnement virtuel, il faut le faire manuellement via le terminal bash ou zsh, suivant ce que vous avez. 
-Vérifiez d'être placé au bon endroit (regarder le chemin dans le terminal), vous devez être à la racine du dossier contenant le projet. Puis, écrivez la commande suivante : source virtual_environment_MAC/bin/activate.
-
-Si vous n'avez pas accès à l'environnement virtuel ou si vous ne souhaitez pas l'utiliser, vous devez installer les packages sur votre machine. Pour ce faire, saisissez la commande associée à cela pour installer les packages suivants : Django, Folium, Matplotlib, Numpy, Plotly, Pandas, Squarify.
-
-Enfin, pour lancer le serveur et accéder à l'interface web, il faut vous déplacer jusqu'au dossier contenenant le fichier "manage.py" grâce à la commande "cd chemin/vers/ce/dossier". Si vous êtes placé à la racine du dossier contenant le projet, cela devrait donc être : cd Projet_Python/. Après cela, vous pouvez le lancer le serveur.
-Pour lancer le serveur si vous êtes sur Windows écrivez : py manage.py runserver. 
-Pour lancer le serveur si vous êtes sur MAC écrivez : python manage.py runserver.
-
+Le projet vous est donné avec un environnement virtuel. Cependant, utilisant 2 OS différents au sein de l'équipe (MAC et Windows) nous avons dû nous adapter.\
+\
+En effet, afin d'accéder à cet environnement virtuel sur Windows vous n'avez rien à faire si ce n'est ouvrir un nouveau terminal pour vous en assurer. Si celui-ci ne s'active pas, saisissez la commande suivante : virtual_environment/Scripts/activate.\
+\
+Sur MAC, nous avons dû créer un autre environnement virtuel car le fichier settings.json (dans le folder .vscode) exécute un fichier (python.exe) se trouvant dans le dossier "Scripts" qui est inexistant pour les utilisateurs de cet OS. Si ces derniers l'utilisaient, il se retrouvaient sans interpréteur python.\
+Ainsi, afin d'utiliser cet autre environnement virtuel, il faut le faire manuellement via le terminal bash ou zsh, suivant ce que vous avez.\ 
+Vérifiez d'être placé au bon endroit (regarder le chemin dans le terminal), vous devez être à la racine du dossier contenant le projet. Puis, écrivez la commande suivante : source virtual_environment_MAC/bin/activate\
+\
+Si vous n'avez pas accès à l'environnement virtuel ou si vous ne souhaitez pas l'utiliser, vous devez installer les packages sur votre machine. Pour ce faire, saisissez la commande associée à cela pour installer les packages suivants : Django, Folium, Matplotlib, Numpy, Plotly, Pandas, Squarify.\
+\
+Enfin, pour lancer le serveur et accéder à l'interface web, il faut vous déplacer jusqu'au dossier contenenant le fichier "manage.py" grâce à la commande "cd chemin/vers/ce/dossier". Si vous êtes placé à la racine du dossier contenant le projet, cela devrait donc être : cd Projet_Python/. Après cela, vous pouvez le lancer le serveur.\
+Pour lancer le serveur si vous êtes sur Windows écrivez : py manage.py runserver.\
+Pour lancer le serveur si vous êtes sur MAC écrivez : python manage.py runserver.\
+\
 Vous pouvez désormais accéder à l'interface web en suivant les instructions données à la suite de cette commande.
