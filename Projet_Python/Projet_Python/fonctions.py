@@ -5,7 +5,7 @@ import folium
 from . import form
 from .methode_JSON import methodes_JSON
 from .methode_JSON import methodes_Statistiques
-
+import json
 
 #! Variables globales
 id_utilisateur = ""
@@ -105,11 +105,14 @@ def Creation(request):
             if(FormCreation.is_valid()):
                 data = FormCreation.cleaned_data
                 print("data",data)
-                #* Mettre les DATA dans le JSON
-                methodes_JSON.EnregistrerClient(data)
-                id_utilisateur = data['id_box']
-                nb_personne_foyer = data['nb_foyer']
-                return redirect('Page_Detail')
+                #Vérifier unicité
+                if(methodes_JSON.VerifUniciteClient(data['id_box'],data['latitude'],data['longitude'])):
+                    #* Mettre les DATA dans le JSON
+                    methodes_JSON.EnregistrerClient(data)
+                    id_utilisateur = data['id_box']
+                    nb_personne_foyer = data['nb_foyer']
+                    return redirect('Page_Detail')
+                erreur="Doublon d'un compte existant ou id déjà utilisé"
         if(request.POST.get('bouton')):
             FormCreation = form.CreationForm(request.POST)
             if(FormCreation.is_valid()):

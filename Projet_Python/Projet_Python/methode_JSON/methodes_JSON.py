@@ -126,3 +126,12 @@ def VerifAdmin(id,pwd):
 		for element in temp:
 			if(element['id']==id and element['pwd']==pwd): check=True
 	return check
+
+def VerifUniciteClient(id,latitude,longitude):
+	with open('./JSON/infos_client.json') as json_file:
+		fichier = json.load(json_file)
+		temp=fichier['foyers']
+		check = True
+		for element in temp:
+			if(element['id_box']==id or (element['latitude']==latitude and element['longitude']==longitude)): check=False
+	return check
