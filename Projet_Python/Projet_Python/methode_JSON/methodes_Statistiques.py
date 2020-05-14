@@ -198,7 +198,7 @@ def Arrondissement_Map(Product_name):
     df_temp['Date']= pd.to_datetime(df_temp['Date']) #on convertit la colonne 'Date' en objet date
 
     trente_jours_avant = date.today() - timedelta(days=30)
-    df = df_temp[df_temp['Date'] >= pd.Timestamp(trente_jours_avant)] #on ne selectionne que les 30 derniers jours
+    df = df_temp[(df_temp['Date'] >= pd.Timestamp(trente_jours_avant)) & (df_temp['Date'] <= pd.Timestamp(date.today())) ] #on ne selectionne que les 30 derniers jours
 
     df = df.fillna(0) #si une commande contient certains produits mais pas d'autres, leur valeur dans le dataframe sera "NaN" et ne pourra être lu lors de la conversion en int
     
@@ -398,7 +398,7 @@ def Livraisons_Map():
     df_temp = pd.DataFrame(liste_livraisons)
     df_temp['Date_livraison']= pd.to_datetime(df_temp['Date_livraison']) #on convertit la colonne 'Date' en objet date
 
-    df = df_temp[df_temp['Date_livraison'] >= pd.Timestamp(date.today())] #on ne veut qu'aujourd'hui puisqu'on veut les livraisons de la journée
+    df = df_temp[df_temp['Date_livraison'] == pd.Timestamp(date.today())] #on ne veut qu'aujourd'hui puisqu'on veut les livraisons de la journée
 
     df = df.fillna(0) #si une commande contient certains produits mais pas d'autres, leur valeur dans le dataframe sera "NaN" et ne pourra être lu lors de la conversion en int
     
