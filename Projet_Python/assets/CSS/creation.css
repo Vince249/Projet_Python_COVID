@@ -135,7 +135,8 @@ p a{
 
 
 .crumbs {
-	text-align: left;
+    text-align: left;
+    margin-top: 1px;    
 }
 .crumbs ul {
 	list-style: none;
