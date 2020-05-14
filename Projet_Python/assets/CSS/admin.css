@@ -176,7 +176,7 @@ figure{
 }
 .Bouton{
     width: 400px;
-    height: 20px;
+    height: 30px;
     font-family: "Times New Roman", sans-serif;
     text-align: center;
     border-radius: 10px;
@@ -188,11 +188,14 @@ figure{
 
 .Bouton input{
     border-radius: 10px;
+    text-align: center;
+    margin:6px;
+    border-radius: 10px;
 }
 
 .Bouton2{
     width: 400px;
-    height: 20px;
+    height: 30px;
     font-family: "Times New Roman", sans-serif;
     text-align: center;
     border-radius: 10px;
@@ -203,5 +206,7 @@ figure{
 }
 
 .Bouton2 input{
+    text-align: center;
+    margin:6px;
     border-radius: 10px;
 }
