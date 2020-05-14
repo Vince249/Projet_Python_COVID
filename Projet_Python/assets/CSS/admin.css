@@ -5,7 +5,7 @@ body{
     background-size: cover;
     background-position: top;
     font-family: sans-serif;
-    background-image: url(../Image/ImageAdmin.jpg);
+    background-image: url(../Image/Engrenageadmin.jpg);
 }
 header{
     width: 500px;
@@ -32,7 +32,7 @@ h3{
     text-align: center;
     font-family: "Times New Roman", sans-serif;
     color:black;
-    
+    box-shadow:5px 5px 10px black;
 }
 
 figcaption{
@@ -42,10 +42,12 @@ figcaption{
     text-align: center;
     border-radius: 10px;
     text-shadow: 2px 2px 4px black;
-    background: #000;
-    border: 1px solid #cc0000;
+    background: rgb(153, 153, 153);
+    border: 1px solid #00adcccb;
     opacity: 0.85;   
     color: #fff;
+    box-shadow:5px 5px 10px black;
+
 }
 
 .entrepot{
@@ -169,5 +171,37 @@ figure{
     color: red;
 }
 #entrepot{
-    color: white;
+    color: black;
+    
+}
+.Bouton{
+    width: 400px;
+    height: 20px;
+    font-family: "Times New Roman", sans-serif;
+    text-align: center;
+    border-radius: 10px;
+    background: rgb(153, 153, 153);
+    opacity: 0.85;   
+    color: #fff;
+    box-shadow:5px 5px 10px black;
+}
+
+.Bouton input{
+    border-radius: 10px;
+}
+
+.Bouton2{
+    width: 400px;
+    height: 20px;
+    font-family: "Times New Roman", sans-serif;
+    text-align: center;
+    border-radius: 10px;
+    background: rgb(153, 153, 153);
+    opacity: 0.85;   
+    color: #fff;
+    box-shadow:5px 5px 10px black;
+}
+
+.Bouton2 input{
+    border-radius: 10px;
 }

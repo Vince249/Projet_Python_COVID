@@ -72,11 +72,13 @@
 
 		<br>
 		<h3>Infos sur produits commandés par arrondissement</h3>
-		<form method="POST" action="/admin">
-			{% csrf_token %}
-			{{FormChoixProduit}}
-			<input type="submit" name="Bouton_Choix_Produit" value="Valider">
-		</form>
+		<div class="Bouton2">
+			<form method="POST" action="/admin">
+				{% csrf_token %}
+				{{FormChoixProduit}}
+				<input type="submit" name="Bouton_Choix_Produit" value="Valider">
+			</form>
+		</div>
 		<figure >
 			<!--{% autoescape off %}--> <!-- semble fonctionner sans aussi -->
 			{{ map_produits }}
@@ -102,12 +104,14 @@
 		<br/><br/>
 
 
-		<h3>Titre à spécifier</h3>
-		<form method="POST" action="/admin">
-			{% csrf_token %}
-			{{FormChoixProduitCommande}}
-			<input type="submit" name="Bouton_Choix_Produit_Commande" value="Valider">
-		</form>
+		<h3>Diagramme sur la consommation d'un produit en particulier</h3>
+		<div class="Bouton">
+			<form method="POST" action="/admin">
+				{% csrf_token %}
+				{{FormChoixProduitCommande}}
+				<input type="submit" name="Bouton_Choix_Produit_Commande" value="Valider">
+			</form>
+		</div>
 		<figure >
 			<img src="{% static 'Image/HistoHorizontal_Quantite-Produit-Semaine.png' %}" 
 			alt="Histogramme horizontal de la quantité commandée la semaine précédente selon les jours pour un produit" 
