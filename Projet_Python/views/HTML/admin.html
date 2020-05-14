@@ -8,7 +8,12 @@
 		<meta name="description" content="The Administrateur Page">
 		<link rel="stylesheet" href="{% static 'CSS/admin.css' %}">
 	</head>
-	<p><a href="/">Home</a> > Admin</p>
+	<div class="crumbs">
+		<ul>
+			<li><a href="/"><i class="fas fa-home" aria-hidden="true"></i> Home</a></li>
+			<li><a href="#"><i class="fas fa-portrait"> </i> Admin</a></li>
+		  </ul>
+	</div>
     <header>
         <h2>Page d'administration</h2>
         <p>Bienvenue {{id_admin}}!</p>
@@ -25,38 +30,42 @@
 			alt="Treemap de la quantité de produits commandée" 
 			title="Tree map des produits" 
 			/>
-			<figcaption>TreeMap mettant en valeur les produits les plus commandés</figcaption>
+			<br><br>
+			<figcaption id = Quantprod>TreeMap mettant en valeur les produits les plus commandés</figcaption>
 		</figure>
 		<br/>
 
 		<h3>Analyse de la quantité de personnes</h3>
-		<figure>
+		<figure id = Quantpers>
 			<img src="{% static 'Image/Totaux_Personnes_Courbe.png' %}" alt="Graphique de la quantité d'utilisateurs" title="Graphique quantité utilisateur" />
-			<figcaption>Graphique analysant la quantité d'utilisateur du site</figcaption>
+			<br><br>
+			<figcaption id = Quantpers2>Graphique analysant la quantité d'utilisateur du site</figcaption>
 		</figure>
 		<br/>
 
 		
 		<h3>Analyse de la quantité de commande</h3>
-		<figure>
+		<figure id = "Quantdemande">
 			<img src="{% static 'Image/Cumule-Commandes.png' %}" alt="Graphique du cumul des commandes" title="Graphique du nombre de commandes" />
-			<figcaption>Graphique analysant la quantité cumulée du nombre de commande en fonction de la date</figcaption>
+			<br><br>
+			<figcaption id = Quantdemande2>Graphique analysant la quantité cumulée du nombre de commande en fonction de la date</figcaption>
 		</figure>
 		<br/>
 
 
 		<h3>Infos Entrepôts</h3>
-		<div id = entrepot>
+		<figure>
 			{{html_entrepot|safe}}
 
-		</div>
+		</figure>
 		<br/>
 		
 
 		<h3>Position des entrepôts</h3>
-		<figure >
+		<figure class = Posentrepotgraph>
 			{{map_entrepot|safe}}
-		<figcaption>Carte affichant la position de chaque entrepôt dans leur arrondissement respectif : cliquez sur un marqueur pour plus de détails</figcaption> 
+			<br><br>
+		<figcaption id = posentrepot>Carte affichant la position de chaque entrepôt dans leur arrondissement respectif : cliquez sur un marqueur pour plus de détails</figcaption> 
 		</figure>
 
 
@@ -72,7 +81,8 @@
 			<!--{% autoescape off %}--> <!-- semble fonctionner sans aussi -->
 			{{ map_produits }}
 			<!--{% endautoescape %}-->
-		<figcaption>Carte montrant la quantité commandée par arrondissements du produit selectionné sur les 30 derniers jours</figcaption> 
+			<br><br>
+		<figcaption id=carte>Carte montrant la quantité commandée par arrondissements du produit selectionné sur les 30 derniers jours</figcaption> 
 		</figure>
 		<br>
 		
@@ -86,7 +96,8 @@
 			<!--{% autoescape off %}--> <!-- semble fonctionner sans aussi -->
 			{{ map_livraison_du_jour }}
 			<!--{% endautoescape %}-->
-		<figcaption>Carte montrant le nombre de livraison à effectuer aujourd'hui</figcaption> 
+			<br><br>
+		<figcaption id = livraison>Carte montrant le nombre de livraison à effectuer aujourd'hui</figcaption> 
 		</figure>
 		<br/><br/>
 
@@ -102,7 +113,8 @@
 			alt="Histogramme horizontal de la quantité commandée la semaine précédente selon les jours pour un produit" 
 			title="Histogramme des quantité commandées d'un produits par jour de la semaine " 			
 			/>
-			<figcaption>Histogramme horizontal de la quantité commandée la semaine précédente, pour un produit, selon les jours.</figcaption>		
+			<br><br>
+			<figcaption id = histo>Histogramme horizontal de la quantité commandée la semaine précédente, pour un produit, selon les jours.</figcaption>		
 		</figure>
 		<br>
 

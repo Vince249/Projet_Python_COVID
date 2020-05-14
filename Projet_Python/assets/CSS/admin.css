@@ -5,6 +5,7 @@ body{
     background-size: cover;
     background-position: top;
     font-family: sans-serif;
+    background-image: url(../Image/ImageAdmin.jpg);
 }
 header{
     width: 500px;
@@ -27,36 +28,143 @@ header{
 }
 
 h3{
-    background:rgba(255, 0, 0, 0.322);
+    background:rgb(255, 0, 0);
     text-align: center;
     font-family: "Times New Roman", sans-serif;
-    color: snow;
+    color:black;
     
 }
 
 figcaption{
     width: 300px;
     height: 60px;
-    background: rgba(255, 255, 255, 0.616);
-    border: 1px solid #cc0000;
     font-family: "Times New Roman", sans-serif;
-}
-
-.entrepot{
-    width: 700px;
-    height: 700px;
+    text-align: center;
+    border-radius: 10px;
+    text-shadow: 2px 2px 4px black;
     background: #000;
     border: 1px solid #cc0000;
     opacity: 0.85;   
     color: #fff;
-    top : 10%;
-    left: 50%;
-    position: absolute;
-    transform: translate(-50%,-50%);
-    box-sizing: border-box;
+}
+
+.entrepot{
+    margin-left: 470px;
+}
+
+.crumbs {
+	text-align: left;
+}
+.crumbs ul {
+	list-style: none;
+	display: inline-block;
+}
+
+.crumbs ul li {
+	display: inline;
+}
+
+.crumbs ul li a {
+	display: block;
+	float: left;
+	height: 40px;
+	background: #ecf0f1;
+	text-align: center;
+	position: relative;
+	padding: 30px 20px 0 60px;
+	margin: 0 10px 0 0;
+	font-size: 20px;
+	text-decoration: none;
+	color: #2c3e50;
+	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+.crumbs ul li a::after {
+	content: '';
+	border-top: 40px solid transparent;
+	border-bottom: 40px solid transparent;
+	border-left: 40px solid #ecf0f1;
+	position: absolute;
+	right: -39px;
+	top: 0;
+	z-index: 1;
+}
+
+.crumbs ul li a::before {
+	content: '';
+	border-top: 40px solid transparent;
+	border-bottom: 40px solid transparent;
+	border-left: 40px solid #fff;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.crumbs ul li:first-child a {
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+
+.crumbs ul li:first-child a::before {
+	display: none;
+}
+
+.crumbs ul li:last-child a {
+	padding-right: 40px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	background: red;
+	color: #fff;
+}
+
+.crumbs ul li:last-child a::after {
+	display: none;
+}
+
+.crumbs ul li a:hover {
+	background: #2c3e50;
+	color: #fff;
+}
+
+.crumbs ul li a:hover::after {
+	border-left-color: #2c3e50;
+	color: #fff;
+}
+
+figure{
+
+    margin-left: 430px;
+
+}
+
+#Quantdemande{
+    margin-left: 50px;
     text-align: center;
-    box-shadow: 5px 5px 10px black;
-    font-style: oblique;
-    font-family: "Times New Roman", sans-serif;
-    text-align: center;
+}
+#Quantprod{
+    margin-left: 180px;
+}
+#Quantpers{
+    margin-left: 300px;
+}
+#Quantpers2{
+    margin-left: 300px;
+}
+#Quantdemande2{
+    margin-left: 550px;
+}
+#posentrepot{
+    margin-left: 230px;
+}
+#carte{
+    margin-left: 230px;
+}
+#livraison{
+    margin-left: 230px;
+}
+#histo{
+    margin-left: 230px;
+}
+.Posentrepotgraph{
+    color: red;
 }
