@@ -1,6 +1,6 @@
 .DS_Store
 .vscode
-virtual_environment/
+
 *.pyc
 test/
 .vscode/
