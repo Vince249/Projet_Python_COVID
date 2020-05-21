@@ -12,4 +12,7 @@ Enfin, pour lancer le serveur et accéder à l'interface web, il faut vous dépl
 Pour lancer le serveur si vous êtes sur Windows écrivez : py manage.py runserver.\
 Pour lancer le serveur si vous êtes sur MAC écrivez : python manage.py runserver.\
 \
-Vous pouvez désormais accéder à l'interface web en suivant les instructions données à la suite de cette commande.
+Vous pouvez désormais accéder à l'interface web en suivant les instructions données à la suite de cette commande.\
+\
+Afin d'accéder à l'interface client rapidement vous pouvez saisir l'identifiant "a" et le mot de passe "a" qui est un client que nous avons déjà crée.\
+De même, afin d'accéder un l'interface administrateur, vous pouvez saisir l'identifiant "admin" et le mot de passe "admin".
