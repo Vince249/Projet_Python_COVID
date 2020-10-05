@@ -1,3 +1,9 @@
+# Sujet 
+
+Le projet se place dans un contexte de confinement total à cause du coronavirus. Les autorités locales ont donc pour mission de délivrer nourriture et autres besoins (médicaments,..) aux habitants. Notre travail était de créer l'interface web Django pour permettre à ces derniers d'émettre leurs demandes.
+
+# Informations complémentaires
+
 Le projet vous est donné avec un environnement virtuel. Cependant, utilisant 2 OS différents au sein de l'équipe (MAC et Windows) nous avons dû nous adapter.\
 \
 En effet, afin d'accéder à cet environnement virtuel sur Windows il suffit de le sélectionner comme l'interpréteur Python puis d'ouvrir un nouveau terminal. Si celui-ci ne s'active pas, saisissez la commande suivante : virtual_environment/Scripts/activate.\
